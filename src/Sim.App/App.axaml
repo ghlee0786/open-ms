@@ -1,0 +1,1223 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="using:Sim.App.Help"
+             xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             x:Class="Sim.App.App"
+             RequestedThemeVariant="Dark">
+  <!--
+    디자인 토큰 — 화면은 이 키만 쓴다(하드코딩 색 금지 — 시험 ThemeTokenTests 가 소스를 훑는다).
+    색: ThemeDictionaries 두 벌(Dark · Light, 같은 키셋 — 시험이 짝을 본다). 테마 전환 = Application.RequestedThemeVariant(ThemeService) → DynamicResource 가 다시 칠한다.
+    팔레트: 참고(Ironwall Tactical Command) — 다크 primary 시안 #22B8D9 · 라이트 딥시안 #0C6B89 · 강조 앰버.
+    글꼴 · 간격(4 · 8 · 12 · 16) · 모서리(4 · 6 · 10) · 그림자는 테마 불변 토큰(아래 공용) — 그림자 색만 테마별.
+    해석 색(컬러맵 · 응력/압력/안전계수 척도 · 상태 색 · 물체 색)은 Rendering/ColorMaps · ColorScale 이 정하며 여기와 무관(표준 유지).
+  -->
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <!-- ==================== 다크 ==================== -->
+        <ResourceDictionary x:Key="Dark">
+          <Color x:Key="SystemAccentColor">#22B8D9</Color>
+          <Color x:Key="SystemAccentColorLight1">#3FCBE8</Color>
+          <Color x:Key="SystemAccentColorLight2">#6FD9EF</Color>
+          <Color x:Key="SystemAccentColorLight3">#9EE6F5</Color>
+          <Color x:Key="SystemAccentColorDark1">#1A9AB8</Color>
+          <Color x:Key="SystemAccentColorDark2">#147D96</Color>
+          <Color x:Key="SystemAccentColorDark3">#0E5F73</Color>
+
+          <!-- 표면 -->
+          <SolidColorBrush x:Key="BgBrush" Color="#0C1117" />
+          <SolidColorBrush x:Key="SurfaceBrush" Color="#141B23" />
+          <SolidColorBrush x:Key="Surface2Brush" Color="#1B242F" />
+          <SolidColorBrush x:Key="Surface3Brush" Color="#232E3A" />
+          <SolidColorBrush x:Key="SurfaceSunkenBrush" Color="#0F151C" />
+          <SolidColorBrush x:Key="SurfaceHoverBrush" Color="#2B3846" />
+          <SolidColorBrush x:Key="SurfacePressedBrush" Color="#344454" />
+          <SolidColorBrush x:Key="SurfaceRaisedBrush" Color="#1F2935" />
+          <!-- 선 -->
+          <SolidColorBrush x:Key="LineBrush" Color="#26313D" />
+          <SolidColorBrush x:Key="ControlBorderBrush" Color="#3A4859" />
+          <SolidColorBrush x:Key="ControlBorderHoverBrush" Color="#5F7185" />
+          <!-- 글자 -->
+          <SolidColorBrush x:Key="TextBrush" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="TextDimBrush" Color="#A6B4C2" />
+          <SolidColorBrush x:Key="TextMutedBrush" Color="#7F8E9E" />
+          <SolidColorBrush x:Key="TextDisabledBrush" Color="#566372" />
+          <!-- 주색 · 강조 -->
+          <SolidColorBrush x:Key="AccentBrush" Color="#22B8D9" />
+          <SolidColorBrush x:Key="AccentHoverBrush" Color="#3FCBE8" />
+          <SolidColorBrush x:Key="AccentPressedBrush" Color="#1A9AB8" />
+          <SolidColorBrush x:Key="AccentTextBrush" Color="#5FD3EC" />
+          <SolidColorBrush x:Key="OnAccentBrush" Color="#04161C" />
+          <SolidColorBrush x:Key="AccentSoftBrush" Color="#1A3A46" />
+          <SolidColorBrush x:Key="HighlightBrush" Color="#F0A33C" />
+          <SolidColorBrush x:Key="FocusRingBrush" Color="#3FCBE8" />
+          <!-- 상태 -->
+          <SolidColorBrush x:Key="OkBrush" Color="#46D17A" />
+          <SolidColorBrush x:Key="WarnBrush" Color="#FFB02E" />
+          <SolidColorBrush x:Key="ErrBrush" Color="#FF6B63" />
+          <SolidColorBrush x:Key="InfoBrush" Color="#4FB8FF" />
+          <SolidColorBrush x:Key="OkSoftBrush" Color="#1E3B2B" />
+          <SolidColorBrush x:Key="WarnSoftBrush" Color="#3D3019" />
+          <SolidColorBrush x:Key="ErrSoftBrush" Color="#3D1F21" />
+          <!-- 상태 칩(물체 모드) · 배지 -->
+          <SolidColorBrush x:Key="ChipBrush" Color="#263545" />
+          <SolidColorBrush x:Key="ChipFreeBrush" Color="#16475A" />
+          <SolidColorBrush x:Key="ChipLandedBrush" Color="#1F4D33" />
+          <SolidColorBrush x:Key="ChipStowedBrush" Color="#323D4A" />
+          <SolidColorBrush x:Key="ChipTextBrush" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="StateStowedBrush" Color="#8A94A3" />
+          <SolidColorBrush x:Key="StateFreeBrush" Color="#4FB8FF" />
+          <SolidColorBrush x:Key="StateLandedBrush" Color="#46D17A" />
+          <SolidColorBrush x:Key="BadgeTrustedBrush" Color="#1BAF7A" />
+          <SolidColorBrush x:Key="BadgeReferenceBrush" Color="#EDA100" />
+          <SolidColorBrush x:Key="BadgeEstimateBrush" Color="#E34948" />
+          <SolidColorBrush x:Key="BadgeTextBrush" Color="#0B0F14" />
+          <!-- 3D 뷰 위 HUD · 떠 있는 막대 -->
+          <SolidColorBrush x:Key="HudBrush" Color="#D90F151C" />
+          <SolidColorBrush x:Key="HudTextBrush" Color="#D6DEE8" />
+          <SolidColorBrush x:Key="ScrimBrush" Color="#B8040810" />
+          <!-- 3D 위 브라우저(어셈블리) — 반투명 바탕 · 머리줄 · 들여쓰기 가이드 -->
+          <SolidColorBrush x:Key="BrowserBgBrush" Color="#E0121820" />
+          <SolidColorBrush x:Key="BrowserHeadBrush" Color="#F01A222C" />
+          <SolidColorBrush x:Key="BrowserGuideBrush" Color="#33404E" />
+          <SolidColorBrush x:Key="BrowserHoverBrush" Color="#9E2B3846" />
+          <!-- 셸(참고 MetroWindow · HamburgerMenu · 이벤트 패널): 제목 표시줄 · 아이콘 레일 · 3D 위 반투명 패널 · 창 닫기 단추 -->
+          <SolidColorBrush x:Key="TitleBarBrush" Color="#0E141B" />
+          <SolidColorBrush x:Key="RailBrush" Color="#F20E141B" />
+          <SolidColorBrush x:Key="PanelBrush" Color="#F5111820" />
+          <SolidColorBrush x:Key="PanelHeadBrush" Color="#F2192430" />
+          <SolidColorBrush x:Key="CaptionCloseHoverBrush" Color="#C42B1C" />
+          <SolidColorBrush x:Key="OnDangerBrush" Color="#FFFFFF" />
+          <!-- 그래프 -->
+          <SolidColorBrush x:Key="PlotBgBrush" Color="#10161D" />
+          <SolidColorBrush x:Key="PlotAxisBrush" Color="#4E5C6C" />
+          <SolidColorBrush x:Key="PlotGridBrush" Color="#28A0AABE" />
+          <SolidColorBrush x:Key="PlotTextBrush" Color="#8E9BAA" />
+          <SolidColorBrush x:Key="PlotTitleBrush" Color="#C9D3DD" />
+          <SolidColorBrush x:Key="PlotCursorBrush" Color="#F2F6FA" />
+          <SolidColorBrush x:Key="PlotLabelBackBrush" Color="#C810161D" />
+          <Color x:Key="PlotSeries1Color">#00BFFF</Color>
+          <Color x:Key="PlotSeries2Color">#FFA500</Color>
+          <Color x:Key="PlotSeries3Color">#FF6347</Color>
+          <Color x:Key="PlotSeries4Color">#32CD32</Color>
+          <Color x:Key="PlotSeries5Color">#6495ED</Color>
+          <Color x:Key="PlotSeries6Color">#FFD700</Color>
+          <Color x:Key="PlotSeries7Color">#EE82EE</Color>
+          <!-- 레전드 패널(막대 색 = 데이터 — 바탕 · 글자만 테마) -->
+          <SolidColorBrush x:Key="LegendBgBrush" Color="#E0141A22" />
+          <SolidColorBrush x:Key="LegendTextBrush" Color="#D6DEE8" />
+          <SolidColorBrush x:Key="LegendDimBrush" Color="#8A96A6" />
+          <SolidColorBrush x:Key="LegendLineBrush" Color="#3A4552" />
+          <!-- 3D 뷰(OpenGL) — ThemeService 가 Color 로 읽어 GlView 팔레트에 넘긴다 -->
+          <Color x:Key="ViewBgColor">#12171F</Color>
+          <Color x:Key="ViewGroundColor">#161B22</Color>
+          <Color x:Key="ViewGridColor">#669A73</Color>
+          <Color x:Key="ViewDividerColor">#333D4C</Color>
+          <Color x:Key="ViewActiveColor">#22B8D9</Color>
+          <Color x:Key="ViewMarkerColor">#FFFFFF</Color>
+          <Color x:Key="ViewRiserColor">#D9D9D9</Color>
+          <!-- 풍동 · 가상 풍동 무대(흐름 시각화 데이터 색 기준 — 두 테마 모두 어두운 무대) -->
+          <SolidColorBrush x:Key="StageBgBrush" Color="#040406" />
+          <SolidColorBrush x:Key="StageHudBrush" Color="#C80D1015" />
+          <SolidColorBrush x:Key="StagePanelBrush" Color="#D8141A22" />
+          <SolidColorBrush x:Key="StageLineBrush" Color="#3A4552" />
+          <SolidColorBrush x:Key="StageTextBrush" Color="#E6ECF2" />
+          <SolidColorBrush x:Key="StageDimBrush" Color="#9AA6B4" />
+          <SolidColorBrush x:Key="StageWarnBrush" Color="#FFC857" />
+          <SolidColorBrush x:Key="GradeBadgeBrush" Color="#E09A3A" />
+          <SolidColorBrush x:Key="GradeBadgeTextBrush" Color="#0B0F14" />
+          <!-- 그림자 -->
+          <BoxShadows x:Key="ShadowSm">0 1 2 0 #40000000</BoxShadows>
+          <BoxShadows x:Key="ShadowMd">0 4 14 0 #66000000</BoxShadows>
+          <BoxShadows x:Key="ShadowLg">0 10 30 0 #80000000</BoxShadows>
+          <SolidColorBrush x:Key="ShadowBrush" Color="#59000000" />
+
+          <!-- Fluent 컨트롤 색을 토큰으로(템플릿이 DynamicResource 로 찾는 키) -->
+          <SolidColorBrush x:Key="ButtonBackground" Color="#232E3A" />
+          <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#2B3846" />
+          <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#344454" />
+          <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#0F151C" />
+          <SolidColorBrush x:Key="ButtonForeground" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="#7F8E9E" />
+          <!-- 참고 Console.Button: 테두리 1 · 꺼지면 테두리 투명 + 가라앉은 판(형태로 말함) -->
+          <SolidColorBrush x:Key="ButtonBorderBrush" Color="#3A4859" />
+          <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#5F7185" />
+          <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#5F7185" />
+          <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#00000000" />
+          <SolidColorBrush x:Key="ToggleButtonBackground" Color="#232E3A" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="#2B3846" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundPressed" Color="#344454" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundChecked" Color="#22B8D9" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPointerOver" Color="#3FCBE8" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed" Color="#1A9AB8" />
+          <SolidColorBrush x:Key="ToggleButtonForeground" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="ToggleButtonForegroundChecked" Color="#04161C" />
+          <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPointerOver" Color="#04161C" />
+          <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPressed" Color="#04161C" />
+          <SolidColorBrush x:Key="TextControlBackground" Color="#0F151C" />
+          <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#121A22" />
+          <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#0F151C" />
+          <SolidColorBrush x:Key="TextControlBorderBrush" Color="#3A4859" />
+          <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="#5F7185" />
+          <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="#22B8D9" />
+          <SolidColorBrush x:Key="TextControlForeground" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#7F8E9E" />
+          <SolidColorBrush x:Key="ComboBoxBackground" Color="#0F151C" />
+          <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="#121A22" />
+          <SolidColorBrush x:Key="ComboBoxBackgroundPressed" Color="#19222C" />
+          <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="#3A4859" />
+          <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="#5F7185" />
+          <SolidColorBrush x:Key="ComboBoxBorderBrushPressed" Color="#22B8D9" />
+          <SolidColorBrush x:Key="ComboBoxForeground" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="#1B242F" />
+          <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="#3A4859" />
+          <SolidColorBrush x:Key="MenuFlyoutPresenterBackground" Color="#1B242F" />
+          <SolidColorBrush x:Key="MenuFlyoutPresenterBorderBrush" Color="#3A4859" />
+          <SolidColorBrush x:Key="FlyoutPresenterBackground" Color="#1B242F" />
+          <SolidColorBrush x:Key="FlyoutBorderThemeBrush" Color="#3A4859" />
+          <SolidColorBrush x:Key="ToolTipBackground" Color="#1F2935" />
+          <SolidColorBrush x:Key="ToolTipForeground" Color="#E6EDF3" />
+          <SolidColorBrush x:Key="ToolTipBorderBrush" Color="#3A4859" />
+          <SolidColorBrush x:Key="SystemControlFocusVisualPrimaryBrush" Color="#3FCBE8" />
+          <SolidColorBrush x:Key="SystemControlFocusVisualSecondaryBrush" Color="#00000000" />
+        </ResourceDictionary>
+
+        <!-- ==================== 라이트 ==================== -->
+        <ResourceDictionary x:Key="Light">
+          <Color x:Key="SystemAccentColor">#0C6B89</Color>
+          <Color x:Key="SystemAccentColorLight1">#1F84A4</Color>
+          <Color x:Key="SystemAccentColorLight2">#4FA3BE</Color>
+          <Color x:Key="SystemAccentColorLight3">#86C2D5</Color>
+          <Color x:Key="SystemAccentColorDark1">#09556E</Color>
+          <Color x:Key="SystemAccentColorDark2">#074457</Color>
+          <Color x:Key="SystemAccentColorDark3">#053342</Color>
+
+          <SolidColorBrush x:Key="BgBrush" Color="#DCE2EA" />
+          <SolidColorBrush x:Key="SurfaceBrush" Color="#F3F6F9" />
+          <SolidColorBrush x:Key="Surface2Brush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="Surface3Brush" Color="#E6EBF1" />
+          <SolidColorBrush x:Key="SurfaceSunkenBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="SurfaceHoverBrush" Color="#D8E0EA" />
+          <SolidColorBrush x:Key="SurfacePressedBrush" Color="#C5D2E0" />
+          <SolidColorBrush x:Key="SurfaceRaisedBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="LineBrush" Color="#D2DAE3" />
+          <SolidColorBrush x:Key="ControlBorderBrush" Color="#AEBBCA" />
+          <SolidColorBrush x:Key="ControlBorderHoverBrush" Color="#6B7C90" />
+          <SolidColorBrush x:Key="TextBrush" Color="#13202C" />
+          <SolidColorBrush x:Key="TextDimBrush" Color="#3D4D5C" />
+          <SolidColorBrush x:Key="TextMutedBrush" Color="#5E6B79" />
+          <SolidColorBrush x:Key="TextDisabledBrush" Color="#9AA6B3" />
+          <SolidColorBrush x:Key="AccentBrush" Color="#0C6B89" />
+          <SolidColorBrush x:Key="AccentHoverBrush" Color="#09556E" />
+          <SolidColorBrush x:Key="AccentPressedBrush" Color="#074457" />
+          <SolidColorBrush x:Key="AccentTextBrush" Color="#0B6582" />
+          <SolidColorBrush x:Key="OnAccentBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="AccentSoftBrush" Color="#D4E9F0" />
+          <SolidColorBrush x:Key="HighlightBrush" Color="#B25A06" />
+          <SolidColorBrush x:Key="FocusRingBrush" Color="#0C6B89" />
+          <SolidColorBrush x:Key="OkBrush" Color="#2E7D32" />
+          <SolidColorBrush x:Key="WarnBrush" Color="#A85F00" />
+          <SolidColorBrush x:Key="ErrBrush" Color="#C62121" />
+          <SolidColorBrush x:Key="InfoBrush" Color="#15589F" />
+          <SolidColorBrush x:Key="OkSoftBrush" Color="#DDEFDF" />
+          <SolidColorBrush x:Key="WarnSoftBrush" Color="#F8EBD3" />
+          <SolidColorBrush x:Key="ErrSoftBrush" Color="#F8E1E1" />
+          <SolidColorBrush x:Key="ChipBrush" Color="#E1E8EF" />
+          <SolidColorBrush x:Key="ChipFreeBrush" Color="#CDE6F2" />
+          <SolidColorBrush x:Key="ChipLandedBrush" Color="#D3ECD8" />
+          <SolidColorBrush x:Key="ChipStowedBrush" Color="#DEE3EA" />
+          <SolidColorBrush x:Key="ChipTextBrush" Color="#13202C" />
+          <SolidColorBrush x:Key="StateStowedBrush" Color="#5E6B79" />
+          <SolidColorBrush x:Key="StateFreeBrush" Color="#15589F" />
+          <SolidColorBrush x:Key="StateLandedBrush" Color="#2E7D32" />
+          <SolidColorBrush x:Key="BadgeTrustedBrush" Color="#178F65" />
+          <SolidColorBrush x:Key="BadgeReferenceBrush" Color="#D99300" />
+          <SolidColorBrush x:Key="BadgeEstimateBrush" Color="#D23B3A" />
+          <SolidColorBrush x:Key="BadgeTextBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="HudBrush" Color="#E6FFFFFF" />
+          <SolidColorBrush x:Key="HudTextBrush" Color="#1D2A36" />
+          <SolidColorBrush x:Key="ScrimBrush" Color="#8C0E161F" />
+          <SolidColorBrush x:Key="BrowserBgBrush" Color="#E8F7F9FB" />
+          <SolidColorBrush x:Key="BrowserHeadBrush" Color="#F5E9EEF3" />
+          <SolidColorBrush x:Key="BrowserGuideBrush" Color="#C6D0DA" />
+          <SolidColorBrush x:Key="BrowserHoverBrush" Color="#B3D8E0EA" />
+          <SolidColorBrush x:Key="TitleBarBrush" Color="#E9EEF3" />
+          <SolidColorBrush x:Key="RailBrush" Color="#F5EEF2F6" />
+          <SolidColorBrush x:Key="PanelBrush" Color="#F7F7F9FB" />
+          <SolidColorBrush x:Key="PanelHeadBrush" Color="#F5E6EBF1" />
+          <SolidColorBrush x:Key="CaptionCloseHoverBrush" Color="#C42B1C" />
+          <SolidColorBrush x:Key="OnDangerBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="PlotBgBrush" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="PlotAxisBrush" Color="#9AA8B8" />
+          <SolidColorBrush x:Key="PlotGridBrush" Color="#2213202C" />
+          <SolidColorBrush x:Key="PlotTextBrush" Color="#5E6B79" />
+          <SolidColorBrush x:Key="PlotTitleBrush" Color="#13202C" />
+          <SolidColorBrush x:Key="PlotCursorBrush" Color="#13202C" />
+          <SolidColorBrush x:Key="PlotLabelBackBrush" Color="#D9FFFFFF" />
+          <Color x:Key="PlotSeries1Color">#0077B6</Color>
+          <Color x:Key="PlotSeries2Color">#D97706</Color>
+          <Color x:Key="PlotSeries3Color">#DC2626</Color>
+          <Color x:Key="PlotSeries4Color">#15803D</Color>
+          <Color x:Key="PlotSeries5Color">#2563EB</Color>
+          <Color x:Key="PlotSeries6Color">#A16207</Color>
+          <Color x:Key="PlotSeries7Color">#9333EA</Color>
+          <SolidColorBrush x:Key="LegendBgBrush" Color="#EBFFFFFF" />
+          <SolidColorBrush x:Key="LegendTextBrush" Color="#13202C" />
+          <SolidColorBrush x:Key="LegendDimBrush" Color="#5E6B79" />
+          <SolidColorBrush x:Key="LegendLineBrush" Color="#C3CDD8" />
+          <Color x:Key="ViewBgColor">#E3E9F0</Color>
+          <Color x:Key="ViewGroundColor">#D3DBE4</Color>
+          <Color x:Key="ViewGridColor">#1F4A33</Color>
+          <Color x:Key="ViewDividerColor">#AEBBCA</Color>
+          <Color x:Key="ViewActiveColor">#0C6B89</Color>
+          <Color x:Key="ViewMarkerColor">#1D2A36</Color>
+          <Color x:Key="ViewRiserColor">#5E6B79</Color>
+          <!-- 무대는 라이트에서도 어둡게(흐름 색 대비) — 테두리만 살짝 밝게 -->
+          <SolidColorBrush x:Key="StageBgBrush" Color="#0B1016" />
+          <SolidColorBrush x:Key="StageHudBrush" Color="#C80D1015" />
+          <SolidColorBrush x:Key="StagePanelBrush" Color="#D8141A22" />
+          <SolidColorBrush x:Key="StageLineBrush" Color="#4A5868" />
+          <SolidColorBrush x:Key="StageTextBrush" Color="#E6ECF2" />
+          <SolidColorBrush x:Key="StageDimBrush" Color="#A6B4C2" />
+          <SolidColorBrush x:Key="StageWarnBrush" Color="#FFC857" />
+          <SolidColorBrush x:Key="GradeBadgeBrush" Color="#E09A3A" />
+          <SolidColorBrush x:Key="GradeBadgeTextBrush" Color="#0B0F14" />
+          <BoxShadows x:Key="ShadowSm">0 1 2 0 #1F0E161F</BoxShadows>
+          <BoxShadows x:Key="ShadowMd">0 4 14 0 #2E0E161F</BoxShadows>
+          <BoxShadows x:Key="ShadowLg">0 10 30 0 #3D0E161F</BoxShadows>
+          <SolidColorBrush x:Key="ShadowBrush" Color="#260E161F" />
+
+          <SolidColorBrush x:Key="ButtonBackground" Color="#E6EBF1" />
+          <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#D8E0EA" />
+          <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#C5D2E0" />
+          <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="#F7F9FB" />
+          <SolidColorBrush x:Key="ButtonForeground" Color="#13202C" />
+          <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#0B141C" />
+          <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#13202C" />
+          <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="#7A8794" />
+          <SolidColorBrush x:Key="ButtonBorderBrush" Color="#AEBBCA" />
+          <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#6B7C90" />
+          <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#6B7C90" />
+          <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="#00000000" />
+          <SolidColorBrush x:Key="ToggleButtonBackground" Color="#E6EBF1" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver" Color="#D8E0EA" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundPressed" Color="#C5D2E0" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundChecked" Color="#0C6B89" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPointerOver" Color="#09556E" />
+          <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed" Color="#074457" />
+          <SolidColorBrush x:Key="ToggleButtonForeground" Color="#13202C" />
+          <SolidColorBrush x:Key="ToggleButtonForegroundChecked" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPointerOver" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPressed" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="TextControlBackground" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="TextControlBorderBrush" Color="#AEBBCA" />
+          <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="#6B7C90" />
+          <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="#0C6B89" />
+          <SolidColorBrush x:Key="TextControlForeground" Color="#13202C" />
+          <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#13202C" />
+          <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#13202C" />
+          <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#7A8794" />
+          <SolidColorBrush x:Key="ComboBoxBackground" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="#F6F8FB" />
+          <SolidColorBrush x:Key="ComboBoxBackgroundPressed" Color="#EEF2F6" />
+          <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="#AEBBCA" />
+          <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="#6B7C90" />
+          <SolidColorBrush x:Key="ComboBoxBorderBrushPressed" Color="#0C6B89" />
+          <SolidColorBrush x:Key="ComboBoxForeground" Color="#13202C" />
+          <SolidColorBrush x:Key="ComboBoxDropDownBackground" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="ComboBoxDropDownBorderBrush" Color="#AEBBCA" />
+          <SolidColorBrush x:Key="MenuFlyoutPresenterBackground" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="MenuFlyoutPresenterBorderBrush" Color="#C3CDD8" />
+          <SolidColorBrush x:Key="FlyoutPresenterBackground" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="FlyoutBorderThemeBrush" Color="#C3CDD8" />
+          <SolidColorBrush x:Key="ToolTipBackground" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="ToolTipForeground" Color="#13202C" />
+          <SolidColorBrush x:Key="ToolTipBorderBrush" Color="#C3CDD8" />
+          <SolidColorBrush x:Key="SystemControlFocusVisualPrimaryBrush" Color="#0C6B89" />
+          <SolidColorBrush x:Key="SystemControlFocusVisualSecondaryBrush" Color="#00000000" />
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+
+      <!-- ==================== 공용(테마 불변) ==================== -->
+      <FontFamily x:Key="UiFont">Malgun Gothic, Segoe UI</FontFamily>
+      <FontFamily x:Key="MonoFont">Consolas, D2Coding, Malgun Gothic</FontFamily>
+      <x:Double x:Key="FontCaption">11</x:Double>
+      <x:Double x:Key="FontSmall">12</x:Double>
+      <x:Double x:Key="FontBody">13</x:Double>
+      <x:Double x:Key="FontTitle">16</x:Double>
+      <x:Double x:Key="FontDisplay">20</x:Double>
+      <CornerRadius x:Key="RadiusSm">4</CornerRadius>
+      <CornerRadius x:Key="RadiusMd">6</CornerRadius>
+      <CornerRadius x:Key="RadiusLg">10</CornerRadius>
+      <Thickness x:Key="SpaceXs">4</Thickness>
+      <Thickness x:Key="SpaceSm">8</Thickness>
+      <Thickness x:Key="SpaceMd">12</Thickness>
+      <Thickness x:Key="SpaceLg">16</Thickness>
+      <!-- 참고 Console.Button · ConsoleLayoutMath.InputHeight = 32 -->
+      <x:Double x:Key="ControlHeight">32</x:Double>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme>
+      <FluentTheme.Palettes>
+        <ColorPaletteResources x:Key="Dark" Accent="#22B8D9" RegionColor="#0C1117" BaseHigh="#E6EDF3" ErrorText="#FF6B63"
+                               ChromeLow="#141B23" ChromeMedium="#1B242F" ChromeMediumLow="#232E3A" ChromeHigh="#5F7185" ChromeAltLow="#E6EDF3"
+                               ListLow="#1A22B8D9" ListMedium="#3322B8D9" />
+        <ColorPaletteResources x:Key="Light" Accent="#0C6B89" RegionColor="#F3F6F9" BaseHigh="#13202C" ErrorText="#C62121"
+                               ChromeLow="#F3F6F9" ChromeMedium="#E6EBF1" ChromeMediumLow="#FFFFFF" ChromeHigh="#AEBBCA" ChromeAltLow="#13202C"
+                               ListLow="#140C6B89" ListMedium="#260C6B89" />
+      </FluentTheme.Palettes>
+    </FluentTheme>
+    <!-- 벡터 아이콘(Material Design Icons — Material.Icons.Avalonia, MIT · 아이콘 데이터 Pictogrammers) -->
+    <mi:MaterialIconStyles />
+
+    <Style Selector="Window">
+      <Setter Property="Background" Value="{DynamicResource BgBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="FontFamily" Value="{DynamicResource UiFont}" />
+      <Setter Property="FontSize" Value="{DynamicResource FontBody}" />
+    </Style>
+
+    <!-- ===== 글자 위계 ===== -->
+    <!-- 섹션 제목(참고 ConsoleSection: 13 SemiBold · 본문 색 — 바로 오른쪽 "?" · 아래 1 px 선은 Border.subhead) -->
+    <Style Selector="TextBlock.h">
+      <Setter Property="FontSize" Value="{DynamicResource FontBody}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="Margin" Value="0,16,0,8" />
+    </Style>
+    <Style Selector="TextBlock.label">
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+    <Style Selector="TextBlock.caption">
+      <Setter Property="FontSize" Value="{DynamicResource FontCaption}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.dim, SelectableTextBlock.dim">
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+    </Style>
+    <Style Selector="TextBlock.muted, SelectableTextBlock.muted">
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+    </Style>
+    <Style Selector="TextBlock.mono, SelectableTextBlock.mono">
+      <Setter Property="FontFamily" Value="{DynamicResource MonoFont}" />
+      <Setter Property="FontSize" Value="{DynamicResource FontSmall}" />
+    </Style>
+    <Style Selector="TextBlock.warn, SelectableTextBlock.warn">
+      <Setter Property="Foreground" Value="{DynamicResource WarnBrush}" />
+    </Style>
+    <Style Selector="TextBlock.err">
+      <Setter Property="Foreground" Value="{DynamicResource ErrBrush}" />
+    </Style>
+    <Style Selector="TextBlock.ok">
+      <Setter Property="Foreground" Value="{DynamicResource OkBrush}" />
+    </Style>
+    <Style Selector="TextBlock.info">
+      <Setter Property="Foreground" Value="{DynamicResource InfoBrush}" />
+    </Style>
+
+    <!-- ===== 버튼 (배경 · 호버 · 눌림 색은 위 Fluent 키 토큰) ===== -->
+    <!--
+      버튼 — 참고 Console.Button 계열(높이 32 · 모서리 4 · 테두리 1 · 호버 SurfaceHover · 눌림 SurfacePressed ·
+      꺼짐 = 가라앉은 판 + 테두리 투명 + 흐린 글자 — 색 하나가 아니라 형태로 말한다). 배경 · 테두리 색은 위 Fluent 키 토큰.
+    -->
+    <Style Selector="Button, ToggleButton, RepeatButton">
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+      <Setter Property="Padding" Value="12,0" />
+      <Setter Property="MinHeight" Value="{DynamicResource ControlHeight}" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Button:disabled /template/ ContentPresenter#PART_ContentPresenter, ToggleButton:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
+    </Style>
+    <!-- 아이콘 + 글 단추 안 간격 -->
+    <Style Selector="StackPanel.btn">
+      <Setter Property="Orientation" Value="Horizontal" />
+      <Setter Property="Spacing" Value="6" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="StackPanel.btn > TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="mi|MaterialIcon">
+      <Setter Property="Width" Value="18" />
+      <Setter Property="Height" Value="18" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="mi|MaterialIcon.sm">
+      <Setter Property="Width" Value="15" />
+      <Setter Property="Height" Value="15" />
+    </Style>
+    <Style Selector="mi|MaterialIcon.lg">
+      <Setter Property="Width" Value="22" />
+      <Setter Property="Height" Value="22" />
+    </Style>
+    <!-- 주 동작(실행) — 꺼지면 채움을 버린다(참고 Console.Button.Primary) -->
+    <Style Selector="Button.primary">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentPressedBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource TextBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Button.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfaceSunkenBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+    </Style>
+    <!-- 배경 · 테두리 없는 단추(참고 Console.Button.Ghost) — 호버만 판 -->
+    <Style Selector="Button.ghost, ToggleButton.ghost">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+      <Setter Property="Padding" Value="10,0" />
+    </Style>
+    <Style Selector="Button.ghost:pointerover /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.ghost:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="Button.ghost:pressed /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.ghost:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfacePressedBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="Button.sm">
+      <Setter Property="MinHeight" Value="26" />
+      <Setter Property="Padding" Value="10,0" />
+      <Setter Property="FontSize" Value="{DynamicResource FontSmall}" />
+    </Style>
+    <!-- 아이콘만 있는 정사각 단추(참고 Console.Button.Icon 32) -->
+    <Style Selector="Button.icon, ToggleButton.icon">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Width" Value="32" />
+      <Setter Property="Height" Value="32" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+    </Style>
+    <Style Selector="Button.icon.sm, ToggleButton.icon.sm">
+      <Setter Property="Width" Value="26" />
+      <Setter Property="Height" Value="26" />
+      <Setter Property="FontSize" Value="{DynamicResource FontSmall}" />
+    </Style>
+    <Style Selector="Button.icon:pointerover /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.icon:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="Button.icon:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <!-- 상태 표시줄 배지 -->
+    <Style Selector="Button.badge">
+      <Setter Property="Padding" Value="8,0" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="VerticalAlignment" Value="Stretch" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="FontSize" Value="{DynamicResource FontSmall}" />
+    </Style>
+    <Style Selector="Button.badge.warn">
+      <Setter Property="Foreground" Value="{DynamicResource WarnBrush}" />
+    </Style>
+    <Style Selector="Button.badge.err">
+      <Setter Property="Foreground" Value="{DynamicResource ErrBrush}" />
+    </Style>
+    <Style Selector="Button.badge.warn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource WarnBrush}" />
+    </Style>
+    <Style Selector="Button.badge.err:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Foreground" Value="{DynamicResource ErrBrush}" />
+    </Style>
+    <!-- 켜짐 강조는 도구 토글(.ghost — 예: 추적)에만. 전체 ToggleButton 에 걸면 접이식(Expander) 머리 토글도 펼칠 때 글자 폭만 칠해진다 -->
+    <Style Selector="ToggleButton.ghost:checked /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Expander ToggleButton, Expander /template/ ToggleButton">
+      <Setter Property="MinHeight" Value="0" />
+    </Style>
+
+    <!-- ===== 셸: 제목 표시줄(참고 MetroWindow — 아이콘 · 굵은 제목 · 창 명령) ===== -->
+    <Style Selector="Border.titlebar">
+      <Setter Property="Background" Value="{DynamicResource TitleBarBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="Height" Value="44" />
+    </Style>
+    <Style Selector="TextBlock.apptitle">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Menu.titlemenu">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Menu.titlemenu > MenuItem">
+      <Setter Property="Padding" Value="9,5" />
+      <Setter Property="FontSize" Value="{DynamicResource FontBody}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+    </Style>
+    <Style Selector="Menu.titlemenu > MenuItem:pointerover, Menu.titlemenu > MenuItem:open">
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <!-- 제목 표시줄 빠른 단추(아이콘 32 · 글 있는 것은 아이콘 + 글) -->
+    <Style Selector="Button.tb">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+      <Setter Property="MinHeight" Value="32" />
+      <Setter Property="Height" Value="32" />
+      <Setter Property="Padding" Value="7,0" />
+    </Style>
+    <Style Selector="Button.tb:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="Button.tb:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Button.tb.primary">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+      <Setter Property="Padding" Value="12,0,14,0" />
+    </Style>
+    <Style Selector="Button.tb.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Button.tb.primary:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfaceSunkenBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+    </Style>
+    <!-- 창 단추(최소화 · 최대화 · 창 닫기) — 제목 표시줄 높이 전체, 닫기 호버 = 위험색 -->
+    <Style Selector="Button.caption">
+      <Setter Property="Width" Value="46" />
+      <Setter Property="Height" Value="44" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="Cursor" Value="Arrow" />
+    </Style>
+    <Style Selector="Button.caption:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="Button.caption.close:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource CaptionCloseHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnDangerBrush}" />
+    </Style>
+    <Style Selector="Button.caption.close:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource CaptionCloseHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnDangerBrush}" />
+      <Setter Property="Opacity" Value="0.85" />
+    </Style>
+
+    <!-- ===== 셸: 왼쪽 아이콘 레일(참고 HamburgerMenu CompactOverlay · ConsoleRailItem) ===== -->
+    <Style Selector="Border.rail">
+      <Setter Property="Background" Value="{DynamicResource RailBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,1,0" />
+      <Setter Property="Width" Value="56" />
+    </Style>
+    <Style Selector="Button.rail, ToggleButton.rail">
+      <Setter Property="Width" Value="44" />
+      <Setter Property="Height" Value="44" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Margin" Value="6,2" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="VerticalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="Button.rail:pointerover /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.rail:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.rail:checked /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.rail:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.rail:checked:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+    </Style>
+    <!-- 선택 = 왼쪽 3 px 주색 막대(참고 ConsoleRailItem) -->
+    <Style Selector="Rectangle.railbar">
+      <Setter Property="Width" Value="3" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="Margin" Value="0,8" />
+      <Setter Property="RadiusX" Value="2" />
+      <Setter Property="RadiusY" Value="2" />
+      <Setter Property="Fill" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="ToggleButton.rail:checked Rectangle.railbar">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="Button.rail mi|MaterialIcon, ToggleButton.rail mi|MaterialIcon">
+      <Setter Property="Width" Value="22" />
+      <Setter Property="Height" Value="22" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.railsep">
+      <Setter Property="Height" Value="1" />
+      <Setter Property="Margin" Value="12,6" />
+      <Setter Property="Background" Value="{DynamicResource LineBrush}" />
+    </Style>
+
+    <!-- ===== 셸: 3D 위 반투명 패널(참고 이벤트 패널 — SurfaceTranslucent · 모서리 10 · 머리 50 = 주색 띠) ===== -->
+    <Style Selector="Border.panel">
+      <Setter Property="Background" Value="{DynamicResource PanelBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowLg}" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+    <Style Selector="Border.panelhead">
+      <Setter Property="Height" Value="50" />
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <Style Selector="Border.panelhead TextBlock.paneltitle">
+      <Setter Property="FontSize" Value="{DynamicResource FontTitle}" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+    <Style Selector="Border.panelhead mi|MaterialIcon.panelicon">
+      <Setter Property="Width" Value="20" />
+      <Setter Property="Height" Value="20" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <!-- 주색 머리 위 원형 단추(참고 ModernPanelCloseButton 26 · 고정 핀) -->
+    <Style Selector="Button.onaccent, ToggleButton.onaccent">
+      <Setter Property="Width" Value="28" />
+      <Setter Property="Height" Value="28" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="14" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.onaccent:pointerover /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.onaccent:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.onaccent:checked /template/ ContentPresenter#PART_ContentPresenter, ToggleButton.onaccent:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentPressedBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Button.onaccent mi|MaterialIcon, ToggleButton.onaccent mi|MaterialIcon">
+      <Setter Property="Width" Value="16" />
+      <Setter Property="Height" Value="16" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <!-- 머리 위 "?" — 주색 띠 위에서도 읽히게(테두리 · 글 = OnAccent) -->
+    <Style Selector="Border.panelhead ToggleButton.helptip /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="BorderBrush" Value="{DynamicResource OnAccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Border.panelhead ToggleButton.helptip:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentHoverBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource OnAccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Border.panelhead ToggleButton.helptip:checked /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource OnAccentBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource OnAccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <!-- 아래 서랍 머리(얇은 띠 34 — 그래프 · 로그 섹션 머리와 겹치지 않게 주색 대신 PanelHead) -->
+    <Style Selector="Border.drawerhead">
+      <Setter Property="Height" Value="34" />
+      <Setter Property="Background" Value="{DynamicResource PanelHeadBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+    </Style>
+    <Style Selector="Border.drawerhead TextBlock.drawertitle">
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!-- 패널 크기 손잡이(참고 Surface.ResizeThumb — 평소 투명, 올리면 주색) -->
+    <Style Selector="Border.sizegrip">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.sizegrip:pointerover">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <!-- 닫힌 패널 다시 열기 — 둥근 떠 있는 단추 35×35(참고 이벤트 패널 열기 단추 · Grow/Shrink 0.2 s) -->
+    <Style Selector="Button.fab">
+      <Setter Property="Width" Value="35" />
+      <Setter Property="Height" Value="35" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="18" />
+      <Setter Property="Background" Value="{DynamicResource HudBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="RenderTransformOrigin" Value="50%,50%" />
+    </Style>
+    <Style Selector="Button.fab:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Button.fab mi|MaterialIcon">
+      <Setter Property="Width" Value="20" />
+      <Setter Property="Height" Value="20" />
+    </Style>
+    <!-- 서랍 페이지 안 섹션 머리(참고 ConsoleSection — 제목 + "?" · 아래 1 px 선) -->
+    <Style Selector="Border.subhead">
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="Padding" Value="0,0,0,6" />
+      <Setter Property="Margin" Value="0,14,0,8" />
+    </Style>
+    <Style Selector="Border.subhead TextBlock.h">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- ===== "?" 섹션 도움말 단추(HelpTip) — 작은 원, 테두리 = 토큰, 열리면 주색 ===== -->
+    <Style Selector="ToggleButton.helptip">
+      <Setter Property="Width" Value="20" />
+      <Setter Property="Height" Value="20" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="MinWidth" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="ToggleButton.helptip /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.helptip:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.helptip:checked /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.helptip:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Opacity" Value="0.4" />
+    </Style>
+
+    <!-- ===== 입력 컨트롤(높이 · 모서리 통일, 색은 Fluent 키 토큰) ===== -->
+    <Style Selector="TextBox">
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+      <Setter Property="MinHeight" Value="{DynamicResource ControlHeight}" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="8,4" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="ComboBox">
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+      <Setter Property="MinHeight" Value="{DynamicResource ControlHeight}" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="10,4,6,4" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="CheckBox">
+      <Setter Property="MinHeight" Value="28" />
+    </Style>
+    <Style Selector="Slider">
+      <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <Style Selector="ProgressBar">
+      <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+      <Setter Property="Background" Value="{DynamicResource Surface3Brush}" />
+      <Setter Property="CornerRadius" Value="3" />
+    </Style>
+
+    <!-- ===== 메뉴 ===== -->
+    <Style Selector="Menu">
+      <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="Menu > MenuItem">
+      <Setter Property="Padding" Value="10,6" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+    </Style>
+    <Style Selector="MenuFlyoutPresenter, ContextMenu">
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusLg}" />
+      <Setter Property="Background" Value="{DynamicResource MenuFlyoutPresenterBackground}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource MenuFlyoutPresenterBorderBrush}" />
+    </Style>
+    <Style Selector="FlyoutPresenter">
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusLg}" />
+      <Setter Property="Background" Value="{DynamicResource FlyoutPresenterBackground}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource FlyoutBorderThemeBrush}" />
+    </Style>
+    <!-- 스크롤 막대: 참고 MaterialDesignScrollBarMinimal(얇게 · 평소 0.6) — 올리면 또렷하게 -->
+    <Style Selector="ScrollBar">
+      <Setter Property="Opacity" Value="0.6" />
+    </Style>
+    <Style Selector="ScrollBar:pointerover">
+      <Setter Property="Opacity" Value="1" />
+    </Style>
+    <Style Selector="ToolTip">
+      <Setter Property="Padding" Value="9,6" />
+      <Setter Property="FontSize" Value="{DynamicResource FontSmall}" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+      <Setter Property="Background" Value="{DynamicResource ToolTipBackground}" />
+      <Setter Property="Foreground" Value="{DynamicResource ToolTipForeground}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ToolTipBorderBrush}" />
+    </Style>
+
+    <!-- ===== 탭 · 트리 · 목록 (Fluent 기본값은 큼) ===== -->
+    <Style Selector="TabControl">
+      <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+    </Style>
+    <Style Selector="TabItem">
+      <Setter Property="FontSize" Value="{DynamicResource FontBody}" />
+      <Setter Property="MinHeight" Value="36" />
+      <Setter Property="Padding" Value="12,0" />
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+    </Style>
+    <Style Selector="TabItem:selected">
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="TabItem:selected /template/ Border#PART_SelectedPipe">
+      <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <Style Selector="TreeView">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="TreeViewItem">
+      <Setter Property="MinHeight" Value="24" />
+      <Setter Property="Padding" Value="2,0" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+      <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+    </Style>
+    <!-- 트리 항목 머리글을 폭에 맞춰 늘림 → 이름 TextTrimming(…) 동작 -->
+    <Style Selector="TreeViewItem /template/ ContentPresenter#PART_HeaderPresenter">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="TreeViewItem:selected /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+    </Style>
+    <Style Selector="ListBox">
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="ListBoxItem">
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+    </Style>
+    <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="ListBox.compact ListBoxItem">
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="Padding" Value="8,1" />
+    </Style>
+    <Style Selector="ListBox.nav ListBoxItem">
+      <Setter Property="Padding" Value="10,7" />
+      <Setter Property="Margin" Value="0,1" />
+    </Style>
+    <Style Selector="Expander">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusLg}" />
+      <Setter Property="Background" Value="{DynamicResource Surface2Brush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+    </Style>
+    <Style Selector="Expander /template/ ToggleButton#ExpanderHeader">
+      <Setter Property="Background" Value="{DynamicResource Surface2Brush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+    </Style>
+    <Style Selector="GridSplitter">
+      <Setter Property="Background" Value="{DynamicResource BgBrush}" />
+    </Style>
+    <Style Selector="GridSplitter:pointerover">
+      <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+    </Style>
+    <Style Selector="ScrollViewer">
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+
+    <!-- ===== 막대(도구 · 상태) ===== -->
+    <Style Selector="Border.toolbar">
+      <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="Padding" Value="8,6" />
+    </Style>
+    <Style Selector="Border.statusbar">
+      <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,1,0,0" />
+      <Setter Property="Height" Value="28" />
+    </Style>
+    <!-- 도구 막대 그룹 구분선 -->
+    <Style Selector="Border.sep">
+      <Setter Property="Width" Value="1" />
+      <Setter Property="Margin" Value="8,6" />
+      <Setter Property="Background" Value="{DynamicResource LineBrush}" />
+    </Style>
+    <!-- 보조 창 아래 출처 · 한계 줄 -->
+    <Style Selector="Border.foot">
+      <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,1,0,0" />
+      <Setter Property="Padding" Value="12,6" />
+    </Style>
+
+    <!-- ===== 섹션(트리 · 그래프 · 로그) ===== -->
+    <Style Selector="Border.section">
+      <Setter Property="Background" Value="{DynamicResource SurfaceBrush}" />
+    </Style>
+    <Style Selector="Grid.sechead, DockPanel.sechead">
+      <Setter Property="MinHeight" Value="38" />
+      <Setter Property="Margin" Value="4,0" />
+    </Style>
+    <Style Selector="TextBlock.sect">
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Margin" Value="8,0,6,0" />
+    </Style>
+
+    <!-- ===== 대시보드 카드 · 타일 ===== -->
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{DynamicResource Surface2Brush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusLg}" />
+      <Setter Property="Padding" Value="12" />
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowSm}" />
+    </Style>
+    <Style Selector="TextBlock.cardh">
+      <Setter Property="FontSize" Value="{DynamicResource FontCaption}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="DockPanel.cardhead">
+      <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+    <Style Selector="Border.chip">
+      <Setter Property="Background" Value="{DynamicResource ChipBrush}" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="8,2" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.chip.free">
+      <Setter Property="Background" Value="{DynamicResource ChipFreeBrush}" />
+    </Style>
+    <Style Selector="Border.chip.landed">
+      <Setter Property="Background" Value="{DynamicResource ChipLandedBrush}" />
+    </Style>
+    <Style Selector="Border.chip.stowed">
+      <Setter Property="Background" Value="{DynamicResource ChipStowedBrush}" />
+    </Style>
+    <Style Selector="Border.chip TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource ChipTextBrush}" />
+    </Style>
+    <Style Selector="Border.tile">
+      <Setter Property="Background" Value="{DynamicResource Surface2Brush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusLg}" />
+      <Setter Property="Padding" Value="10,8" />
+      <Setter Property="Margin" Value="2" />
+    </Style>
+    <Style Selector="TextBlock.tlabel">
+      <Setter Property="FontSize" Value="{DynamicResource FontCaption}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+    </Style>
+    <Style Selector="TextBlock.tvalue">
+      <Setter Property="FontSize" Value="18" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="FontFamily" Value="{DynamicResource MonoFont}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="TextBlock.tvalue.warn">
+      <Setter Property="Foreground" Value="{DynamicResource WarnBrush}" />
+    </Style>
+    <Style Selector="TextBlock.tvalue.alarm">
+      <Setter Property="Foreground" Value="{DynamicResource ErrBrush}" />
+    </Style>
+    <Style Selector="TextBlock.tunit">
+      <Setter Property="FontSize" Value="{DynamicResource FontCaption}" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+    </Style>
+    <!-- 신뢰도 배지(신뢰 · 참고 · 추정) -->
+    <Style Selector="Border.badge">
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+      <Setter Property="Padding" Value="6,1" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Background" Value="{DynamicResource BadgeEstimateBrush}" />
+    </Style>
+    <Style Selector="Border.badge.trusted">
+      <Setter Property="Background" Value="{DynamicResource BadgeTrustedBrush}" />
+    </Style>
+    <Style Selector="Border.badge.reference">
+      <Setter Property="Background" Value="{DynamicResource BadgeReferenceBrush}" />
+    </Style>
+    <Style Selector="Border.badge TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource BadgeTextBrush}" />
+      <Setter Property="FontSize" Value="{DynamicResource FontCaption}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <!-- 목록 구분선 -->
+    <Style Selector="Border.rowline">
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="Padding" Value="0,0,0,8" />
+    </Style>
+
+    <!-- ===== 3D 뷰 위 떠 있는 막대(카메라 · HUD) ===== -->
+    <Style Selector="Border.float">
+      <Setter Property="Background" Value="{DynamicResource HudBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusLg}" />
+      <Setter Property="Padding" Value="4" />
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowMd}" />
+    </Style>
+    <Style Selector="TextBlock.hud">
+      <Setter Property="Background" Value="{DynamicResource HudBrush}" />
+      <Setter Property="Foreground" Value="{DynamicResource HudTextBrush}" />
+    </Style>
+    <Style Selector="Border.busy">
+      <Setter Property="Background" Value="{DynamicResource SurfaceRaisedBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusLg}" />
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowLg}" />
+    </Style>
+    <Style Selector="ComboBox.pane">
+      <Setter Property="Background" Value="{DynamicResource HudBrush}" />
+    </Style>
+
+    <!-- ===== 보조 대화상자 머리(참고 ConsoleShell 머리 — SurfaceAlt 띠 · 아래 구분선 · 제목 15 SemiBold · "?") ===== -->
+    <Style Selector="Border.dialoghead">
+      <Setter Property="Background" Value="{DynamicResource Surface2Brush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="Padding" Value="24,10" />
+      <Setter Property="MinHeight" Value="48" />
+    </Style>
+    <Style Selector="TextBlock.dialogtitle">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!-- ===== 도움말 · 정보 창 ===== -->
+    <Style Selector="TextBlock.doc-h1, SelectableTextBlock.doc-h1">
+      <Setter Property="FontSize" Value="18" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="Margin" Value="0,0,0,4" />
+    </Style>
+    <Style Selector="TextBlock.doc-h2">
+      <Setter Property="FontSize" Value="{DynamicResource FontSmall}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+      <Setter Property="Margin" Value="0,10,0,4" />
+    </Style>
+    <Style Selector="Border.kbd">
+      <Setter Property="Background" Value="{DynamicResource Surface3Brush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderBrush}" />
+      <Setter Property="BorderThickness" Value="1,1,1,2" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+      <Setter Property="Padding" Value="5,0" />
+      <Setter Property="Margin" Value="0,0,4,2" />
+    </Style>
+    <Style Selector="Border.kbd TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="FontFamily" Value="{DynamicResource MonoFont}" />
+      <Setter Property="FontSize" Value="11.5" />
+    </Style>
+    <!-- 말풍선 · 도움말 창 장(章) 카드 안 글 -->
+    <Style Selector="TextBlock.help-title">
+      <Setter Property="FontSize" Value="{DynamicResource FontBody}" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="TextBlock.help-heading">
+      <Setter Property="FontSize" Value="11.5" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource TextMutedBrush}" />
+    </Style>
+    <Style Selector="TextBlock.help-body, SelectableTextBlock.help-body">
+      <Setter Property="FontSize" Value="12.5" />
+      <Setter Property="LineHeight" Value="19" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="Ellipse.help-dot">
+      <Setter Property="Fill" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <Style Selector="Button.link">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="FontSize" Value="{DynamicResource FontSmall}" />
+      <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Button.link:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="{DynamicResource AccentHoverBrush}" />
+    </Style>
+  </Application.Styles>
+</Application>

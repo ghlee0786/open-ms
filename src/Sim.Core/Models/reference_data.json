@@ -1,0 +1,1056 @@
+{
+ "schema": "mns.reference-data/1",
+ "generator": "tools/validation/convert_public.py",
+ "cylinderCrossflow": {
+  "grade": "A (TR R-300 Table II, cross-plotted by the authors from Table I(a)) / B (TN 2960 Fig.7 subcritical CD-M, Fig.8 eta(L/D))",
+  "sources": [
+   "NASA TR R-300",
+   "NACA TN 2960"
+  ],
+  "reSubcritical": 200000.0,
+  "machRows": [
+   {
+    "mach": 0.1,
+    "points": [
+     [
+      490000.0,
+      0.143,
+      1
+     ],
+     [
+      1950000.0,
+      0.472,
+      1
+     ],
+     [
+      1970000.0,
+      0.452,
+      1
+     ],
+     [
+      2000000.0,
+      0.42,
+      1
+     ],
+     [
+      4450000.0,
+      0.538,
+      1
+     ],
+     [
+      4650000.0,
+      0.494,
+      1
+     ]
+    ],
+    "gases": [
+     "Air, 1 atm",
+     "Freon, 1 atm",
+     "Freon, 1/10 atm"
+    ]
+   },
+   {
+    "mach": 0.15,
+    "points": [
+     [
+      725000.0,
+      0.184,
+      1
+     ],
+     [
+      2540000.0,
+      0.52,
+      1
+     ],
+     [
+      2930000.0,
+      0.534,
+      1
+     ],
+     [
+      2965000.0,
+      0.535,
+      2
+     ],
+     [
+      3640000.0,
+      0.549,
+      1
+     ],
+     [
+      3880000.0,
+      0.49,
+      1
+     ],
+     [
+      6574950.0,
+      0.5375,
+      2
+     ],
+     [
+      6880000.0,
+      0.499,
+      1
+     ]
+    ],
+    "gases": [
+     "Air, 1 atm",
+     "Freon, 1 atm",
+     "Freon, 1/10 atm",
+     "Freon, 1/2 atm",
+     "Freon, 1/3 atm"
+    ]
+   },
+   {
+    "mach": 0.2,
+    "points": [
+     [
+      962000.0,
+      0.218,
+      1
+     ],
+     [
+      3140000.0,
+      0.587,
+      1
+     ],
+     [
+      3300000.0,
+      0.59,
+      1
+     ],
+     [
+      3360000.0,
+      0.54,
+      1
+     ],
+     [
+      3910000.0,
+      0.54,
+      1
+     ],
+     [
+      3950000.0,
+      0.59,
+      2
+     ],
+     [
+      4830000.0,
+      0.589,
+      2
+     ],
+     [
+      4910000.0,
+      0.521,
+      1
+     ],
+     [
+      8744990.0,
+      0.5375,
+      2
+     ],
+     [
+      9090000.0,
+      0.505,
+      1
+     ]
+    ],
+    "gases": [
+     "Air, 1 atm",
+     "Freon, 1 atm",
+     "Freon, 1/10 atm",
+     "Freon, 1/2 atm",
+     "Freon, 1/3 atm"
+    ]
+   },
+   {
+    "mach": 0.25,
+    "points": [
+     [
+      1200000.0,
+      0.27,
+      1
+     ],
+     [
+      3920000.0,
+      0.609,
+      1
+     ],
+     [
+      4149950.0,
+      0.5925,
+      2
+     ],
+     [
+      4865000.0,
+      0.6,
+      2
+     ],
+     [
+      4920000.0,
+      0.621,
+      1
+     ],
+     [
+      5999970.0,
+      0.5755,
+      2
+     ],
+     [
+      10895000.0,
+      0.543,
+      2
+     ],
+     [
+      11300000.0,
+      0.524,
+      1
+     ]
+    ],
+    "gases": [
+     "Air, 1 atm",
+     "Freon, 1 atm",
+     "Freon, 1/10 atm",
+     "Freon, 1/2 atm",
+     "Freon, 1/3 atm"
+    ]
+   },
+   {
+    "mach": 0.3,
+    "points": [
+     [
+      1440000.0,
+      0.338,
+      1
+     ],
+     [
+      1460000.0,
+      0.431,
+      1
+     ],
+     [
+      4630000.0,
+      0.641,
+      1
+     ],
+     [
+      4954980.0,
+      0.6265,
+      2
+     ],
+     [
+      5700000.0,
+      0.669,
+      1
+     ],
+     [
+      5819970.0,
+      0.6215,
+      2
+     ],
+     [
+      7129970.0,
+      0.598,
+      2
+     ],
+     [
+      12950000.0,
+      0.5515,
+      2
+     ],
+     [
+      13470000.0,
+      0.535,
+      1
+     ]
+    ],
+    "gases": [
+     "Air, 1 atm",
+     "Freon, 1 atm",
+     "Freon, 1/10 atm",
+     "Freon, 1/2 atm",
+     "Freon, 1/3 atm"
+    ]
+   },
+   {
+    "mach": 0.35,
+    "points": [
+     [
+      1664990.0,
+      0.442,
+      2
+     ],
+     [
+      5739990.0,
+      0.6705,
+      2
+     ],
+     [
+      6480000.0,
+      0.727,
+      1
+     ],
+     [
+      6660000.0,
+      0.7,
+      1
+     ],
+     [
+      6740000.0,
+      0.723,
+      1
+     ],
+     [
+      8214990.0,
+      0.6355,
+      2
+     ],
+     [
+      14940000.0,
+      0.5715,
+      2
+     ],
+     [
+      15540000.0,
+      0.563,
+      1
+     ]
+    ],
+    "gases": [
+     "Air, 1 atm",
+     "Freon, 1 atm",
+     "Freon, 1/10 atm",
+     "Freon, 1/2 atm",
+     "Freon, 1/3 atm"
+    ]
+   },
+   {
+    "mach": 0.4,
+    "points": [
+     [
+      1874990.0,
+      0.5245,
+      2
+     ],
+     [
+      6390000.0,
+      0.711,
+      1
+     ],
+     [
+      6500000.0,
+      0.73,
+      1
+     ],
+     [
+      7270000.0,
+      0.803,
+      1
+     ],
+     [
+      7470000.0,
+      0.9,
+      1
+     ],
+     [
+      9279950.0,
+      0.654,
+      2
+     ],
+     [
+      16895000.0,
+      0.608,
+      2
+     ],
+     [
+      17540000.0,
+      0.608,
+      1
+     ]
+    ],
+    "gases": [
+     "Air, 1 atm",
+     "Freon, 1 atm",
+     "Freon, 1/10 atm",
+     "Freon, 1/2 atm",
+     "Freon, 1/3 atm"
+    ]
+   },
+   {
+    "mach": 0.45,
+    "points": [
+     [
+      2270000.0,
+      0.764,
+      1
+     ],
+     [
+      7180000.0,
+      0.781,
+      1
+     ]
+    ],
+    "gases": [
+     "Freon, 1/10 atm",
+     "Freon, 1/3 atm"
+    ]
+   },
+   {
+    "mach": 0.5,
+    "points": [
+     [
+      2530000.0,
+      1.184,
+      1
+     ],
+     [
+      7750000.0,
+      1.028,
+      1
+     ]
+    ],
+    "gases": [
+     "Freon, 1/10 atm",
+     "Freon, 1/3 atm"
+    ]
+   },
+   {
+    "mach": 0.55,
+    "points": [
+     [
+      2780000.0,
+      1.53,
+      1
+     ]
+    ],
+    "gases": [
+     "Freon, 1/10 atm"
+    ]
+   },
+   {
+    "mach": 0.6,
+    "points": [
+     [
+      3000000.0,
+      1.819,
+      1
+     ]
+    ],
+    "gases": [
+     "Freon, 1/10 atm"
+    ]
+   }
+  ],
+  "subcriticalCdVsMach": [
+   [
+    0.0,
+    1.2
+   ],
+   [
+    0.2,
+    1.2
+   ],
+   [
+    0.297,
+    1.25
+   ],
+   [
+    0.4,
+    1.279
+   ],
+   [
+    0.499,
+    1.364
+   ],
+   [
+    0.548,
+    1.391
+   ],
+   [
+    0.598,
+    1.53
+   ],
+   [
+    0.626,
+    1.594
+   ],
+   [
+    0.65,
+    1.628
+   ],
+   [
+    0.682,
+    1.612
+   ],
+   [
+    0.706,
+    1.619
+   ],
+   [
+    0.728,
+    1.622
+   ]
+  ],
+  "eta": [
+   [
+    1.5,
+    0.553
+   ],
+   [
+    2,
+    0.57
+   ],
+   [
+    3,
+    0.597
+   ],
+   [
+    4,
+    0.62
+   ],
+   [
+    5,
+    0.636
+   ],
+   [
+    6,
+    0.65
+   ],
+   [
+    8,
+    0.675
+   ],
+   [
+    10,
+    0.695
+   ],
+   [
+    12,
+    0.712
+   ],
+   [
+    16,
+    0.74
+   ],
+   [
+    20,
+    0.761
+   ],
+   [
+    24,
+    0.778
+   ],
+   [
+    28,
+    0.79
+   ]
+  ],
+  "notes": [
+   "machRows: TR R-300 표 II 일정 마하 행(공기 + Freon-12) — Re 가 1 % 이내인 반복점만 평균(마지막 수 = 점 수), 나머지는 저자 점을 그대로 잇는다.",
+   "아임계(Re ≤ 2×10⁵) CD: M ≤ 0.2 는 1.20(Gowen Fig.6·White 표 7.3), M ≥ 0.3 은 TN 2960 그림 7(0.5 in 원통, Re 0.85–1.57×10⁵, B).",
+   "Re_sub ~ 행 최소 Re 사이는 log Re 선형(항력 위기 구간은 표 II 의 저 Re Freon 점이 있으면 그 점이 형태를 정한다).",
+   "η(L/D): TN 2960 그림 8 아임계(Re 8.8×10⁴, M < 0.1) 곡선 — 초임계·M 0.5 의 L/D < 15 η 공개 자료 없음(±0.08 판단, README)."
+  ],
+  "origin": {
+   "source_case": "validation/sources/cylinder_crossflow_mach/case.json",
+   "sha256": "aa4f689d24ab69904b960ba41dc87fe8563b65dc41d41afb8fd7c994fb6b9666",
+   "converter": "tools/validation/convert_public.py"
+  }
+ },
+ "parachuteKnacke": {
+  "grade": "A (Knacke Tables 5-1, 5-2, 5-6) / B (Fig.5-48, 5-50)",
+  "cxTable": [
+   {
+    "type": "flat circular",
+    "cx": 1.7,
+    "cd0": [
+     0.75,
+     0.8
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "conical",
+    "cx": 1.8,
+    "cd0": [
+     0.75,
+     0.9
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "biconical",
+    "cx": 1.8,
+    "cd0": [
+     0.75,
+     0.92
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "triconical / polyconical",
+    "cx": 1.8,
+    "cd0": [
+     0.8,
+     0.96
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "extended skirt 10% flat",
+    "cx": 1.4,
+    "cd0": [
+     0.78,
+     0.87
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "extended skirt 14.3% full",
+    "cx": 1.4,
+    "cd0": [
+     0.75,
+     0.9
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "hemispherical",
+    "cx": 1.6,
+    "cd0": [
+     0.62,
+     0.77
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "guide surface (ribbed)",
+    "cx": 1.2,
+    "cd0": [
+     0.28,
+     0.42
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "guide surface (ribless)",
+    "cx": 1.4,
+    "cd0": [
+     0.3,
+     0.34
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "annular",
+    "cx": 1.4,
+    "cd0": [
+     0.85,
+     0.95
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-1, PDF p.82 (printed 5-3)"
+   },
+   {
+    "type": "flat (FIST) ribbon",
+    "cx": 1.05,
+    "cd0": [
+     0.45,
+     0.5
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-2, PDF p.83 (printed 5-4)"
+   },
+   {
+    "type": "conical ribbon",
+    "cx": 1.05,
+    "cd0": [
+     0.5,
+     0.55
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-2, PDF p.83 (printed 5-4)"
+   },
+   {
+    "type": "ringslot",
+    "cx": 1.05,
+    "cd0": [
+     0.56,
+     0.65
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-2, PDF p.83 (printed 5-4)"
+   },
+   {
+    "type": "ringsail",
+    "cx": 1.1,
+    "cd0": [
+     0.75,
+     0.85
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-2, PDF p.83 (printed 5-4)"
+   },
+   {
+    "type": "disc-gap-band",
+    "cx": 1.3,
+    "cd0": [
+     0.52,
+     0.58
+    ],
+    "source": "Knacke NWC TP 6575 Table 5-2, PDF p.83 (printed 5-4)"
+   }
+  ],
+  "fillConstant": {
+   "solid flat circular": 8,
+   "extended-skirt, 10%": 10,
+   "extended-skirt, full": 12,
+   "cross": 11.7,
+   "ribbon": 14,
+   "ringslot": 14,
+   "ringsail": 7,
+   "ribless guide surface": "4-6"
+  },
+  "x1VsCanopyLoadingPa": [
+   [
+    19.15,
+    0.027
+   ],
+   [
+    23.94,
+    0.038
+   ],
+   [
+    28.73,
+    0.05
+   ],
+   [
+    38.3,
+    0.076
+   ],
+   [
+    47.88,
+    0.101
+   ],
+   [
+    71.82,
+    0.153
+   ],
+   [
+    95.76,
+    0.197
+   ],
+   [
+    143.64,
+    0.264
+   ],
+   [
+    191.52,
+    0.32
+   ],
+   [
+    239.4,
+    0.363
+   ],
+   [
+    287.28,
+    0.401
+   ],
+   [
+    383.04,
+    0.463
+   ],
+   [
+    478.8,
+    0.513
+   ],
+   [
+    718.2,
+    0.602
+   ],
+   [
+    957.61,
+    0.666
+   ],
+   [
+    1436.41,
+    0.755
+   ],
+   [
+    1915.21,
+    0.814
+   ],
+   [
+    2394.01,
+    0.859
+   ],
+   [
+    2872.82,
+    0.893
+   ],
+   [
+    3830.42,
+    0.942
+   ],
+   [
+    4548.62,
+    0.969
+   ]
+  ],
+  "ckVsRm": [
+   [
+    0.0001347,
+    1.428
+   ],
+   [
+    0.0002463,
+    1.425
+   ],
+   [
+    0.0008978,
+    1.4
+   ],
+   [
+    0.001268,
+    1.386
+   ],
+   [
+    0.001642,
+    1.372
+   ],
+   [
+    0.002318,
+    1.343
+   ],
+   [
+    0.004622,
+    1.279
+   ],
+   [
+    0.005492,
+    1.25
+   ],
+   [
+    0.009213,
+    1.149
+   ],
+   [
+    0.01546,
+    1.03
+   ],
+   [
+    0.02182,
+    0.94
+   ],
+   [
+    0.03359,
+    0.821
+   ],
+   [
+    0.06696,
+    0.575
+   ]
+  ],
+  "origin": {
+   "source_case": "validation/sources/parachute_opening_force_knacke/case.json",
+   "sha256": "72a5654291a1d1c9a3babc7b0b3314752c80a561ddfea322547afbda6c7d9b7b",
+   "converter": "tools/validation/convert_public.py"
+  },
+  "notes": [
+   "표 값은 여러 시험의 핸드북 대표값(불확도 없음). 그림 5-50 산포 ±0.2(눈 판독).",
+   "X1 곡선은 17 Pa(0.36 psf) 아래·Rm 0.067 위는 없음 — 박스 낙하산(약 30 Pa, Rm ≈ 0.6)은 곡선 범위 밖."
+  ]
+ },
+ "shockCriteria": {
+  "grade": "A (MIL-STD-810H 516.8 tables) / C (BMI088 datasheet, UN 38.3 report quote)",
+  "functionalShockFlight_g": 20.0,
+  "functionalShockDuration_ms": 11.0,
+  "launchEject_g": 30.0,
+  "crashHazardFlight_g": 40.0,
+  "lipoUn383_g": 150.0,
+  "lipoUn383_ms": 6.0,
+  "imuBmi088_g_1ms": 2000.0,
+  "airdropLandingLow_mps": 8.7,
+  "notes": [
+   "810H g 값은 시험 입력(규격)이지 고장 한계가 아니다 — '규격 시험 수준을 넘는가'로 판정.",
+   "Pixhawk 보드 단위 충격 정격은 공개 자료 없음(IMU 부품 정격만)."
+  ],
+  "origin": {
+   "source_case": "validation/sources/shock_tolerance_uav/case.json",
+   "sha256": "4177a0d67a68fdaecbc065834b828b2ce6dc2bba48a0c0c0a047884f914c9922",
+   "converter": "tools/validation/convert_public.py"
+  }
+ },
+ "components": {
+  "brakeCord": {
+   "spec": "V-T-295 nylon thread Type I size 9 (AFFDL Table 4.3)",
+   "breakLoad_N": 355.9,
+   "maxElongation": [
+    0.22,
+    0.33
+   ],
+   "ratedElongationFig46": 0.2,
+   "grade": "A",
+   "note": "규격 최소값(평균은 더 높음) — 분산 −0/+25 % 제안(README). 신율: Class I ≤ 22 %·II ≤ 33 %(A), AFFDL 그림 4.6 평균 곡선 정격 20 %(B). 실 굵기 선택은 설계 가정.",
+   "origin": {
+    "source_case": "validation/sources/textile_cords_tapes/case.json",
+    "sha256": "03adf72242c1977e5ba107f8f014e0fdd3b30962044571cdf687723144123697",
+    "converter": "tools/validation/convert_public.py"
+   }
+  },
+  "tether": {
+   "spec": "LIROS 2 mm SK78 12-strand (Marlow D12 곡선 모양 가정)",
+   "breakLoad_N": 4021,
+   "ea_N": 45329,
+   "eaRange_N": [
+    45329,
+    75197
+   ],
+   "breakRange_N": [
+    4021,
+    6670
+   ],
+   "grade": "C",
+   "note": "제조사·유통사 값(공인 시험 없음). 첫 충격 = 새 로프 0–20 % 할선 EA.",
+   "origin": {
+    "source_case": "validation/sources/tether_dyneema_nylon/case.json",
+    "sha256": "5c89682e8a73204e6210b356557c6e1b6dfa351a0db3ed5db4c43e64f2002c71",
+    "converter": "tools/validation/convert_public.py"
+   }
+  },
+  "eppPad": {
+   "spec": "ARPRO 5135 45 g/l",
+   "stress25_kPa": 240,
+   "stress50_kPa": 340,
+   "stress75_kPa": 720,
+   "grade": "C",
+   "note": "준정적 ISO 844 전형값 ±20 %. 동적 배율 1.0–1.5 는 출처 없음(D, 민감도용).",
+   "origin": {
+    "source_case": "validation/sources/foam_epp_eva/case.json",
+    "sha256": "f4dbf6d3a2b028f133bb24a32de83597a3ba0436765d3ced6f27e93233e15f69",
+    "converter": "tools/validation/convert_public.py"
+   }
+  }
+ },
+ "credibility7009A": {
+  "grade": "A (NASA-STD-7009A, 2016-07-13, public release, verbatim extraction)",
+  "source": "NASA-STD-7009A Standard for Models and Simulations — https://ntrs.nasa.gov/api/citations/20160011121/downloads/20160011121.pdf",
+  "terminologyNote": "The string 'Credibility Assessment Scale' / 'CAS' does not occur in NASA-STD-7009A or NASA-HDBK-7009A (checked by text search). In 7009A the construct is the 'M&S credibility assessment': eight factors, levels 0-4, reported per factor without aggregation (E.5.1).",
+  "categories": {
+   "M&S Development": [
+    "Data Pedigree",
+    "Verification",
+    "Validation"
+   ],
+   "M&S Use (Operations)": [
+    "Input Pedigree",
+    "Uncertainty Characterization",
+    "Results Robustness"
+   ],
+   "Supporting Evidence": [
+    "M&S History",
+    "M&S Process/Product Management"
+   ]
+  },
+  "rules": "This subsection includes an explanation for the factor-level definitions in the updated credibility assessment of this revision of this NASA Technical Standard. In many of the level definitions, multiple conditions are stated. In the levels where multiple conditions are stated, all of them are to be met to achieve that level unless they are part of an “or” type listing. The assessment of each factor level is a discrete step function, with no intentions for partial credit at any given level. Note: The factor assessments are ordinal only, and as such, should not be arithmetically manipulated. Also, as the factors are largely independent, level comparison between factors is not intended except that Level 0 indicates insufficient evidence to claim anything higher and Level 4 indicates the best possible assessment for that factor.",
+  "requirementMS31": "[M&S 31] The responsible party shall assess the credibility of M&S results for each of the factors described in Appendix E.",
+  "factors": [
+   {
+    "factor": "Data Pedigree",
+    "category": "M&S Development",
+    "levels": {
+     "4": "All data known and fully traceable to the RWS. All data are acceptable in terms of accuracy, precision, and uncertainty.",
+     "3": "All data are known and can be traced to a sufficiently representative referent. All significant data are acceptable in terms of accuracy, precision and uncertainty.",
+     "2": "Most data are known and traceable to formal documentation. Processes to establish significant data are known. Uncertainties in all data are at least estimated.",
+     "1": "Some data are known and traceable to informal documentation. Sources of all significant data are known. Uncertainties in data may not even be estimated.",
+     "0": "Insufficient evidence."
+    },
+    "source": "Table 4--Level Definitions for Factors in the M&S Development Category (PDF pp.59-60)"
+   },
+   {
+    "factor": "Verification",
+    "category": "M&S Development",
+    "levels": {
+     "4": "The model is correctly implemented as determined by reliable verification practices, which evaluate all components, features, capabilities, and couplings of the end-to-end model. Reliable estimation methods are used to assess model errors. All model errors satisfy program/project specified requirements.",
+     "3": "The model is correctly implemented as determined by formal verification practices, which evaluate all components, features, capabilities, and couplings of the end-to-end model. Formal methods are used to assess model errors. All important model errors satisfy program/project-specified requirements.",
+     "2": "The model is correctly implemented as determined by documented verification practices, which evaluate all components, features, capabilities, and couplings of the model. Documented methods are used to assess model errors. Most of the important model errors satisfy program/project-specified requirements.",
+     "1": "Verification is informal, with some documentation or evidence of completeness/success.",
+     "0": "Insufficient evidence."
+    },
+    "source": "Table 4--Level Definitions for Factors in the M&S Development Category (PDF pp.59-60)"
+   },
+   {
+    "factor": "Validation",
+    "category": "M&S Development",
+    "levels": {
+     "4": "M&S results compare favorably to measurements on the RWS in its operating environment or to results from a higher-fidelity M&S that satisfies the conditions for Level 4. Validation points completely span the domain of operation for the RWS. Favorable comparisons are obtained for all response quantities.",
+     "3": "M&S results compare favorably to measurements on the RWS in a representative environment or to results from a higher-fidelity M&S that satisfies the conditions for Level 3. Validation points significantly span the domain of operation for the RWS. Favorable comparisons are obtained for all important response quantities.",
+     "2": "M&S results compare favorably to measurements from a representative system or to results from a higher-fidelity M&S that satisfies the conditions for Level 2. Validation points are within the domain of operation for the RWS. Favorable comparisons are obtained for at least some of the important response quantities.",
+     "1": "The model is conceptually validated. The problem statement (intended use) is clearly stated & well- understood, and the conceptual model, requirements, & specifications are correct and sufficiently address the problem.",
+     "0": "Insufficient evidence."
+    },
+    "source": "Table 4--Level Definitions for Factors in the M&S Development Category (PDF pp.59-60)"
+   },
+   {
+    "factor": "Input Pedigree",
+    "category": "M&S Use (Operations)",
+    "levels": {
+     "4": "All input data known and fully traceable to the RWS. All data are acceptable in terms of accuracy, precision, and uncertainty.",
+     "3": "All input data are known and can be traced to a sufficiently representative referent. All significant data are acceptable in terms of accuracy, precision, and uncertainty.",
+     "2": "Most input data are known and traceable to formal documentation. Processes to establish significant data are known. Uncertainties in all data are at least estimated.",
+     "1": "Some input data are known and traceable to informal documentation. Sources of all significant input data are known. Uncertainties in input data may not even be estimated.",
+     "0": "Insufficient evidence."
+    },
+    "source": "Table 5--Level Definitions for Factors in the M&S Use (Operations) Category (PDF p.62); column heading 'Input Pedigree Evidence'"
+   },
+   {
+    "factor": "Uncertainty Characterization",
+    "category": "M&S Use (Operations)",
+    "levels": {
+     "4": "A statistical analysis (e.g., ANOVA) of the output uncertainty has been performed for all output quantities after rigorous and validated propagation of all known sources of uncertainty. Reported results may include statistical moments, confidence intervals, sensitivity analysis, etc.",
+     "3": "Quantitative estimates of uncertainties have been reported for most output quantities after a propagation of all known sources of uncertainty.",
+     "2": "Most sources of uncertainty have been identified, expressed quantitatively and correctly classified based on SME opinions and/or by deduction from experimental data. Propagation of the uncertainty to output quantities has been addressed by reduced order (e.g., monotonic or boundary analysis) and/or reduced dimension propagation.",
+     "1": "Sources of input uncertainty have been identified with qualitative estimates of the uncertainty. Their impact on output uncertainties and uncertainty propagation have not been addressed.",
+     "0": "Insufficient evidence."
+    },
+    "source": "Table 5--Level Definitions for Factors in the M&S Use (Operations) Category (PDF p.62); column heading 'Uncertainty Characterization Evidence'"
+   },
+   {
+    "factor": "Results Robustness",
+    "category": "M&S Use (Operations)",
+    "levels": {
+     "4": "Sensitivity of the M&S results for the RWS is quantitatively known for most of the variables and parameters, including most, if not all, of the most sensitive variables and parameters. Sensitivities of many combinations of these variables and parameters are also quantified.",
+     "3": "Sensitivity of the M&S results for the RWS is quantitatively known for many variables and parameters, including many of the most sensitive variables and parameters. Sensitivities of some combinations of these variables and parameters are also quantified.",
+     "2": "Sensitivity of the M&S results for the RWS is quantitatively known for a few variables and parameters. Only a few (or none) of the most sensitive variables and parameters are identified. Sensitivities of combinations of variables and parameters are not known.",
+     "1": "Sensitivity of M&S results for the RWS is estimated by analogy with the quantified sensitivity of similar problems of interest.",
+     "0": "Insufficient evidence."
+    },
+    "source": "Table 5--Level Definitions for Factors in the M&S Use (Operations) Category (PDF p.62); column heading 'Results Robustness Evidence'"
+   },
+   {
+    "factor": "M&S History",
+    "category": "Supporting Evidence",
+    "levels": {
+     "4": "Model changes have stabilized to inconsequential levels and proposed use is within established norms for the model.",
+     "3": "Model has at most (no more than) minor changes from previously used versions, and proposed use is in interpolated regions of validation points.",
+     "2": "Model has at most (no more than) moderate changes from previously used versions, and proposed use is at most (no more than) moderately different from previous uses.",
+     "1": "Model is new or has major changes from previously used versions, or proposed use has major differences from previous uses; however, the model, changes, and uses are documented.",
+     "0": "Insufficient evidence."
+    },
+    "source": "Table 6--Level Definitions for Factors in the Supporting Evidence Category (PDF p.65)"
+   },
+   {
+    "factor": "M&S Process/Product Management",
+    "category": "Supporting Evidence",
+    "levels": {
+     "4": "Measurements, including customer/user feedback, are used to improve both the M&S process and products.",
+     "3": "The formally established process is rigorously controlled and followed. Compliance with the process is formally documented. Measurements of process and product compliance are made and documented. CM of M&S products is rigorously applied.",
+     "2": "Roles and responsibilities are defined in the context of an M&S process that is formally documented and approved. Requirements for M&S products are formally documented and approved. CM of M&S products is established and applied using formal methods.",
+     "1": "Roles and responsibilities are defined in the context of an M&S process that is informally documented. Requirements for M&S products are informally documented. CM of M&S products is established and applied using informal methods.",
+     "0": "Insufficient evidence."
+    },
+    "source": "Table 6--Level Definitions for Factors in the Supporting Evidence Category (PDF p.65)"
+   }
+  ],
+  "origin": {
+   "source_case": "validation/sources/credibility_framework/case.json",
+   "sha256": "d5ad840815c2defb9fa254eb008198d57e77b9b5f8362af2a5862c2686c15058",
+   "converter": "tools/validation/convert_public.py"
+  }
+ }
+}

@@ -1,0 +1,102 @@
+{
+  "schema": "mns.scenario/1",
+  "name": "demo_01_cargo_airdrop",
+  "description": "데모 1 — 운반체 사출 · 2단 낙하산 · 다물체 착지 · 바람/난류 · 구조 분석 · 몬테카를로 · 장면 환경(모래). 수송기(800 m AGL, 70 m/s, 기수 10° 들림)의 후방 램프 레일에서 원통 컨테이너가 미끄러져 사출 → 덮개 옆으로 분리 → 드로그 전개 → 35 m/s 이하로 감속하면 드로그 해제 · 주낙하산 전개 → 300 m 에서 센서 더미(공개 합성 샘플 STL) 분리 · 소형 낙하산 → 컨테이너 · 덮개 · 센서 더미 착지. 모든 값은 공개 문헌 수준의 일반값(가정)이다.",
+  "sim": { "dt": 0.001, "tEnd": 300, "outputRate": 50, "seed": 101 },
+  "environment": {
+    "groundAltitude": 0,
+    "wind": { "speed": 6, "directionFrom": 250, "refHeight": 10, "shear": "log", "roughness": 0.01 },
+    "turbulence": "moderate",
+    "soil": "sand"
+  },
+  "carrier": {
+    "name": "transport",
+    "altitude": 800,
+    "speed": 70,
+    "heading": 0,
+    "pitch": 10,
+    "color": "#8a949e",
+    "shape": { "type": "box", "size": [24, 4, 4], "center": [0, 0, -1.2] }
+  },
+  "bodies": [
+    {
+      "name": "container",
+      "parent": "transport",
+      "mount": [-9, 0, 0.5],
+      "mass": 60,
+      "cg": [0.05, 0, 0],
+      "shape": { "type": "cylinder", "radius": 0.25, "length": 1.2, "axis": "x" },
+      "aero": { "cp": [-0.15, 0, 0], "damping": [-2, -6, -6], "flowField": "../../samples/flow/demo_container_flow.json" },
+      "structure": { "material": "al6061-t6", "thickness": 0.003, "section": "thinWall" },
+      "color": "#6f8f5a",
+      "devices": [
+        { "type": "parachute", "name": "drogue", "d0": 1.4, "cd0": 0.55, "attach": [-0.6, 0, 0], "riser": 5,
+          "fillConstant": 8, "fillExponent": 2, "lineStretchTime": 0.25 },
+        { "type": "parachute", "name": "main", "d0": 6.0, "cd0": 0.8, "attach": [-0.6, 0, 0], "riser": 7,
+          "fillConstant": 8, "fillExponent": 2, "lineStretchTime": 0.5 }
+      ]
+    },
+    {
+      "name": "lid",
+      "parent": "container",
+      "mount": [-0.615, 0, 0],
+      "mass": 1.5,
+      "shape": { "type": "cylinder", "radius": 0.25, "length": 0.03, "axis": "x" },
+      "aero": { "damping": [-2, -4, -4] },
+      "structure": { "material": "al6061-t6", "thickness": 0.003, "section": "thinWall" },
+      "color": "#c8a050"
+    },
+    {
+      "name": "payload",
+      "parent": "container",
+      "mount": [0.15, 0, 0],
+      "mountAttitude": [0, 0, 0],
+      "massProps": "../../samples/fusion_export/sensor_dummy_sample.massprops.json",
+      "modelFrame": "fusion",
+      "noseAxis": "+Z",
+      "aero": { "cp": "auto", "damping": [-2, -10, -10] },
+      "structure": { "material": "pc", "thickness": 0.003, "section": "thinWall" },
+      "color": "#e0a030",
+      "devices": [
+        { "type": "parachute", "name": "chute", "d0": 1.4, "cd0": 0.8, "attach": [-0.05, 0, 0], "riser": 1.5,
+          "fillConstant": 8, "fillExponent": 2, "lineStretchTime": 0.3 }
+      ]
+    }
+  ],
+  "connectors": [
+    { "type": "rail", "name": "ramp", "parent": "transport", "child": "container", "axis": [-1, 0, 0], "length": 4.0, "friction": 0.05, "exitPush": 2.0 }
+  ],
+  "collisions": { "restitution": 0.3, "friction": 0.3, "bodies": ["container", "lid", "payload"], "parachutes": true, "until": 30 },
+  "events": [
+    { "name": "ramp_open", "when": { "type": "time", "t": 1.0 }, "do": [ { "type": "startRail", "connector": "ramp" } ] },
+    { "name": "lid_off", "when": { "type": "after", "event": "ramp.exit", "delay": 0.5 },
+      "do": [ { "type": "separate", "body": "lid", "relVel": [-2, 5, 0] } ] },
+    { "name": "drogue_deploy", "when": { "type": "after", "event": "lid_off", "delay": 0.8 },
+      "do": [ { "type": "deploy", "device": "container.drogue" } ] },
+    { "name": "main_deploy",
+      "when": { "type": "or", "any": [
+        { "type": "and", "all": [ { "type": "after", "event": "drogue_deploy", "delay": 2.0 }, { "type": "speed", "body": "container", "below": 35 } ] },
+        { "type": "after", "event": "drogue_deploy", "delay": 10.0 } ] },
+      "do": [ { "type": "release", "device": "container.drogue" }, { "type": "deploy", "device": "container.main" } ] },
+    { "name": "payload_release",
+      "when": { "type": "and", "all": [ { "type": "after", "event": "main_deploy", "delay": 5.0 }, { "type": "altitude", "body": "container", "below": 300 } ] },
+      "do": [ { "type": "separate", "body": "payload", "relVel": [2, 0, 0] } ] },
+    { "name": "payload_chute", "when": { "type": "after", "event": "payload.separated", "delay": 1.5 },
+      "do": [ { "type": "deploy", "device": "payload.chute" } ] }
+  ],
+  "metrics": [
+    { "type": "maxLoad", "name": "openingLoad", "bodies": ["container", "payload"], "limitG": 20 },
+    { "type": "landingSeparation", "name": "landingSpread", "bodies": ["container", "lid", "payload"] },
+    { "type": "debrisNearDeploy", "name": "lidNearMain", "devices": ["container.main"], "debris": ["lid"], "window": 3, "riskDistance": 5 }
+  ],
+  "dispersions": [
+    { "path": "environment.wind.speed", "dist": "truncnormal", "sd": 2.0, "min": -6, "max": 6 },
+    { "path": "environment.wind.directionFrom", "dist": "normal", "sd": 20 },
+    { "path": "bodies.container.devices.main.cd0", "dist": "normal", "mode": "scale", "sd": 0.05 },
+    { "path": "bodies.container.mass", "dist": "normal", "mode": "scale", "sd": 0.03 },
+    { "path": "events.drogue_deploy.when.delay", "dist": "uniform", "min": -0.3, "max": 0.5 }
+  ],
+  "monteCarlo": { "runs": 100, "impactBody": "container", "sampling": "lhs", "seed": 111 },
+  "uq": { "profile": "operational", "runs": 40, "seed": 112, "impactBody": "payload", "tumblingBody": "container",
+          "from": "drogue_deploy", "to": "main_deploy", "chutes": ["container.drogue", "container.main"] }
+}

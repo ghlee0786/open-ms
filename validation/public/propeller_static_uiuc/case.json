@@ -1,0 +1,383 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "propeller_static_uiuc",
+ "title": "Static thrust coefficient vs RPM of APC 8x4 Thin Electric and 8x3.8 Slow Flyer (UIUC propDB vol.1)",
+ "vv": "VV-44",
+ "grade": "A",
+ "use": "calibration",
+ "kind": "propeller-static-ct",
+ "model": "프로펠러 정적 추력계수 CT(RPM) (RotorModel.StaticCt)",
+ "tolerance": {
+  "relative": 0.05
+ },
+ "envelope": "정지(J = 0), 3000–7000 RPM, 8 in APC",
+ "sources": [
+  {
+   "title": "UIUC Propeller Data Site, vol.1 (Brandt & Selig)",
+   "url": "https://m-selig.ae.illinois.edu/props/propDB.html"
+  }
+ ],
+ "notes": [
+  "RPM 지수 p(CT ∝ n^p)는 이 두 프로펠러로 정한 값이라 보정용 — 독립 검증 자료 없음.",
+  "기준 CT 는 각 프로펠러의 ~5000 RPM 점. '일정 k_T' 참고 줄은 RPM 의존을 무시한 경우의 오차(최대 ±10 %)."
+ ],
+ "points": [
+  {
+   "label": "APC TE 8x4 3037 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 3037.0
+   },
+   "measured": 0.0892,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 3293 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 3293.0
+   },
+   "measured": 0.0905,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 3543 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 3543.0
+   },
+   "measured": 0.0918,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 3850 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 3850.0
+   },
+   "measured": 0.0915,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 4090 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 4090.0
+   },
+   "measured": 0.0921,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 4350 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 4350.0
+   },
+   "measured": 0.0931,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 4592 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 4592.0
+   },
+   "measured": 0.0936,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 4868 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 4868.0
+   },
+   "measured": 0.0936,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 5128 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 5128.0
+   },
+   "measured": 0.0941,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 5413 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 5413.0
+   },
+   "measured": 0.0938,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 5668 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 5668.0
+   },
+   "measured": 0.0943,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 5938 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 5938.0
+   },
+   "measured": 0.0955,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 6197 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 6197.0
+   },
+   "measured": 0.0961,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 6479 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 6479.0
+   },
+   "measured": 0.0967,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 6737 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 6737.0
+   },
+   "measured": 0.0974,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC TE 8x4 6989 RPM",
+   "inputs": {
+    "ctRef": 0.0941,
+    "rpmRef": 5128.0,
+    "rpm": 6989.0
+   },
+   "measured": 0.0978,
+   "unit": "-",
+   "provenance": "table (apce_8x4_static_2791rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 3030 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 3030.0
+   },
+   "measured": 0.0951,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 3226 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 3226.0
+   },
+   "measured": 0.0963,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 3555 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 3555.0
+   },
+   "measured": 0.0972,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 3808 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 3808.0
+   },
+   "measured": 0.0976,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 4093 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 4093.0
+   },
+   "measured": 0.0994,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 4337 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 4337.0
+   },
+   "measured": 0.0998,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 4619 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 4619.0
+   },
+   "measured": 0.1017,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 4861 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 4861.0
+   },
+   "measured": 0.1025,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 5132 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 5132.0
+   },
+   "measured": 0.1035,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 5411 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 5411.0
+   },
+   "measured": 0.1048,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 5676 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 5676.0
+   },
+   "measured": 0.1061,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 5946 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 5946.0
+   },
+   "measured": 0.1077,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 6212 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 6212.0
+   },
+   "measured": 0.1087,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 6484 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 6484.0
+   },
+   "measured": 0.1106,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 6731 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 6731.0
+   },
+   "measured": 0.1125,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  },
+  {
+   "label": "APC SF 8x3.8 7015 RPM",
+   "inputs": {
+    "ctRef": 0.1035,
+    "rpmRef": 5132.0,
+    "rpm": 7015.0
+   },
+   "measured": 0.1143,
+   "unit": "-",
+   "provenance": "table (apcsf_8x3.8_static_2777rd.txt)"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/propeller_static_uiuc/case.json",
+  "sha256": "9018c620cb4d4217ea72fce28d7d5b68c3b210bd32a8bd6315a91207594e02ea",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

@@ -1,0 +1,1016 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:r="using:Sim.App.Rendering"
+        xmlns:c="using:Sim.App.Controls"
+        xmlns:h="using:Sim.App.Help"
+        xmlns:mi="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        x:Class="Sim.App.MainWindow"
+        Title="MnS 공중투하 M&amp;S 시뮬레이터 — 6DOF · Avalonia · OpenGL · ILGPU"
+        Icon="avares://MnS.Simulator/Assets/app.ico"
+        Width="1680" Height="980" MinWidth="1100" MinHeight="640"
+        ExtendClientAreaToDecorationsHint="True" ExtendClientAreaChromeHints="NoChrome" ExtendClientAreaTitleBarHeightHint="44"
+        DragDrop.AllowDrop="True">
+  <!--
+    셸 배치(참고 Dotnet.Monitoring ShellView 컨셉을 Avalonia 로 재구성 — 코드 · 자산 복사 없음):
+      제목 표시줄(아이콘 · 굵은 제목 · 메뉴 · 빠른 단추 · 테마 · 도움말 · 창 단추) / 본문 = 3D 가 전체 /
+      그 위 층(ShellLayer): 왼쪽 아이콘 레일 + 서랍 · 오른쪽 대시보드 패널 · 아래 서랍(그래프 | 로그) · 장면 영역(ViewGrid — 브라우저 · HUD · 카메라 · 표시 · 재생 막대 · 다시 열기 단추).
+      패널 '고정' = 3D 장면 영역이 그 패널을 비켜 그림(GlView.ContentInset = ViewGrid.Margin), 고정 해제 = 3D 위에 떠서 겹침.
+  -->
+  <Window.Styles>
+    <!-- 입력 양식: 라벨 | 입력칸, 줄 간격 6 (참고 ConsoleField — 라벨 12.5 · 보조 글색) -->
+    <Style Selector="Grid.form > :is(Control)">
+      <Setter Property="Margin" Value="0,3" />
+    </Style>
+    <Style Selector="Grid.form > TextBlock">
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+      <Setter Property="FontSize" Value="12.5" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+      <Setter Property="Margin" Value="0,3,8,3" />
+    </Style>
+    <Style Selector="Grid.form > ComboBox">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+    <!-- 패널 소제목 줄(참고 ConsoleSection): 제목 13 SemiBold · 바로 오른쪽 ? · 아래 1 px 선 -->
+    <Style Selector="DockPanel.subhead">
+      <Setter Property="Margin" Value="0,16,0,8" />
+    </Style>
+    <Style Selector="DockPanel.subhead > TextBlock.h">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <!-- 트리 상태(수납 · 비행 · 착지) -->
+    <Style Selector="TextBlock.state">
+      <Setter Property="Foreground" Value="{DynamicResource StateStowedBrush}" />
+    </Style>
+    <Style Selector="TextBlock.state.free">
+      <Setter Property="Foreground" Value="{DynamicResource StateFreeBrush}" />
+    </Style>
+    <Style Selector="TextBlock.state.landed">
+      <Setter Property="Foreground" Value="{DynamicResource StateLandedBrush}" />
+    </Style>
+    <Style Selector="Ellipse.state">
+      <Setter Property="Fill" Value="{DynamicResource StateStowedBrush}" />
+    </Style>
+    <Style Selector="Ellipse.state.free">
+      <Setter Property="Fill" Value="{DynamicResource StateFreeBrush}" />
+    </Style>
+    <Style Selector="Ellipse.state.landed">
+      <Setter Property="Fill" Value="{DynamicResource StateLandedBrush}" />
+    </Style>
+
+    <!-- ===== 브라우저: 3D 위 왼쪽 위에 겹친 어셈블리 패널(Fusion 360 BROWSER 모양) ===== -->
+    <Style Selector="Border.browser">
+      <Setter Property="Background" Value="{DynamicResource BrowserBgBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusMd}" />
+      <Setter Property="BoxShadow" Value="{DynamicResource ShadowMd}" />
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+    <Style Selector="Border.browserhead">
+      <Setter Property="Background" Value="{DynamicResource BrowserHeadBrush}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource LineBrush}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+      <Setter Property="Padding" Value="4,0,4,0" />
+      <Setter Property="MinHeight" Value="28" />
+    </Style>
+    <Style Selector="Border.browserhead.collapsed">
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="TextBlock.browsertitle">
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="LetterSpacing" Value="0.8" />
+      <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.icon.xs">
+      <Setter Property="Width" Value="22" />
+      <Setter Property="Height" Value="22" />
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="CornerRadius" Value="{DynamicResource RadiusSm}" />
+    </Style>
+    <Style Selector="Button.icon.xs mi|MaterialIcon">
+      <Setter Property="Width" Value="15" />
+      <Setter Property="Height" Value="15" />
+    </Style>
+    <!-- 오른쪽 가장자리 끌기(폭 조절) — 보일 때만 살짝 강조 -->
+    <Style Selector="Border.grip:pointerover">
+      <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+    </Style>
+    <!-- 펼침 화살표(▸ → 펼치면 ▾) -->
+    <Style Selector="ToggleButton.chev">
+      <Setter Property="Width" Value="14" />
+      <Setter Property="Height" Value="22" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="MinWidth" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="Transparent">
+            <Path Name="arrow" Data="M 0,0 L 4,4 L 0,8 Z" Fill="{DynamicResource TextMutedBrush}"
+                  HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="50%,50%" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="ToggleButton.chev:checked /template/ Path#arrow">
+      <Setter Property="RenderTransform" Value="rotate(90deg)" />
+    </Style>
+    <Style Selector="ToggleButton.chev:pointerover /template/ Path#arrow">
+      <Setter Property="Fill" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <!-- 보이기 토글(눈) — 켬 = 뜬 눈, 끔 = 감은 눈(흐림) -->
+    <Style Selector="ToggleButton.eye">
+      <Setter Property="Width" Value="18" />
+      <Setter Property="Height" Value="20" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="MinWidth" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Name="bg" Background="Transparent" CornerRadius="3">
+            <Panel Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+              <Path Name="lid" Data="M1.5,8 C4,3.8 12,3.8 14.5,8 C12,12.2 4,12.2 1.5,8 Z" StrokeThickness="1.2"
+                    Stroke="{DynamicResource TextDimBrush}" />
+              <Path Name="pupil" Data="M5.8,8 A2.2,2.2 0 1 1 10.2,8 A2.2,2.2 0 1 1 5.8,8 Z" Fill="{DynamicResource TextDimBrush}" />
+              <Path Name="slash" Data="M2.5,13.5 L13.5,2.5" StrokeThickness="1.4" Stroke="{DynamicResource TextMutedBrush}" IsVisible="False" />
+            </Panel>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="ToggleButton.eye:unchecked /template/ Path#pupil">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="ToggleButton.eye:unchecked /template/ Path#slash">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="ToggleButton.eye:unchecked /template/ Path#lid">
+      <Setter Property="Stroke" Value="{DynamicResource TextMutedBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.eye:pointerover /template/ Border#bg">
+      <Setter Property="Background" Value="{DynamicResource SurfaceHoverBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.eye:pointerover /template/ Path#lid">
+      <Setter Property="Stroke" Value="{DynamicResource AccentTextBrush}" />
+    </Style>
+    <Style Selector="ToggleButton.eye:pointerover /template/ Path#pupil">
+      <Setter Property="Fill" Value="{DynamicResource AccentTextBrush}" />
+    </Style>
+    <Style Selector="TextBlock.info">
+      <Setter Property="Foreground" Value="{DynamicResource TextDimBrush}" />
+      <Setter Property="FontSize" Value="11.5" />
+    </Style>
+    <!-- 트리 행: 촘촘한 22 px, 들여쓰기 가이드 · 행 전체 폭 호버/선택(테마 accent) · 선택 막대.
+         템플릿 부분 이름(PART_*)은 Fluent 와 같게 → 선택 · 더블클릭 펼침 · 키보드 동작 그대로 -->
+    <Style Selector="TreeView.browser TreeViewItem">
+      <Setter Property="MinHeight" Value="22" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <StackPanel>
+            <Border Name="PART_LayoutRoot" Classes="TreeViewItemLayoutRoot" Focusable="True"
+                    Background="{TemplateBinding Background}" MinHeight="{TemplateBinding MinHeight}"
+                    TemplatedControl.IsTemplateFocusTarget="True">
+              <Panel>
+                <Rectangle Name="selbar" Width="2" HorizontalAlignment="Left" Fill="{DynamicResource AccentBrush}" IsVisible="False" />
+                <Grid Name="PART_Header" ColumnDefinitions="Auto,14,*" Margin="4,0,10,0">
+                  <c:IndentGuides Level="{TemplateBinding Level}" Step="14" />
+                  <Panel Grid.Column="1">
+                    <ToggleButton Name="PART_ExpandCollapseChip" Classes="chev" Focusable="False"
+                                  IsChecked="{TemplateBinding IsExpanded, Mode=TwoWay}" />
+                  </Panel>
+                  <ContentPresenter Name="PART_HeaderPresenter" Grid.Column="2" Focusable="False" Background="Transparent"
+                                    Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" />
+                </Grid>
+              </Panel>
+            </Border>
+            <ItemsPresenter Name="PART_ItemsPresenter" IsVisible="{TemplateBinding IsExpanded}" ItemsPanel="{TemplateBinding ItemsPanel}" />
+          </StackPanel>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="TreeView.browser TreeViewItem:empty /template/ ToggleButton#PART_ExpandCollapseChip">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="TreeView.browser TreeViewItem /template/ Border#PART_LayoutRoot:pointerover">
+      <Setter Property="Background" Value="{DynamicResource BrowserHoverBrush}" />
+    </Style>
+    <Style Selector="TreeView.browser TreeViewItem:selected /template/ Border#PART_LayoutRoot">
+      <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+    </Style>
+    <Style Selector="TreeView.browser TreeViewItem:selected /template/ Rectangle#selbar">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <!-- ===== 셸 보조 ===== -->
+    <!-- 재생 단추: 둥근 주색 단추(참고 떠 있는 둥근 단추) -->
+    <Style Selector="Button.play">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="MinHeight" Value="0" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="CornerRadius" Value="18" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.play mi|MaterialIcon">
+      <Setter Property="Width" Value="22" />
+      <Setter Property="Height" Value="22" />
+    </Style>
+    <!-- 아래 서랍 머리 안 그래프 · 로그 켜기 칩 -->
+    <Style Selector="ToggleButton.chiptoggle">
+      <Setter Property="MinHeight" Value="24" />
+      <Setter Property="Height" Value="24" />
+      <Setter Property="Padding" Value="10,0" />
+      <Setter Property="CornerRadius" Value="12" />
+      <Setter Property="FontSize" Value="{DynamicResource FontSmall}" />
+    </Style>
+    <!-- 서랍 페이지 안 바깥 여백 -->
+    <Style Selector="StackPanel.page">
+      <Setter Property="Margin" Value="16,4,16,16" />
+    </Style>
+    <!-- 3D 위 떠 있는 막대 안 작은 글(색상 · 화면) -->
+    <Style Selector="Border.float TextBlock.caption">
+      <Setter Property="Margin" Value="6,0,4,0" />
+    </Style>
+  </Window.Styles>
+
+  <Panel x:Name="RootPanel">
+  <DockPanel>
+
+    <!-- ===== 제목 표시줄(참고 MetroWindow: 아이콘 · 굵은 제목 · 창 명령) ===== -->
+    <Border DockPanel.Dock="Top" x:Name="TitleBar" Classes="titlebar">
+      <Grid ColumnDefinitions="Auto,Auto,*,Auto,Auto">
+        <StackPanel x:Name="TitleBrand" Orientation="Horizontal" Spacing="10" Margin="14,0,6,0" VerticalAlignment="Center" Background="Transparent">
+          <Image Source="avares://MnS.Simulator/Assets/app.png" Width="20" Height="20" VerticalAlignment="Center"/>
+          <TextBlock x:Name="TitleText" Classes="apptitle" Text="MnS 공중투하 M&amp;S 시뮬레이터"/>
+        </StackPanel>
+
+        <!-- 메뉴(머리글 이름 그대로 — UI 자동화가 이름으로 찾는다) -->
+        <Menu Grid.Column="1" x:Name="MainMenu" Classes="titlemenu">
+          <MenuItem Header="파일(_F)">
+            <MenuItem x:Name="MiOpen" Header="시나리오 열기…" InputGesture="Ctrl+O"/>
+            <MenuItem x:Name="MiImport" Header="모델 가져오기 (Fusion STL/JSON)…" InputGesture="Ctrl+I"/>
+            <Separator/>
+            <MenuItem x:Name="MiLoadResult" Header="결과 불러오기 (.mnsr)…" InputGesture="Ctrl+L"/>
+            <MenuItem x:Name="MiSave" Header="결과 저장 (.mnsr)…" InputGesture="Ctrl+S"/>
+            <MenuItem x:Name="MiExport" Header="결과 폴더 내보내기 (CSV · Blender · scene)…"/>
+            <Separator/>
+            <MenuItem x:Name="MiShot" Header="3D 화면 캡처 (PNG)…"/>
+            <MenuItem x:Name="MiSaveLog" Header="로그 저장…"/>
+            <Separator/>
+            <MenuItem x:Name="MiExit" Header="종료" InputGesture="Alt+F4"/>
+          </MenuItem>
+          <MenuItem Header="시뮬레이션(_S)">
+            <MenuItem x:Name="MiRun" Header="실행" InputGesture="F5"/>
+            <MenuItem x:Name="MiCancel" Header="실행 중인 작업 취소" InputGesture="Escape"/>
+            <Separator/>
+            <MenuItem x:Name="MiGpuMc" Header="GPU Monte Carlo (단순 모델)"/>
+            <MenuItem x:Name="MiCpuMc" Header="CPU Monte Carlo (전체 6DOF)"/>
+            <Separator/>
+            <MenuItem x:Name="MiApplyJson" Header="시나리오 JSON 적용·검증"/>
+          </MenuItem>
+          <MenuItem x:Name="AnalysisMenu" Header="해석(_A)">
+            <MenuItem x:Name="MiStructural" Header="구조 분석 — 전 구간 최대값 · 최초 항복/파단 (근사)" InputGesture="F6"/>
+            <MenuItem x:Name="MiLoadCases" Header="FEA 하중 케이스 내보내기…"/>
+            <Separator/>
+            <MenuItem x:Name="MiCcx" Header="정적/진동/좌굴 FEA — CalculiX (선택 물체)…" InputGesture="F7"/>
+            <MenuItem x:Name="MiCcxDeform" Header="FEA 변형 표시 배율"/>
+            <MenuItem x:Name="MiCcxCheck" Header="CalculiX · Gmsh 설치 확인"/>
+            <Separator/>
+            <MenuItem x:Name="MiShock" Header="개방 충격 응답 — 보 동해석 (근사 C, 충격 가속도·응력 색)"/>
+            <MenuItem x:Name="MiCcxShock" Header="개방 충격 과도 응답 — CalculiX 모달 과도 (선택 물체 · 현재/다음 충격 창 · 솔리드 단면만)"/>
+            <MenuItem x:Name="MiShockNext" Header="다음 충격 창으로 이동 (슬로모션 0.005×)" InputGesture="Ctrl+OemCloseBrackets"/>
+            <MenuItem x:Name="MiShockPrev" Header="이전 충격 창으로 이동" InputGesture="Ctrl+OemOpenBrackets"/>
+            <Separator/>
+            <MenuItem x:Name="MiFea" Header="충돌 FEA — OpenCourant 착지 충돌 해석 (선택 물체)…"/>
+            <MenuItem x:Name="MiFeaCheck" Header="OpenCourant 설치 확인"/>
+            <Separator/>
+            <MenuItem x:Name="MiMaterials" Header="재질 라이브러리 보기"/>
+            <MenuItem x:Name="MiCredibility" Header="결과 신뢰도 — 7009A 요인 · 신뢰 등급 · 시험 우선순위…"/>
+            <Separator/>
+            <MenuItem x:Name="MiWindTunnel" Header="풍동 보기 — CFD 표면 압력 · 3-D 유선 · 입자 흐름 (선택 물체)…" InputGesture="F8"/>
+            <MenuItem x:Name="MiAirflow" Header="GPU 가상 풍동 — 실시간 흐름 (XLB 격자 볼츠만 · 연기 · 와류 · 시각화 근사)…" InputGesture="Shift+F8"/>
+          </MenuItem>
+          <!-- 보기: 3D 레이어 · 패널 · 색상 표시 · 테마 체크 항목은 코드에서 생성 -->
+          <MenuItem x:Name="ViewMenu" Header="보기(_V)"/>
+          <MenuItem Header="카메라(_C)">
+            <MenuItem x:Name="MiFollow" Header="선택 물체 추적" ToggleType="CheckBox" InputGesture="T"/>
+            <MenuItem x:Name="MiFocus" Header="선택 물체로 확대" InputGesture="C"/>
+            <MenuItem x:Name="MiFit" Header="전체 보기" InputGesture="F"/>
+            <MenuItem x:Name="MiResetCam" Header="카메라 초기화" InputGesture="Home"/>
+            <Separator/>
+            <MenuItem x:Name="MiZoomIn" Header="확대   (+ · 휠)"/>
+            <MenuItem x:Name="MiZoomOut" Header="축소   (- · 휠)"/>
+            <Separator/>
+            <MenuItem x:Name="MiTop" Header="위에서 (평면, 북쪽 위)   (1)"/>
+            <MenuItem x:Name="MiNorth" Header="정면 (북쪽을 봄)   (2)"/>
+            <MenuItem x:Name="MiEast" Header="측면 (동쪽을 봄)   (3)"/>
+            <MenuItem x:Name="MiIso" Header="등각   (4)"/>
+          </MenuItem>
+          <MenuItem Header="재생(_P)">
+            <MenuItem x:Name="MiPlay" Header="재생 / 일시정지" InputGesture="Space"/>
+            <MenuItem x:Name="MiRewind" Header="처음으로" InputGesture="Ctrl+Home"/>
+            <MenuItem x:Name="MiStepBack" Header="이전 프레임   (,)"/>
+            <MenuItem x:Name="MiStepFwd" Header="다음 프레임   (.)"/>
+            <Separator/>
+            <MenuItem x:Name="MiPrevEvent" Header="이전 이벤트" InputGesture="PageUp"/>
+            <MenuItem x:Name="MiNextEvent" Header="다음 이벤트" InputGesture="PageDown"/>
+          </MenuItem>
+          <MenuItem Header="도움말(_H)">
+            <MenuItem x:Name="MiHelp" Header="도움말 · 조작법 · 단축키" InputGesture="F1"/>
+            <MenuItem x:Name="MiScenarioInfo" Header="현재 시나리오 설명…"/>
+            <Separator/>
+            <MenuItem x:Name="MiCheckUpdate" Header="업데이트 확인…"/>
+            <MenuItem x:Name="MiAutoUpdate" Header="시작할 때 업데이트 자동 확인 (하루 한 번)" ToggleType="CheckBox"/>
+            <Separator/>
+            <MenuItem x:Name="MiAbout" Header="정보 (버전)…"/>
+          </MenuItem>
+        </Menu>
+
+        <!-- 끌어 이동 · 더블클릭 최대화(빈 곳) -->
+        <Border Grid.Column="2" x:Name="DragArea" Background="Transparent"/>
+
+        <!-- 빠른 단추: 파일 | 실행 · 구조 | 테마 · 도움말 -->
+        <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="2" VerticalAlignment="Center" Margin="0,0,6,0">
+          <Button x:Name="TbOpen" Classes="tb" ToolTip.Tip="시나리오 열기 (Ctrl+O)" AutomationProperties.Name="열기">
+            <mi:MaterialIcon Kind="FolderOpenOutline"/>
+          </Button>
+          <Button x:Name="TbLoad" Classes="tb" ToolTip.Tip="결과(.mnsr) 불러오기 (Ctrl+L)" AutomationProperties.Name="불러오기">
+            <mi:MaterialIcon Kind="TrayArrowDown"/>
+          </Button>
+          <Button x:Name="TbSave" Classes="tb" ToolTip.Tip="결과 저장 .mnsr (Ctrl+S)" AutomationProperties.Name="저장">
+            <mi:MaterialIcon Kind="ContentSaveOutline"/>
+          </Button>
+          <Border Classes="sep"/>
+          <Button x:Name="TbRun" Classes="tb primary" ToolTip.Tip="시뮬레이션 실행 (F5)" AutomationProperties.Name="실행">
+            <StackPanel Classes="btn">
+              <mi:MaterialIcon Kind="Play"/>
+              <TextBlock Text="실행"/>
+            </StackPanel>
+          </Button>
+          <Button x:Name="TbStruct" Classes="tb" ToolTip.Tip="구조 분석 — 근사 (F6)" AutomationProperties.Name="구조 분석">
+            <StackPanel Classes="btn">
+              <mi:MaterialIcon Kind="Wall"/>
+              <TextBlock Text="구조 분석"/>
+            </StackPanel>
+          </Button>
+          <h:HelpTip HelpKey="{x:Static h:HelpKeys.Toolbar}" Margin="4,0,0,0"/>
+          <Border Classes="sep"/>
+          <Button x:Name="ThemeBtn" Classes="tb" ToolTip.Tip="테마 전환 — 다크 ↔ 라이트 (다음 실행에도 유지)" AutomationProperties.Name="테마 전환">
+            <mi:MaterialIcon x:Name="ThemeIcon" Kind="ThemeLightDark"/>
+          </Button>
+          <Button x:Name="HelpBtn" Classes="tb" ToolTip.Tip="전체 도움말 (F1)" AutomationProperties.Name="도움말">
+            <mi:MaterialIcon Kind="HelpCircleOutline"/>
+          </Button>
+        </StackPanel>
+
+        <!-- 창 단추(직접 그림 — 테마 토큰 색) -->
+        <StackPanel Grid.Column="4" Orientation="Horizontal">
+          <Button x:Name="MinBtn" Classes="caption" ToolTip.Tip="최소화" AutomationProperties.Name="최소화">
+            <mi:MaterialIcon Kind="WindowMinimize" Classes="sm"/>
+          </Button>
+          <Button x:Name="MaxBtn" Classes="caption" ToolTip.Tip="최대화" AutomationProperties.Name="최대화">
+            <mi:MaterialIcon x:Name="MaxIcon" Kind="WindowMaximize" Classes="sm"/>
+          </Button>
+          <Button x:Name="CloseBtn" Classes="caption close" ToolTip.Tip="닫기 (Alt+F4)" AutomationProperties.Name="창 닫기">
+            <mi:MaterialIcon Kind="WindowClose" Classes="sm"/>
+          </Button>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- ===== 상태 표시줄: 작업 · 단계 · 진행 · 취소 · 경고/오류 ===== -->
+    <Border DockPanel.Dock="Bottom" Classes="statusbar">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+        <TextBlock Grid.Column="0" x:Name="JobIcon" Text="●" Classes="ok" FontSize="10" VerticalAlignment="Center" Margin="12,0,8,0"/>
+        <TextBlock Grid.Column="1" x:Name="JobText" Text="준비" FontSize="12" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+        <ProgressBar Grid.Column="2" x:Name="JobProgress" Width="220" Minimum="0" Maximum="1" Height="6" MinHeight="6" VerticalAlignment="Center" Margin="8,0" IsVisible="False"/>
+        <TextBlock Grid.Column="3" x:Name="JobElapsed" Classes="mono dim" VerticalAlignment="Center" Margin="0,0,8,0" MinWidth="60"/>
+        <Button Grid.Column="4" x:Name="CancelBtn" Classes="badge" Content="취소 (Esc)" IsEnabled="False" IsVisible="False"/>
+        <Button Grid.Column="5" x:Name="WarnBadge" Classes="badge warn" ToolTip.Tip="경고 — 로그 보기">
+          <StackPanel Classes="btn" Spacing="4">
+            <mi:MaterialIcon Kind="AlertOutline" Classes="sm"/>
+            <TextBlock x:Name="WarnCount" Text="0"/>
+          </StackPanel>
+        </Button>
+        <Button Grid.Column="6" x:Name="ErrBadge" Classes="badge err" ToolTip.Tip="오류 — 로그 보기">
+          <StackPanel Classes="btn" Spacing="4">
+            <mi:MaterialIcon Kind="CloseCircleOutline" Classes="sm"/>
+            <TextBlock x:Name="ErrCount" Text="0"/>
+          </StackPanel>
+        </Button>
+        <TextBlock Grid.Column="7" x:Name="GlText" Classes="caption" Margin="8,0,8,0" MaxWidth="360" TextTrimming="CharacterEllipsis"/>
+        <h:HelpTip Grid.Column="8" HelpKey="{x:Static h:HelpKeys.Status}" Margin="0,0,8,0"/>
+      </Grid>
+    </Border>
+
+    <!-- ===== 본문: 3D 가 전체(참고 캔버스 = 지도 전체), 그 위에 셸 층 ===== -->
+    <Panel x:Name="Body">
+      <r:GlView x:Name="View"/>
+
+      <!-- 셸 층(바탕 없음 — 빈 곳은 3D 로 입력 통과) -->
+      <Panel x:Name="ShellLayer">
+
+        <!-- 장면 영역(고정 패널을 비킨 3D 그림 영역과 같은 사각형 — Margin = GlView.ContentInset) -->
+        <Grid x:Name="ViewGrid">
+          <!-- 분할 화면별 레전드 · 색 모드 콤보(코드에서 채움, 배경 없음 = 빈 곳은 3D 뷰로 입력 통과) -->
+          <Grid x:Name="PaneGrid"/>
+          <TextBlock x:Name="Overlay" Margin="8" Padding="10,6" Classes="mono hud"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False"/>
+
+          <!-- 오른쪽 위: 카메라 막대 + 표시(색상 · 화면) 막대 -->
+          <StackPanel x:Name="FloatStack" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Spacing="6">
+            <Border x:Name="CamBar" Classes="float" HorizontalAlignment="Right">
+              <StackPanel Orientation="Horizontal" Spacing="2">
+                <ToggleButton x:Name="FollowToggle" Classes="ghost" MinHeight="30" Padding="8,0" ToolTip.Tip="선택 물체 추적 (T)" AutomationProperties.Name="추적">
+                  <StackPanel Classes="btn">
+                    <mi:MaterialIcon Kind="CrosshairsGps" Classes="sm"/>
+                    <TextBlock Text="추적"/>
+                  </StackPanel>
+                </ToggleButton>
+                <Button x:Name="ZoomInBtn" Classes="icon" ToolTip.Tip="확대 (+)" AutomationProperties.Name="확대">
+                  <mi:MaterialIcon Kind="MagnifyPlusOutline"/>
+                </Button>
+                <Button x:Name="ZoomOutBtn" Classes="icon" ToolTip.Tip="축소 (−)" AutomationProperties.Name="축소">
+                  <mi:MaterialIcon Kind="MagnifyMinusOutline"/>
+                </Button>
+                <Button x:Name="FocusBtn" Classes="icon" ToolTip.Tip="선택 물체로 (C)" AutomationProperties.Name="선택 물체로">
+                  <mi:MaterialIcon Kind="ImageFilterCenterFocus"/>
+                </Button>
+                <Button x:Name="FitBtn" Classes="icon" ToolTip.Tip="전체 보기 (F)" AutomationProperties.Name="전체 보기">
+                  <mi:MaterialIcon Kind="FitToScreenOutline"/>
+                </Button>
+                <Button x:Name="ResetCamBtn" Classes="icon" ToolTip.Tip="카메라 초기화 (Home)" AutomationProperties.Name="카메라 초기화">
+                  <mi:MaterialIcon Kind="HomeOutline"/>
+                </Button>
+                <h:HelpTip HelpKey="{x:Static h:HelpKeys.View3D}" Margin="4,0,4,0"/>
+              </StackPanel>
+            </Border>
+            <Border x:Name="DisplayBar" Classes="float" HorizontalAlignment="Right">
+              <StackPanel Spacing="4">
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                  <mi:MaterialIcon Kind="PaletteOutline" Classes="sm" Margin="6,0,0,0" Foreground="{DynamicResource TextMutedBrush}"/>
+                  <TextBlock Classes="caption" Text="색상"/>
+                  <ComboBox x:Name="ColorModeBox" Width="210" ToolTip.Tip="면 색 표시 모드"/>
+                  <ComboBox x:Name="ColorMapBox" Width="96" ToolTip.Tip="컬러맵"/>
+                  <Button x:Name="ColorOptsBtn" Classes="ghost" Padding="8,0" ToolTip.Tip="최대값 유지 · 표시 대상 · 범위" AutomationProperties.Name="옵션">
+                    <StackPanel Classes="btn" Spacing="2">
+                      <TextBlock Text="옵션"/>
+                      <mi:MaterialIcon Kind="ChevronDown" Classes="sm"/>
+                    </StackPanel>
+                    <Button.Flyout>
+                      <Flyout Placement="BottomEdgeAlignedRight">
+                        <StackPanel Spacing="4" Width="230">
+                          <TextBlock Classes="h" Text="색상 옵션" Margin="0,0,0,4"/>
+                          <CheckBox x:Name="PeakHoldBox" Content="최대값 유지 (전 구간)" ToolTip.Tip="구조 분석(F6) 결과 사용"/>
+                          <CheckBox x:Name="SelectedOnlyBox" Content="선택 물체만" IsChecked="True"/>
+                          <CheckBox x:Name="AutoRangeBox" Content="범위 자동" IsChecked="True"/>
+                          <Grid ColumnDefinitions="*,8,*">
+                            <TextBox x:Name="RangeMinBox" Watermark="최소" IsEnabled="False"/>
+                            <TextBox Grid.Column="2" x:Name="RangeMaxBox" Watermark="최대" IsEnabled="False"/>
+                          </Grid>
+                        </StackPanel>
+                      </Flyout>
+                    </Button.Flyout>
+                  </Button>
+                  <h:HelpTip HelpKey="{x:Static h:HelpKeys.Color}" Margin="0,0,4,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right">
+                  <mi:MaterialIcon Kind="ViewGridOutline" Classes="sm" Foreground="{DynamicResource TextMutedBrush}"/>
+                  <TextBlock Classes="caption" Text="화면"/>
+                  <ComboBox x:Name="SplitBox" Width="96" ToolTip.Tip="3D 뷰 분할"/>
+                  <CheckBox x:Name="CamSyncBox" Content="카메라 동기" IsChecked="True" Margin="6,0,0,0" ToolTip.Tip="분할 화면을 함께 회전·이동"/>
+                  <CheckBox x:Name="SectionBox" Content="단면(내부)" Margin="6,0,0,0" ToolTip.Tip="선택 물체를 잘라 내부 보기"/>
+                  <h:HelpTip HelpKey="{x:Static h:HelpKeys.Split}" Margin="2,0,4,0"/>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+
+          <!-- 브라우저(어셈블리) — 장면 왼쪽 위에 겹친 반투명 패널(Fusion 360 BROWSER). 바탕이 있어 패널 위 입력은 패널이 받고(3D 로 새지 않음),
+               패널 밖은 그대로 3D. 폭 = 오른쪽 가장자리 끌기, 높이 = 내용(뷰 높이 비율 상한, 넘으면 스크롤 — 코드 UpdateBrowserLimits) -->
+          <Panel x:Name="BrowserPanel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8">
+            <Border x:Name="BrowserBox" Classes="browser" Width="280">
+              <DockPanel>
+                <Border x:Name="BrowserHead" DockPanel.Dock="Top" Classes="browserhead">
+                  <Grid ColumnDefinitions="Auto,*,Auto">
+                    <StackPanel x:Name="BrowserTitle" Orientation="Horizontal" Spacing="4" Background="Transparent" Cursor="Hand"
+                                ToolTip.Tip="접기 · 펼치기 (Ctrl+B = 브라우저 숨기기 · 보이기)">
+                      <ToggleButton x:Name="BrowserCollapseBtn" Classes="chev" IsChecked="True" Focusable="False"/>
+                      <TextBlock Classes="browsertitle" Text="BROWSER"/>
+                      <TextBlock Classes="caption" Text="어셈블리" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                      <Button x:Name="TreeExpandBtn" Classes="icon xs" ToolTip.Tip="모두 펼치기" AutomationProperties.Name="모두 펼치기">
+                        <mi:MaterialIcon Kind="ArrowExpandVertical"/>
+                      </Button>
+                      <Button x:Name="TreeCollapseBtn" Classes="icon xs" ToolTip.Tip="물체만 펼치기" AutomationProperties.Name="물체만 펼치기">
+                        <mi:MaterialIcon Kind="ArrowCollapseVertical"/>
+                      </Button>
+                      <Button x:Name="TreeShowAllBtn" Classes="icon xs" ToolTip.Tip="모두 보기" AutomationProperties.Name="모두 보기">
+                        <mi:MaterialIcon Kind="EyeOutline"/>
+                      </Button>
+                      <h:HelpTip HelpKey="{x:Static h:HelpKeys.Tree}" Margin="4,0,2,0"/>
+                    </StackPanel>
+                  </Grid>
+                </Border>
+                <TreeView x:Name="AsmTree" Classes="browser" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,2">
+                  <TreeView.ContextMenu>
+                    <ContextMenu x:Name="BrowserMenu">
+                      <MenuItem x:Name="CmToggleShow" Header="숨기기"/>
+                      <MenuItem x:Name="CmIsolate" Header="이것만 보기 (격리 — 하위 포함)"/>
+                      <MenuItem x:Name="CmShowAll" Header="모두 보기"/>
+                      <Separator/>
+                      <MenuItem x:Name="CmFocus" Header="선택 물체로 확대" InputGesture="C"/>
+                      <MenuItem x:Name="CmFollow" Header="추적" ToggleType="CheckBox" InputGesture="T"/>
+                      <Separator/>
+                      <MenuItem x:Name="CmDashboard" Header="대시보드에서 보기"/>
+                    </ContextMenu>
+                  </TreeView.ContextMenu>
+                  <TreeView.ItemTemplate>
+                    <TreeDataTemplate ItemsSource="{Binding Children}">
+                      <Grid ColumnDefinitions="18,20,*,Auto" ToolTip.Tip="{Binding Tip}" Background="Transparent" Height="22">
+                        <ToggleButton Classes="eye" IsChecked="{Binding Shown, Mode=TwoWay}" IsVisible="{Binding HasEye}" ToolTip.Tip="3D 표시 · 숨김 (하위 포함)"
+                                      AutomationProperties.Name="보이기" AutomationProperties.AutomationId="TreeEye"/>
+                        <c:BrowserIcon Grid.Column="1" Kind="{Binding IconKind}" Swatch="{Binding Swatch}" Opacity="{Binding RowOpacity}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="2" Text="{Binding Label}" FontWeight="{Binding Weight}" Opacity="{Binding RowOpacity}" Classes.info="{Binding IsInfo}"
+                                   VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="3,0,0,0"/>
+                        <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="4" Margin="6,0,2,0" IsVisible="{Binding HasState}" Opacity="{Binding RowOpacity}">
+                          <Ellipse Width="6" Height="6" VerticalAlignment="Center" Classes="state" Classes.free="{Binding IsFree}" Classes.landed="{Binding IsLanded}"/>
+                          <TextBlock Text="{Binding State}" FontSize="11" VerticalAlignment="Center"
+                                     Classes="state" Classes.free="{Binding IsFree}" Classes.landed="{Binding IsLanded}"/>
+                        </StackPanel>
+                      </Grid>
+                    </TreeDataTemplate>
+                  </TreeView.ItemTemplate>
+                </TreeView>
+              </DockPanel>
+            </Border>
+            <Border x:Name="BrowserGrip" Classes="grip" HorizontalAlignment="Right" Width="8" Margin="0,4,-4,4" CornerRadius="3"
+                    Background="Transparent" Cursor="SizeWestEast" ToolTip.Tip="끌어서 브라우저 폭 조절"/>
+          </Panel>
+
+          <!-- 작업 진행 표시(3D 위, 입력 통과 — 재생 막대 위) -->
+          <Border x:Name="BusyOverlay" Classes="busy" IsVisible="False" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                  Margin="0,0,0,76" Padding="16,12">
+            <StackPanel Spacing="6" MinWidth="320">
+              <TextBlock x:Name="BusyTitle" FontWeight="SemiBold" Foreground="{DynamicResource AccentTextBrush}"/>
+              <TextBlock x:Name="BusyStage" Classes="dim" FontSize="12"/>
+              <ProgressBar x:Name="BusyProgress" Minimum="0" Maximum="1" Height="4" MinHeight="4"/>
+            </StackPanel>
+          </Border>
+
+          <!-- 재생 막대 — 3D 아래에 떠 있는 바 -->
+          <Border x:Name="PlayBar" Classes="float" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" MaxWidth="1000" Margin="12,0,12,12" Padding="6,4">
+            <DockPanel LastChildFill="True">
+              <Button DockPanel.Dock="Left" x:Name="PlayBtn" Classes="primary play" ToolTip.Tip="재생 / 일시정지 (Space)" AutomationProperties.Name="재생 / 일시정지">
+                <mi:MaterialIcon x:Name="PlayIcon" Kind="Play"/>
+              </Button>
+              <Button DockPanel.Dock="Left" x:Name="PrevEventBtn" Classes="icon" Margin="6,0,0,0" ToolTip.Tip="이전 이벤트 (PageUp)" AutomationProperties.Name="이전 이벤트">
+                <mi:MaterialIcon Kind="SkipPrevious"/>
+              </Button>
+              <Button DockPanel.Dock="Left" x:Name="NextEventBtn" Classes="icon" ToolTip.Tip="다음 이벤트 (PageDown)" AutomationProperties.Name="다음 이벤트">
+                <mi:MaterialIcon Kind="SkipNext"/>
+              </Button>
+              <ComboBox DockPanel.Dock="Left" x:Name="RateBox" Width="86" Margin="8,0" ToolTip.Tip="재생 속도"/>
+              <TextBlock DockPanel.Dock="Left" x:Name="TimeText" VerticalAlignment="Center" Width="120" Classes="mono dim"/>
+              <h:HelpTip DockPanel.Dock="Right" HelpKey="{x:Static h:HelpKeys.Playback}" Margin="4,0,4,0"/>
+              <Slider x:Name="TimeSlider" Minimum="0" Maximum="1" Margin="8,0" VerticalAlignment="Center"/>
+            </DockPanel>
+          </Border>
+
+          <!-- 닫힌 패널 다시 열기 — 둥근 떠 있는 단추 35×35(참고 이벤트 패널 열기 단추, 0.2 s 커지기/줄어들기) -->
+          <StackPanel x:Name="FabBar" Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,14,16">
+            <Button x:Name="BottomFab" Classes="fab" ToolTip.Tip="그래프 · 로그 열기" AutomationProperties.Name="그래프 · 로그 열기" IsVisible="False">
+              <mi:MaterialIcon Kind="ChartLine"/>
+            </Button>
+            <Button x:Name="DashFab" Classes="fab" ToolTip.Tip="대시보드 열기" AutomationProperties.Name="대시보드 열기" IsVisible="False">
+              <mi:MaterialIcon Kind="ViewDashboardOutline"/>
+            </Button>
+          </StackPanel>
+        </Grid>
+
+        <!-- ===== 아래 서랍: 그래프 | 로그 (참고 EventSection — 위 가장자리 끌어 높이, 고정 · 닫기) ===== -->
+        <Border x:Name="BottomDrawer" Classes="panel" VerticalAlignment="Bottom" Height="260" CornerRadius="10,10,0,0" BorderThickness="1,1,1,0">
+          <Panel>
+            <DockPanel>
+              <Border DockPanel.Dock="Top" Classes="drawerhead">
+                <Grid ColumnDefinitions="Auto,Auto,*,Auto" Margin="12,0,6,0">
+                  <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <mi:MaterialIcon Kind="ChartTimelineVariant" Classes="sm" Foreground="{DynamicResource AccentTextBrush}"/>
+                    <TextBlock Classes="drawertitle" Text="그래프 · 로그"/>
+                  </StackPanel>
+                  <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" Margin="14,0,0,0" VerticalAlignment="Center">
+                    <ToggleButton x:Name="PlotToggle" Classes="chiptoggle" Content="그래프" IsChecked="True" ToolTip.Tip="그래프 섹션 보이기"/>
+                    <ToggleButton x:Name="LogToggle" Classes="chiptoggle" Content="로그" IsChecked="True" ToolTip.Tip="로그 섹션 보이기"/>
+                  </StackPanel>
+                  <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="2" VerticalAlignment="Center">
+                    <ToggleButton x:Name="BottomPinBtn" Classes="icon sm" IsChecked="True" ToolTip.Tip="고정 — 3D 장면이 서랍을 비켜 그림 (끄면 3D 위에 겹침)" AutomationProperties.Name="아래 서랍 고정">
+                      <mi:MaterialIcon Kind="PinOutline" Classes="sm"/>
+                    </ToggleButton>
+                    <Button x:Name="BottomCloseBtn" Classes="icon sm" ToolTip.Tip="닫기 (보기 → 패널 · 오른쪽 아래 단추로 다시 열기)" AutomationProperties.Name="그래프 · 로그 닫기">
+                      <mi:MaterialIcon Kind="ChevronDown"/>
+                    </Button>
+                  </StackPanel>
+                </Grid>
+              </Border>
+              <!-- 하단: 그래프 섹션 | 로그 섹션 -->
+              <Grid x:Name="BottomGrid" ColumnDefinitions="*,4,*">
+                <Border x:Name="PlotSection" Grid.Column="0" Background="Transparent">
+                  <DockPanel>
+                    <Grid DockPanel.Dock="Top" ColumnDefinitions="Auto,Auto,*" Classes="sechead">
+                      <TextBlock Classes="sect" Text="그래프"/>
+                      <h:HelpTip Grid.Column="1" HelpKey="{x:Static h:HelpKeys.Plot}"/>
+                      <ComboBox Grid.Column="2" x:Name="PlotSel" Width="200" HorizontalAlignment="Right" Margin="0,0,4,0"/>
+                    </Grid>
+                    <c:PlotView x:Name="Plot" ToolTip.Tip="클릭 → 그 시각 · ←/→ 시각 이동(Shift ×10) · 휠 확대 · 오른쪽 드래그 이동 · 더블클릭 전체"/>
+                  </DockPanel>
+                </Border>
+                <GridSplitter Grid.Column="1"/>
+                <Border x:Name="LogSection" Grid.Column="2" Background="Transparent">
+                  <DockPanel>
+                    <Grid DockPanel.Dock="Top" ColumnDefinitions="Auto,Auto,*" Classes="sechead">
+                      <TextBlock Classes="sect" Text="로그"/>
+                      <h:HelpTip Grid.Column="1" HelpKey="{x:Static h:HelpKeys.Log}"/>
+                      <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="4" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <ComboBox x:Name="LogLevelBox" Width="112"/>
+                        <TextBox x:Name="LogSearch" Width="150" Watermark="검색"/>
+                        <CheckBox x:Name="LogAutoScroll" Content="자동 스크롤" IsChecked="True" Margin="4,0"/>
+                        <Button x:Name="LogCopyBtn" Classes="icon sm" ToolTip.Tip="복사" AutomationProperties.Name="복사">
+                          <mi:MaterialIcon Kind="ContentCopy" Classes="sm"/>
+                        </Button>
+                        <Button x:Name="LogSaveBtn" Classes="icon sm" ToolTip.Tip="저장…" AutomationProperties.Name="로그 저장">
+                          <mi:MaterialIcon Kind="ContentSaveOutline" Classes="sm"/>
+                        </Button>
+                        <Button x:Name="LogClearBtn" Classes="icon sm" ToolTip.Tip="지우기" AutomationProperties.Name="지우기">
+                          <mi:MaterialIcon Kind="DeleteOutline" Classes="sm"/>
+                        </Button>
+                      </StackPanel>
+                    </Grid>
+                    <TextBlock DockPanel.Dock="Bottom" x:Name="LogFileText" Classes="caption" Margin="12,2" TextTrimming="CharacterEllipsis"/>
+                    <ListBox x:Name="LogList" Classes="compact" FontFamily="{DynamicResource MonoFont}" FontSize="12">
+                      <ListBox.ItemTemplate>
+                        <DataTemplate>
+                          <TextBlock Text="{Binding Text}" TextWrapping="NoWrap" Classes="dim" Classes.warn="{Binding IsWarn}" Classes.err="{Binding IsError}"/>
+                        </DataTemplate>
+                      </ListBox.ItemTemplate>
+                    </ListBox>
+                  </DockPanel>
+                </Border>
+              </Grid>
+            </DockPanel>
+            <Border x:Name="BottomGrip" Classes="sizegrip" Height="5" VerticalAlignment="Top" Cursor="SizeNorthSouth" ToolTip.Tip="끌어서 높이 조절 (더블클릭 = 기본)"/>
+          </Panel>
+        </Border>
+
+        <!-- ===== 오른쪽 대시보드 패널(참고 이벤트 패널 — 머리 50 · 아이콘 · 제목 · 동작 1*/3*/1* · 미끄러져 들어옴) ===== -->
+        <Border x:Name="DashPanel" Classes="panel" HorizontalAlignment="Right" Width="340" CornerRadius="10,0,0,10" BorderThickness="1,1,0,1" Margin="0,8,0,8">
+          <Panel>
+            <DockPanel>
+              <Border DockPanel.Dock="Top" Classes="panelhead" CornerRadius="10,0,0,0">
+                <Grid ColumnDefinitions="1*,3*,1*">
+                  <mi:MaterialIcon Classes="panelicon" Kind="ViewDashboardOutline"/>
+                  <TextBlock Grid.Column="1" Classes="paneltitle" Text="대시보드"/>
+                  <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ToggleButton x:Name="DashPinBtn" Classes="onaccent" IsChecked="True" ToolTip.Tip="고정 — 3D 장면이 패널을 비켜 그림 (끄면 3D 위에 겹침)" AutomationProperties.Name="대시보드 고정">
+                      <mi:MaterialIcon Kind="PinOutline"/>
+                    </ToggleButton>
+                    <Button x:Name="DashCloseBtn" Classes="onaccent" ToolTip.Tip="닫기 (오른쪽 아래 단추 · 보기 → 패널로 다시 열기)" AutomationProperties.Name="대시보드 닫기">
+                      <mi:MaterialIcon Kind="Close"/>
+                    </Button>
+                  </StackPanel>
+                </Grid>
+              </Border>
+              <!-- 여백은 ScrollViewer Padding 이 아니라 안쪽 Margin 으로: Padding 은 측정에 빠져 긴 글 카드만 16 px 넓어지고 "?" 가 스크롤 막대 밑으로 갔다 -->
+              <ScrollViewer x:Name="RightPanel" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Spacing="8" Margin="10">
+                  <Border Classes="card">
+                    <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="Auto,Auto">
+                      <TextBlock x:Name="DashBody" Text="선택 없음" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                      <Border Grid.Column="1" x:Name="DashModeChip" Classes="chip">
+                        <TextBlock x:Name="DashMode" Text="—" FontSize="11"/>
+                      </Border>
+                      <h:HelpTip Grid.Column="2" HelpKey="{x:Static h:HelpKeys.Dashboard}" Margin="6,0,0,0"/>
+                      <TextBlock Grid.Row="1" Grid.ColumnSpan="3" x:Name="DashPhase" Classes="caption" TextTrimming="CharacterEllipsis" Margin="0,4,0,0"/>
+                    </Grid>
+                  </Border>
+                  <UniformGrid x:Name="TileGrid" Columns="3" Margin="-2"/>
+                  <Border Classes="card" x:Name="DeviceCard">
+                    <StackPanel>
+                      <DockPanel Classes="cardhead">
+                        <h:HelpTip DockPanel.Dock="Right" HelpKey="{x:Static h:HelpKeys.Devices}"/>
+                        <TextBlock Classes="cardh" Text="장치 · 연결"/>
+                      </DockPanel>
+                      <StackPanel x:Name="DevicePanel" Spacing="6"/>
+                    </StackPanel>
+                  </Border>
+                  <Border Classes="card" x:Name="ImpactCard">
+                    <StackPanel>
+                      <DockPanel Classes="cardhead">
+                        <h:HelpTip DockPanel.Dock="Right" HelpKey="{x:Static h:HelpKeys.Impact}"/>
+                        <TextBlock Classes="cardh" Text="착지 · 착탄점"/>
+                      </DockPanel>
+                      <TextBlock x:Name="ImpactText" Classes="mono dim" TextWrapping="Wrap"/>
+                    </StackPanel>
+                  </Border>
+                  <Border Classes="card">
+                    <StackPanel>
+                      <DockPanel Classes="cardhead">
+                        <h:HelpTip DockPanel.Dock="Right" HelpKey="{x:Static h:HelpKeys.Structure}"/>
+                        <TextBlock Classes="cardh" Text="구조 · 재질 (근사)"/>
+                      </DockPanel>
+                      <TextBlock x:Name="StructText" Classes="mono dim" TextWrapping="Wrap" Text="구조 분석(F6) 또는 색상 모드를 선택하세요."/>
+                    </StackPanel>
+                  </Border>
+                  <Border Classes="card" x:Name="CredCard">
+                    <StackPanel>
+                      <DockPanel Classes="cardhead">
+                        <h:HelpTip DockPanel.Dock="Right" HelpKey="{x:Static h:HelpKeys.Credibility}"/>
+                        <TextBlock Classes="cardh" Text="결과 신뢰도 (7009A · 90 % 구간)"/>
+                      </DockPanel>
+                      <StackPanel x:Name="CredPanel" Spacing="6"/>
+                      <TextBlock x:Name="CredNote" Classes="caption" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                    </StackPanel>
+                  </Border>
+                  <Expander IsExpanded="True" ToolTip.Tip="클릭 → 그 시각으로">
+                    <Expander.Header>
+                      <DockPanel>
+                        <h:HelpTip DockPanel.Dock="Right" HelpKey="{x:Static h:HelpKeys.Events}" Margin="6,0,0,0"/>
+                        <TextBlock Text="이벤트" VerticalAlignment="Center"/>
+                      </DockPanel>
+                    </Expander.Header>
+                    <ListBox x:Name="EventsList" Classes="compact" MaxHeight="320">
+                      <ListBox.ItemTemplate>
+                        <DataTemplate>
+                          <Grid ColumnDefinitions="68,*" Margin="0,3" ToolTip.Tip="{Binding Detail}">
+                            <TextBlock Text="{Binding TimeText}" FontFamily="{DynamicResource MonoFont}" FontSize="11" Classes="muted"
+                                       HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,1,10,0"/>
+                            <StackPanel Grid.Column="1" Spacing="1">
+                              <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                              <TextBlock Text="{Binding Detail}" FontSize="11" Classes="dim" TextWrapping="Wrap" MaxLines="2"
+                                         TextTrimming="CharacterEllipsis" IsVisible="{Binding HasDetail}"/>
+                            </StackPanel>
+                          </Grid>
+                        </DataTemplate>
+                      </ListBox.ItemTemplate>
+                    </ListBox>
+                  </Expander>
+                  <Expander IsExpanded="False">
+                    <Expander.Header>
+                      <DockPanel>
+                        <h:HelpTip DockPanel.Dock="Right" HelpKey="{x:Static h:HelpKeys.Summary}" Margin="6,0,0,0"/>
+                        <TextBlock Text="결과 요약" VerticalAlignment="Center"/>
+                      </DockPanel>
+                    </Expander.Header>
+                    <StackPanel Spacing="10">
+                      <StackPanel x:Name="SummaryPanel" Spacing="10"/>
+                      <Button x:Name="SummaryCopyBtn" Classes="ghost sm" HorizontalAlignment="Right" ToolTip.Tip="요약 전체를 텍스트로 클립보드에 복사">
+                        <StackPanel Classes="btn">
+                          <mi:MaterialIcon Kind="ContentCopy" Classes="sm"/>
+                          <TextBlock Text="요약 텍스트 복사"/>
+                        </StackPanel>
+                      </Button>
+                      <!-- 복사·스모크 로그용 원문(화면에는 위 표로 표시) -->
+                      <SelectableTextBlock x:Name="SummaryText" IsVisible="False"/>
+                    </StackPanel>
+                  </Expander>
+                </StackPanel>
+              </ScrollViewer>
+            </DockPanel>
+            <Border x:Name="DashGrip" Classes="sizegrip" Width="5" HorizontalAlignment="Left" Cursor="SizeWestEast" ToolTip.Tip="끌어서 폭 조절 (더블클릭 = 기본)"/>
+          </Panel>
+        </Border>
+
+        <!-- ===== 왼쪽 서랍(참고 HamburgerMenu CompactOverlay — 레일 오른쪽에 펼쳐짐, 최대 폭 제한) ===== -->
+        <Border x:Name="LeftDrawer" Classes="panel" HorizontalAlignment="Left" Width="320" CornerRadius="0,10,10,0" BorderThickness="0,1,1,1" Margin="56,0,0,0">
+          <Panel>
+            <DockPanel>
+              <Border DockPanel.Dock="Top" Classes="panelhead" CornerRadius="0,10,0,0">
+                <Grid ColumnDefinitions="1*,3*,1*">
+                  <mi:MaterialIcon x:Name="DrawerIcon" Classes="panelicon" Kind="TuneVariant"/>
+                  <TextBlock Grid.Column="1" x:Name="DrawerTitle" Classes="paneltitle" Text="입력"/>
+                  <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ToggleButton x:Name="LeftPinBtn" Classes="onaccent" IsChecked="False" ToolTip.Tip="고정 — 3D 장면이 서랍을 비켜 그림 (끄면 3D 위에 겹치고 3D 를 누르면 닫힘)" AutomationProperties.Name="서랍 고정">
+                      <mi:MaterialIcon Kind="PinOutline"/>
+                    </ToggleButton>
+                    <Button x:Name="LeftCloseBtn" Classes="onaccent" ToolTip.Tip="닫기 (레일 아이콘으로 다시 열기)" AutomationProperties.Name="서랍 닫기">
+                      <mi:MaterialIcon Kind="Close"/>
+                    </Button>
+                  </StackPanel>
+                </Grid>
+              </Border>
+              <Panel>
+                <!-- 페이지: 입력 -->
+                <ScrollViewer x:Name="InputPage" HorizontalScrollBarVisibility="Disabled">
+                  <StackPanel Classes="page">
+                    <DockPanel Classes="subhead">
+                      <Button DockPanel.Dock="Right" x:Name="ScenarioInfoBtn" Classes="ghost sm" ToolTip.Tip="시나리오 설명 창" AutomationProperties.Name="설명">
+                        <StackPanel Classes="btn" Spacing="4">
+                          <mi:MaterialIcon Kind="InformationOutline" Classes="sm"/>
+                          <TextBlock Text="설명"/>
+                        </StackPanel>
+                      </Button>
+                      <StackPanel Orientation="Horizontal" Spacing="6">
+                        <TextBlock Classes="h" Text="시나리오"/>
+                        <h:HelpTip HelpKey="{x:Static h:HelpKeys.Scenario}"/>
+                      </StackPanel>
+                    </DockPanel>
+                    <Panel>
+                      <ComboBox x:Name="ScenarioBox" HorizontalAlignment="Stretch" MinWidth="0">
+                        <!-- 긴 이름은 말줄임(콤보가 패널 폭을 넘지 않게) — 펼친 목록에서는 마우스를 올리면 전체 이름 -->
+                        <ComboBox.ItemTemplate>
+                          <DataTemplate>
+                            <TextBlock Text="{Binding}" TextTrimming="CharacterEllipsis" ToolTip.Tip="{Binding}"/>
+                          </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                      </ComboBox>
+                    </Panel>
+                    <Grid ColumnDefinitions="*,6,*" Margin="0,8,0,0">
+                      <Button x:Name="OpenBtn" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AutomationProperties.Name="열기…">
+                        <StackPanel Classes="btn">
+                          <mi:MaterialIcon Kind="FolderOpenOutline" Classes="sm"/>
+                          <TextBlock Text="열기…"/>
+                        </StackPanel>
+                      </Button>
+                      <Button Grid.Column="2" x:Name="ImportBtn" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AutomationProperties.Name="모델 가져오기…">
+                        <StackPanel Classes="btn">
+                          <mi:MaterialIcon Kind="Import" Classes="sm"/>
+                          <TextBlock Text="모델 가져오기…"/>
+                        </StackPanel>
+                      </Button>
+                    </Grid>
+
+                    <DockPanel Classes="subhead">
+                      <StackPanel Orientation="Horizontal" Spacing="6">
+                        <TextBlock Classes="h" Text="투하 조건 · 환경"/>
+                        <h:HelpTip HelpKey="{x:Static h:HelpKeys.Conditions}"/>
+                      </StackPanel>
+                    </DockPanel>
+                    <Grid Classes="form" ColumnDefinitions="128,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+                      <TextBlock Grid.Row="0" Text="운반체 고도 AGL [m]"/>
+                      <TextBox Grid.Row="0" Grid.Column="1" x:Name="AltBox"/>
+                      <TextBlock Grid.Row="1" Text="운반체 속도 [m/s]"/>
+                      <TextBox Grid.Row="1" Grid.Column="1" x:Name="SpeedBox"/>
+                      <TextBlock Grid.Row="2" Text="운반체 방위 [°]"/>
+                      <TextBox Grid.Row="2" Grid.Column="1" x:Name="HeadingBox"/>
+                      <TextBlock Grid.Row="3" Text="풍속 (10 m) [m/s]"/>
+                      <TextBox Grid.Row="3" Grid.Column="1" x:Name="WindBox"/>
+                      <TextBlock Grid.Row="4" Text="풍향 (불어오는) [°]"/>
+                      <TextBox Grid.Row="4" Grid.Column="1" x:Name="WindDirBox"/>
+                      <TextBlock Grid.Row="5" Text="난류 (Dryden)"/>
+                      <ComboBox Grid.Row="5" Grid.Column="1" x:Name="TurbBox"/>
+                      <TextBlock Grid.Row="6" Text="적분 dt [s]"/>
+                      <TextBox Grid.Row="6" Grid.Column="1" x:Name="DtBox"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,6,Auto" Margin="0,12,0,0">
+                      <Button x:Name="RunBtn" Classes="primary" ToolTip.Tip="F5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AutomationProperties.Name="시뮬레이션 실행">
+                        <StackPanel Classes="btn">
+                          <mi:MaterialIcon Kind="Play"/>
+                          <TextBlock Text="시뮬레이션 실행"/>
+                        </StackPanel>
+                      </Button>
+                      <Button Grid.Column="2" x:Name="SaveBtn" ToolTip.Tip="Ctrl+S" AutomationProperties.Name="결과 저장…">
+                        <StackPanel Classes="btn">
+                          <mi:MaterialIcon Kind="ContentSaveOutline" Classes="sm"/>
+                          <TextBlock Text="결과 저장…"/>
+                        </StackPanel>
+                      </Button>
+                    </Grid>
+
+                    <Expander Margin="0,16,0,0">
+                      <Expander.Header>
+                        <DockPanel>
+                          <h:HelpTip DockPanel.Dock="Right" HelpKey="{x:Static h:HelpKeys.ImportOptions}" Margin="6,0,0,0"/>
+                          <TextBlock Text="모델 가져오기 옵션" VerticalAlignment="Center"/>
+                        </DockPanel>
+                      </Expander.Header>
+                      <Grid Classes="form" ColumnDefinitions="116,*" RowDefinitions="Auto,Auto">
+                        <TextBlock Grid.Row="0" Text="질량 [kg]" ToolTip.Tip="STL 만 가져올 때 (균일 밀도)"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="ImportMassBox" Text="1.0"/>
+                        <TextBlock Grid.Row="1" Text="기수축" ToolTip.Tip="모델 좌표의 기수 방향"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" x:Name="NoseAxisBox"/>
+                      </Grid>
+                    </Expander>
+                  </StackPanel>
+                </ScrollViewer>
+
+                <!-- 페이지: Monte Carlo -->
+                <ScrollViewer x:Name="McPage" HorizontalScrollBarVisibility="Disabled" IsVisible="False">
+                  <StackPanel Classes="page">
+                    <DockPanel Classes="subhead">
+                      <StackPanel Orientation="Horizontal" Spacing="6">
+                        <TextBlock Classes="h" Text="Monte Carlo"/>
+                        <h:HelpTip HelpKey="{x:Static h:HelpKeys.MonteCarlo}"/>
+                      </StackPanel>
+                    </DockPanel>
+                    <Grid Classes="form" ColumnDefinitions="116,*" RowDefinitions="Auto,Auto">
+                      <TextBlock Text="GPU 실행 수"/>
+                      <TextBox Grid.Column="1" x:Name="RunsBox" Text="100000"/>
+                      <TextBlock Grid.Row="1" Text="6DOF 실행 수"/>
+                      <TextBox Grid.Row="1" Grid.Column="1" x:Name="FullRunsBox" Text="100"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,6,*" Margin="0,8,0,0">
+                      <Button x:Name="GpuMcBtn" ToolTip.Tip="단순 모델 · 대량" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AutomationProperties.Name="GPU MC">
+                        <StackPanel Classes="btn">
+                          <mi:MaterialIcon Kind="Chip" Classes="sm"/>
+                          <TextBlock Text="GPU MC"/>
+                        </StackPanel>
+                      </Button>
+                      <Button Grid.Column="2" x:Name="CpuMcBtn" ToolTip.Tip="CPU · 전체 6DOF" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" AutomationProperties.Name="6DOF MC">
+                        <StackPanel Classes="btn">
+                          <mi:MaterialIcon Kind="CubeOutline" Classes="sm"/>
+                          <TextBlock Text="6DOF MC"/>
+                        </StackPanel>
+                      </Button>
+                    </Grid>
+                    <TextBlock Classes="caption" TextWrapping="Wrap" Margin="0,12,0,0"
+                               Text="결과는 3D 착탄점 · CEP 원 · 95 % 타원과 아래 그래프 'MC 착탄 산포' 로 보이고 결과 저장(.mnsr)에 포함됩니다."/>
+                  </StackPanel>
+                </ScrollViewer>
+
+                <!-- 페이지: 시나리오 JSON -->
+                <DockPanel x:Name="JsonPage" Margin="12" IsVisible="False">
+                  <DockPanel DockPanel.Dock="Bottom" Margin="0,8,0,0">
+                    <Button DockPanel.Dock="Right" x:Name="ApplyJsonBtn" Classes="primary" AutomationProperties.Name="JSON 적용 · 검증">
+                      <StackPanel Classes="btn">
+                        <mi:MaterialIcon Kind="CheckCircleOutline" Classes="sm"/>
+                        <TextBlock Text="JSON 적용 · 검증"/>
+                      </StackPanel>
+                    </Button>
+                    <h:HelpTip HelpKey="{x:Static h:HelpKeys.Json}" HorizontalAlignment="Left"/>
+                  </DockPanel>
+                  <TextBox x:Name="JsonBox" AcceptsReturn="True" TextWrapping="NoWrap" FontFamily="{DynamicResource MonoFont}" FontSize="11" VerticalContentAlignment="Top"/>
+                </DockPanel>
+              </Panel>
+            </DockPanel>
+            <Border x:Name="LeftGrip" Classes="sizegrip" Width="5" HorizontalAlignment="Right" Cursor="SizeWestEast" ToolTip.Tip="끌어서 폭 조절 (더블클릭 = 기본)"/>
+          </Panel>
+        </Border>
+
+        <!-- ===== 왼쪽 아이콘 레일(참고 HamburgerMenu CompactOverlay · ConsoleRailItem — 선택 = 3 px 주색 막대 + 틴트) ===== -->
+        <Border x:Name="Rail" Classes="rail" HorizontalAlignment="Left">
+          <DockPanel Margin="0,6">
+            <StackPanel DockPanel.Dock="Bottom" Spacing="0">
+              <Border Classes="railsep"/>
+              <ToggleButton x:Name="RailBrowser" Classes="rail" ToolTip.Tip="브라우저 (어셈블리) 보이기 · 숨기기 (Ctrl+B)"
+                            AutomationProperties.Name="브라우저" AutomationProperties.AutomationId="Shell.LeftMenu.Browser">
+                <Panel><Rectangle Classes="railbar"/><mi:MaterialIcon Kind="FileTreeOutline"/></Panel>
+              </ToggleButton>
+              <ToggleButton x:Name="RailDash" Classes="rail" ToolTip.Tip="대시보드 열기 · 닫기"
+                            AutomationProperties.Name="대시보드" AutomationProperties.AutomationId="Shell.LeftMenu.Dashboard">
+                <Panel><Rectangle Classes="railbar"/><mi:MaterialIcon Kind="ViewDashboardOutline"/></Panel>
+              </ToggleButton>
+              <ToggleButton x:Name="RailBottom" Classes="rail" ToolTip.Tip="그래프 · 로그 열기 · 닫기"
+                            AutomationProperties.Name="그래프 · 로그" AutomationProperties.AutomationId="Shell.LeftMenu.Bottom">
+                <Panel><Rectangle Classes="railbar"/><mi:MaterialIcon Kind="ChartLine"/></Panel>
+              </ToggleButton>
+              <Button x:Name="RailHelp" Classes="rail" ToolTip.Tip="도움말 (F1)"
+                      AutomationProperties.Name="도움말 레일" AutomationProperties.AutomationId="Shell.LeftMenu.Help">
+                <mi:MaterialIcon Kind="HelpCircleOutline"/>
+              </Button>
+              <h:HelpTip HelpKey="{x:Static h:HelpKeys.Rail}" HorizontalAlignment="Center" Margin="0,4,0,2"/>
+            </StackPanel>
+            <StackPanel Spacing="0">
+              <ToggleButton x:Name="RailInput" Classes="rail" ToolTip.Tip="입력 — 시나리오 · 투하 조건 · 실행 · 가져오기 옵션"
+                            AutomationProperties.Name="입력" AutomationProperties.AutomationId="Shell.LeftMenu.Input">
+                <Panel><Rectangle Classes="railbar"/><mi:MaterialIcon Kind="TuneVariant"/></Panel>
+              </ToggleButton>
+              <ToggleButton x:Name="RailMc" Classes="rail" ToolTip.Tip="Monte Carlo — GPU MC · 6DOF MC"
+                            AutomationProperties.Name="Monte Carlo" AutomationProperties.AutomationId="Shell.LeftMenu.MonteCarlo">
+                <Panel><Rectangle Classes="railbar"/><mi:MaterialIcon Kind="ChartScatterPlot"/></Panel>
+              </ToggleButton>
+              <ToggleButton x:Name="RailJson" Classes="rail" ToolTip.Tip="시나리오 JSON — 편집 · 적용 · 검증"
+                            AutomationProperties.Name="시나리오 JSON" AutomationProperties.AutomationId="Shell.LeftMenu.Json">
+                <Panel><Rectangle Classes="railbar"/><mi:MaterialIcon Kind="CodeJson"/></Panel>
+              </ToggleButton>
+              <Border Classes="railsep"/>
+              <!-- 묶음 아이콘 → 레일 오른쪽에 멤버 목록(메인 메뉴와 같은 항목 · 같은 동작) -->
+              <Button x:Name="RailFile" Classes="rail" ToolTip.Tip="결과 · 파일 — 열기 · 불러오기 · 저장 · 내보내기 · 캡처"
+                      AutomationProperties.Name="결과 · 파일" AutomationProperties.AutomationId="Shell.LeftMenuGroup.File">
+                <mi:MaterialIcon Kind="FolderOutline"/>
+              </Button>
+              <Button x:Name="RailAnalysis" Classes="rail" ToolTip.Tip="해석 — 구조 분석 · FEA · 충격 · 재질 · 신뢰도"
+                      AutomationProperties.Name="해석" AutomationProperties.AutomationId="Shell.LeftMenuGroup.Analysis">
+                <mi:MaterialIcon Kind="ChartBellCurveCumulative"/>
+              </Button>
+              <Button x:Name="RailWind" Classes="rail" ToolTip.Tip="풍동 — 풍동 보기 (F8) · GPU 가상 풍동 (Shift+F8)"
+                      AutomationProperties.Name="풍동" AutomationProperties.AutomationId="Shell.LeftMenuGroup.Wind">
+                <mi:MaterialIcon Kind="WeatherWindy"/>
+              </Button>
+            </StackPanel>
+          </DockPanel>
+        </Border>
+      </Panel>
+    </Panel>
+  </DockPanel>
+  </Panel>
+</Window>

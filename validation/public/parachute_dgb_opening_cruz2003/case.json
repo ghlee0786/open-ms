@@ -1,0 +1,280 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "parachute_dgb_opening_cruz2003",
+ "title": "Peak opening loads of full-scale DGB parachutes: 11 NFAC wind-tunnel tests (infinite mass) + 4 heavy (8000 lb) drop tests",
+ "vv": "VV-41",
+ "grade": "A",
+ "use": "validation",
+ "kind": "parachute-opening-infinite-mass",
+ "model": "낙하산 충만·개방하중(F절: 충만 곡선 + 겉보기 질량 유입 항 k0)",
+ "tolerance": {
+  "relative": 0.25
+ },
+ "envelope": "비압축(M ≤ 0.5), 무한 질량(풍동·중량 투하체), DGB D0 13–15 m",
+ "sources": [
+  {
+   "title": "Opening Loads Analyses for Various Disk-Gap-Band Parachutes (AIAA Paper 2003-2131 (17th AIAA Aerodynamic Decelerator Systems Conference, Monterey, May 2003))",
+   "url": "https://ntrs.nasa.gov/api/citations/20030065911/downloads/20030065911.pdf",
+   "note": "Tables 1-4"
+  }
+ ],
+ "notes": [
+  "k0(겉보기 질량 계수)를 WTMD 11·12(같은 설계 반복시험)로 보정하고 나머지 시험의 최대 하중을 예측한다.",
+  "충만 거리 n = 8.2 D0(WTMD 11·12 측정 8.18·8.19), 충만 곡선 Sr = (t/tf)^2 — 모든 시험에 같은 캐노피 상수로 적용.",
+  "CD0 는 원 논문의 가정값(측정 아님). 풍동 속도는 막힘 보정 V_eff(식 8), 낙하시험은 가속도 적분으로 얻은 q(저자: 불확도 큼)에서 V=√(2q/ρ), ρ=1 (무한 질량 근사에서 하중은 ρ 와 무관).",
+  "WTMD 2(완전 충만 실패), DTST 037/038(3000 lb, 최대 하중이 충만 66 % 에서 발생 — 유한 질량 효과)는 제외.",
+  "허용 ±25 %(PRD VV-41)."
+ ],
+ "points": [
+  {
+   "label": "WTMD 1 (1.6 Hybrid, q_eff 532 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 13.594,
+    "cd0": 0.486,
+    "rho_kg_m3": 1.208,
+    "v_m_s": 29.66,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.86
+   },
+   "measured": 68217.9,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 3 (1.8 Viking, q_eff 898 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 13.564,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.1581,
+    "v_m_s": 39.38,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.66
+   },
+   "measured": 91620.0,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 4 (1.8 Viking, q_eff 1080 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 13.533,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.2065,
+    "v_m_s": 42.31,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.7
+   },
+   "measured": 112099.6,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 5 (MPF, q_eff 695 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 15.149,
+    "cd0": 0.405,
+    "rho_kg_m3": 1.1823,
+    "v_m_s": 34.29,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.75
+   },
+   "measured": 86771.4,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 6 (1.8 Viking, q_eff 685 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 13.564,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.1885,
+    "v_m_s": 33.95,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.84
+   },
+   "measured": 77203.3,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 7 (1.8 MPF, q_eff 1080 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 13.228,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.2086,
+    "v_m_s": 42.28,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.62
+   },
+   "measured": 102411.4,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 8 (1.8 MPF, q_eff 1415 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 13.198,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.205,
+    "v_m_s": 48.46,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.59
+   },
+   "measured": 130964.5,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 9 (1.8 MPF, q_eff 1259 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 13.228,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.2194,
+    "v_m_s": 45.45,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.6
+   },
+   "measured": 117615.4,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 10 (1.8 MPF, q_eff 1083 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 13.198,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.2039,
+    "v_m_s": 42.43,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.57
+   },
+   "measured": 99061.9,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 11 (1.8 MPF, q_eff 976 Pa)",
+   "role": "calibration",
+   "inputs": {
+    "d0_m": 14.112,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.206,
+    "v_m_s": 40.23,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.74
+   },
+   "measured": 112820.2,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "WTMD 12 (1.8 MPF, q_eff 972 Pa)",
+   "role": "calibration",
+   "inputs": {
+    "d0_m": 14.112,
+    "cd0": 0.432,
+    "rho_kg_m3": 1.2364,
+    "v_m_s": 39.65,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.75
+   },
+   "measured": 112491.0,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Tables 3-4)"
+  },
+  {
+   "label": "DTST 040 (낙하 8000 lb, q 996 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 15.27,
+    "cd0": 0.41,
+    "rho_kg_m3": 1.0,
+    "v_m_s": 44.6296,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.79
+   },
+   "measured": 133566.7,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Table 2; q derived from accelerometers)"
+  },
+  {
+   "label": "DTST 049 (낙하 8000 lb, q 857 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 15.179,
+    "cd0": 0.41,
+    "rho_kg_m3": 1.0,
+    "v_m_s": 41.4029,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 2.08
+   },
+   "measured": 131956.4,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Table 2; q derived from accelerometers)"
+  },
+  {
+   "label": "DTST 050 (낙하 8000 lb, q 790 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 15.21,
+    "cd0": 0.41,
+    "rho_kg_m3": 1.0,
+    "v_m_s": 39.7492,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.91
+   },
+   "measured": 112669.0,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Table 2; q derived from accelerometers)"
+  },
+  {
+   "label": "DTST 071 (낙하 8000 lb, q 723 Pa)",
+   "role": "validation",
+   "inputs": {
+    "d0_m": 15.27,
+    "cd0": 0.41,
+    "rho_kg_m3": 1.0,
+    "v_m_s": 38.0263,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "measuredCx": 1.85
+   },
+   "measured": 98541.4,
+   "unit": "N",
+   "provenance": "table (Cruz 2003 Table 2; q derived from accelerometers)"
+  }
+ ],
+ "calibration": {
+  "parameter": "apparentMassK0",
+  "lo": 0.0,
+  "hi": 10.0
+ },
+ "origin": {
+  "source_case": "validation/sources/parachute_dgb_opening_loads/case.json",
+  "sha256": "38059a872ab174746a8ce47cf5696e9750b8498940c8f6b6e279b6e8ee179321",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

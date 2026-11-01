@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Sim.Gpu</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ILGPU" Version="1.5.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sim.Core\Sim.Core.csproj" />
+  </ItemGroup>
+</Project>

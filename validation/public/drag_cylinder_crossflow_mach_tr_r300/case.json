@@ -1,0 +1,2543 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "drag_cylinder_crossflow_mach_tr_r300",
+ "title": "2-D circular cylinder crossflow CD vs Re (0.59e6-18.3e6) and Mach (0.09-0.60): 133 measured points (NASA TR R-300 Table I(a))",
+ "vv": "FR-REL-06",
+ "grade": "A",
+ "use": "consistency",
+ "kind": "cylinder-crossflow-2d",
+ "model": "원통 횡류 2-D CD(Re, M) 표(TR R-300·TN 2960, aero.crossflow tr-r300)",
+ "tolerance": {
+  "relative": 0.1
+ },
+ "envelope": "2-D CD: 0 ≤ M ≤ 0.6, Re ≤ 1.9×10⁷",
+ "sources": [
+  {
+   "title": "Aerodynamic Forces on a Stationary and Oscillating Circular Cylinder at High Reynolds Numbers (NASA TR R-300, 1969)",
+   "url": "https://ntrs.nasa.gov/api/citations/19690007972/downloads/19690007972.pdf",
+   "note": "Table I(a) gaps sealed"
+  }
+ ],
+ "notes": [
+  "모델 표는 같은 보고서 표 II(저자가 표 I(a) 를 일정 마하로 다시 그린 값) → 판정 줄 = 표 II 점(구현 일관성, 반복점 평균과의 차). 표 I(a) 원점 133개는 '참고' 줄 — 표 II 재작도·측정 산포·항력 위기 기울기에 따른 차이를 그대로 보여 주고, 그 잔차(RMS)를 불확도 정량화(FR-REL-03)의 모델 형태 산포로 쓴다. 독립 검증 아님.",
+  "허용(README 제안): |ΔCD| ≤ 0.05 (M ≤ 0.4), 0.10 (M > 0.4, 기울기 급함). 반복점 차 0.03–0.04 가 측정 재현성.",
+  "Freon-12(γ ≈ 1.14) 점은 원문과 같이 같은 M 으로 취급. 표 I(b)(틈 열림)는 옮기지 않음.",
+  "독립 비교: OpenFOAM 2-D 원통 기준 사례(validation/reports/cfd) — FR-REL-01."
+ ],
+ "points": [
+  {
+   "label": "표 II M 0.10 Air, 1 atm Re 1.97e6",
+   "inputs": {
+    "re": 1970000,
+    "mach": 0.1
+   },
+   "measured": 0.452,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.10 Air, 1 atm Re 1.95e6",
+   "inputs": {
+    "re": 1950000,
+    "mach": 0.1
+   },
+   "measured": 0.472,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.10 Air, 1 atm Re 2.00e6",
+   "inputs": {
+    "re": 2000000,
+    "mach": 0.1
+   },
+   "measured": 0.42,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.10 Freon, 1 atm Re 4.45e6",
+   "inputs": {
+    "re": 4450000,
+    "mach": 0.1
+   },
+   "measured": 0.538,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.10 Freon, 1 atm Re 4.65e6",
+   "inputs": {
+    "re": 4650000,
+    "mach": 0.1
+   },
+   "measured": 0.494,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.10 Freon, 1/10 atm Re 0.49e6",
+   "inputs": {
+    "re": 490000,
+    "mach": 0.1
+   },
+   "measured": 0.143,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Air, 1 atm Re 2.96e6",
+   "inputs": {
+    "re": 2960000,
+    "mach": 0.15
+   },
+   "measured": 0.543,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Air, 1 atm Re 2.93e6",
+   "inputs": {
+    "re": 2930000,
+    "mach": 0.15
+   },
+   "measured": 0.534,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Air, 1 atm Re 2.97e6",
+   "inputs": {
+    "re": 2970000,
+    "mach": 0.15
+   },
+   "measured": 0.527,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Freon, 1 atm Re 6.60e6",
+   "inputs": {
+    "re": 6600000,
+    "mach": 0.15
+   },
+   "measured": 0.535,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Freon, 1 atm Re 6.88e6",
+   "inputs": {
+    "re": 6880000,
+    "mach": 0.15
+   },
+   "measured": 0.499,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Freon, 1 atm Re 6.55e6",
+   "inputs": {
+    "re": 6550000,
+    "mach": 0.15
+   },
+   "measured": 0.54,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Freon, 1/2 atm Re 3.64e6",
+   "inputs": {
+    "re": 3640000,
+    "mach": 0.15
+   },
+   "measured": 0.549,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Freon, 1/2 atm Re 3.88e6",
+   "inputs": {
+    "re": 3880000,
+    "mach": 0.15
+   },
+   "measured": 0.49,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Freon, 1/3 atm Re 2.54e6",
+   "inputs": {
+    "re": 2540000,
+    "mach": 0.15
+   },
+   "measured": 0.52,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.15 Freon, 1/10 atm Re 0.72e6",
+   "inputs": {
+    "re": 725000,
+    "mach": 0.15
+   },
+   "measured": 0.184,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Air, 1 atm Re 3.95e6",
+   "inputs": {
+    "re": 3950000,
+    "mach": 0.2
+   },
+   "measured": 0.591,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Air, 1 atm Re 3.91e6",
+   "inputs": {
+    "re": 3910000,
+    "mach": 0.2
+   },
+   "measured": 0.54,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Air, 1 atm Re 3.95e6",
+   "inputs": {
+    "re": 3950000,
+    "mach": 0.2
+   },
+   "measured": 0.589,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1 atm Re 8.76e6",
+   "inputs": {
+    "re": 8760000,
+    "mach": 0.2
+   },
+   "measured": 0.535,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1 atm Re 9.09e6",
+   "inputs": {
+    "re": 9090000,
+    "mach": 0.2
+   },
+   "measured": 0.505,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1 atm Re 8.73e6",
+   "inputs": {
+    "re": 8730000,
+    "mach": 0.2
+   },
+   "measured": 0.54,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1/2 atm Re 4.83e6",
+   "inputs": {
+    "re": 4830000,
+    "mach": 0.2
+   },
+   "measured": 0.583,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1/2 atm Re 4.91e6",
+   "inputs": {
+    "re": 4910000,
+    "mach": 0.2
+   },
+   "measured": 0.521,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1/2 atm Re 4.83e6",
+   "inputs": {
+    "re": 4830000,
+    "mach": 0.2
+   },
+   "measured": 0.595,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1/3 atm Re 3.36e6",
+   "inputs": {
+    "re": 3360000,
+    "mach": 0.2
+   },
+   "measured": 0.54,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1/3 atm Re 3.30e6",
+   "inputs": {
+    "re": 3300000,
+    "mach": 0.2
+   },
+   "measured": 0.59,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1/3 atm Re 3.14e6",
+   "inputs": {
+    "re": 3140000,
+    "mach": 0.2
+   },
+   "measured": 0.587,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.20 Freon, 1/10 atm Re 0.96e6",
+   "inputs": {
+    "re": 962000,
+    "mach": 0.2
+   },
+   "measured": 0.218,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Air, 1 atm Re 4.92e6",
+   "inputs": {
+    "re": 4920000,
+    "mach": 0.25
+   },
+   "measured": 0.621,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Air, 1 atm Re 4.87e6",
+   "inputs": {
+    "re": 4870000,
+    "mach": 0.25
+   },
+   "measured": 0.57,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Air, 1 atm Re 4.86e6",
+   "inputs": {
+    "re": 4860000,
+    "mach": 0.25
+   },
+   "measured": 0.63,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1 atm Re 10.92e6",
+   "inputs": {
+    "re": 10920000,
+    "mach": 0.25
+   },
+   "measured": 0.54,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1 atm Re 11.30e6",
+   "inputs": {
+    "re": 11300000,
+    "mach": 0.25
+   },
+   "measured": 0.524,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1 atm Re 10.87e6",
+   "inputs": {
+    "re": 10870000,
+    "mach": 0.25
+   },
+   "measured": 0.546,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1/2 atm Re 6.02e6",
+   "inputs": {
+    "re": 6020000,
+    "mach": 0.25
+   },
+   "measured": 0.599,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1/2 atm Re 5.98e6",
+   "inputs": {
+    "re": 5980000,
+    "mach": 0.25
+   },
+   "measured": 0.552,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1/3 atm Re 4.17e6",
+   "inputs": {
+    "re": 4170000,
+    "mach": 0.25
+   },
+   "measured": 0.575,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1/3 atm Re 4.13e6",
+   "inputs": {
+    "re": 4130000,
+    "mach": 0.25
+   },
+   "measured": 0.61,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1/3 atm Re 3.92e6",
+   "inputs": {
+    "re": 3920000,
+    "mach": 0.25
+   },
+   "measured": 0.609,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.25 Freon, 1/10 atm Re 1.20e6",
+   "inputs": {
+    "re": 1200000,
+    "mach": 0.25
+   },
+   "measured": 0.27,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Air, 1 atm Re 5.84e6",
+   "inputs": {
+    "re": 5840000,
+    "mach": 0.3
+   },
+   "measured": 0.632,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Air, 1 atm Re 5.80e6",
+   "inputs": {
+    "re": 5800000,
+    "mach": 0.3
+   },
+   "measured": 0.611,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Air, 1 atm Re 5.70e6",
+   "inputs": {
+    "re": 5700000,
+    "mach": 0.3
+   },
+   "measured": 0.669,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1 atm Re 12.97e6",
+   "inputs": {
+    "re": 12970000,
+    "mach": 0.3
+   },
+   "measured": 0.55,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1 atm Re 13.47e6",
+   "inputs": {
+    "re": 13470000,
+    "mach": 0.3
+   },
+   "measured": 0.535,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1 atm Re 12.93e6",
+   "inputs": {
+    "re": 12930000,
+    "mach": 0.3
+   },
+   "measured": 0.553,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1/2 atm Re 7.15e6",
+   "inputs": {
+    "re": 7150000,
+    "mach": 0.3
+   },
+   "measured": 0.613,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1/2 atm Re 7.11e6",
+   "inputs": {
+    "re": 7110000,
+    "mach": 0.3
+   },
+   "measured": 0.583,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1/3 atm Re 4.97e6",
+   "inputs": {
+    "re": 4970000,
+    "mach": 0.3
+   },
+   "measured": 0.619,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1/3 atm Re 4.94e6",
+   "inputs": {
+    "re": 4940000,
+    "mach": 0.3
+   },
+   "measured": 0.634,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1/3 atm Re 4.63e6",
+   "inputs": {
+    "re": 4630000,
+    "mach": 0.3
+   },
+   "measured": 0.641,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1/10 atm Re 1.44e6",
+   "inputs": {
+    "re": 1440000,
+    "mach": 0.3
+   },
+   "measured": 0.338,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.30 Freon, 1/10 atm Re 1.46e6",
+   "inputs": {
+    "re": 1460000,
+    "mach": 0.3
+   },
+   "measured": 0.431,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Air, 1 atm Re 6.74e6",
+   "inputs": {
+    "re": 6740000,
+    "mach": 0.35
+   },
+   "measured": 0.723,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Air, 1 atm Re 6.66e6",
+   "inputs": {
+    "re": 6660000,
+    "mach": 0.35
+   },
+   "measured": 0.7,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Air, 1 atm Re 6.48e6",
+   "inputs": {
+    "re": 6480000,
+    "mach": 0.35
+   },
+   "measured": 0.727,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1 atm Re 14.96e6",
+   "inputs": {
+    "re": 14960000,
+    "mach": 0.35
+   },
+   "measured": 0.57,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1 atm Re 15.54e6",
+   "inputs": {
+    "re": 15540000,
+    "mach": 0.35
+   },
+   "measured": 0.563,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1 atm Re 14.92e6",
+   "inputs": {
+    "re": 14920000,
+    "mach": 0.35
+   },
+   "measured": 0.573,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1/2 atm Re 8.23e6",
+   "inputs": {
+    "re": 8230000,
+    "mach": 0.35
+   },
+   "measured": 0.65,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1/2 atm Re 8.20e6",
+   "inputs": {
+    "re": 8200000,
+    "mach": 0.35
+   },
+   "measured": 0.621,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1/3 atm Re 5.75e6",
+   "inputs": {
+    "re": 5750000,
+    "mach": 0.35
+   },
+   "measured": 0.671,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1/3 atm Re 5.73e6",
+   "inputs": {
+    "re": 5730000,
+    "mach": 0.35
+   },
+   "measured": 0.67,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1/10 atm Re 1.66e6",
+   "inputs": {
+    "re": 1660000,
+    "mach": 0.35
+   },
+   "measured": 0.42,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.35 Freon, 1/10 atm Re 1.67e6",
+   "inputs": {
+    "re": 1670000,
+    "mach": 0.35
+   },
+   "measured": 0.464,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Air, 1 atm Re 7.47e6",
+   "inputs": {
+    "re": 7470000,
+    "mach": 0.4
+   },
+   "measured": 0.9,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Air, 1 atm Re 7.27e6",
+   "inputs": {
+    "re": 7270000,
+    "mach": 0.4
+   },
+   "measured": 0.803,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1 atm Re 16.88e6",
+   "inputs": {
+    "re": 16880000,
+    "mach": 0.4
+   },
+   "measured": 0.608,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1 atm Re 17.54e6",
+   "inputs": {
+    "re": 17540000,
+    "mach": 0.4
+   },
+   "measured": 0.608,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1 atm Re 16.91e6",
+   "inputs": {
+    "re": 16910000,
+    "mach": 0.4
+   },
+   "measured": 0.608,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1/2 atm Re 9.31e6",
+   "inputs": {
+    "re": 9310000,
+    "mach": 0.4
+   },
+   "measured": 0.628,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1/2 atm Re 9.25e6",
+   "inputs": {
+    "re": 9250000,
+    "mach": 0.4
+   },
+   "measured": 0.68,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1/3 atm Re 6.50e6",
+   "inputs": {
+    "re": 6500000,
+    "mach": 0.4
+   },
+   "measured": 0.73,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1/3 atm Re 6.39e6",
+   "inputs": {
+    "re": 6390000,
+    "mach": 0.4
+   },
+   "measured": 0.711,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1/10 atm Re 1.88e6",
+   "inputs": {
+    "re": 1880000,
+    "mach": 0.4
+   },
+   "measured": 0.549,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.40 Freon, 1/10 atm Re 1.87e6",
+   "inputs": {
+    "re": 1870000,
+    "mach": 0.4
+   },
+   "measured": 0.5,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.45 Freon, 1/3 atm Re 7.18e6",
+   "inputs": {
+    "re": 7180000,
+    "mach": 0.45
+   },
+   "measured": 0.781,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.45 Freon, 1/10 atm Re 2.27e6",
+   "inputs": {
+    "re": 2270000,
+    "mach": 0.45
+   },
+   "measured": 0.764,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.50 Freon, 1/3 atm Re 7.75e6",
+   "inputs": {
+    "re": 7750000,
+    "mach": 0.5
+   },
+   "measured": 1.028,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.50 Freon, 1/10 atm Re 2.53e6",
+   "inputs": {
+    "re": 2530000,
+    "mach": 0.5
+   },
+   "measured": 1.184,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.55 Freon, 1/10 atm Re 2.78e6",
+   "inputs": {
+    "re": 2780000,
+    "mach": 0.55
+   },
+   "measured": 1.53,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 II M 0.60 Freon, 1/10 atm Re 3.00e6",
+   "inputs": {
+    "re": 3000000,
+    "mach": 0.6
+   },
+   "measured": 1.819,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "provenance": "table (TR R-300 Table II)"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.120 Re 2.38e6",
+   "inputs": {
+    "re": 2380000,
+    "mach": 0.12
+   },
+   "measured": 0.493,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.167 Re 3.30e6",
+   "inputs": {
+    "re": 3300000,
+    "mach": 0.167
+   },
+   "measured": 0.567,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.204 Re 4.03e6",
+   "inputs": {
+    "re": 4030000,
+    "mach": 0.204
+   },
+   "measured": 0.584,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.236 Re 4.65e6",
+   "inputs": {
+    "re": 4650000,
+    "mach": 0.236
+   },
+   "measured": 0.615,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.264 Re 5.17e6",
+   "inputs": {
+    "re": 5170000,
+    "mach": 0.264
+   },
+   "measured": 0.634,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.289 Re 5.66e6",
+   "inputs": {
+    "re": 5660000,
+    "mach": 0.289
+   },
+   "measured": 0.631,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.313 Re 6.08e6",
+   "inputs": {
+    "re": 6080000,
+    "mach": 0.313
+   },
+   "measured": 0.635,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.342 Re 6.60e6",
+   "inputs": {
+    "re": 6600000,
+    "mach": 0.342
+   },
+   "measured": 0.702,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.368 Re 7.05e6",
+   "inputs": {
+    "re": 7050000,
+    "mach": 0.368
+   },
+   "measured": 0.743,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.330 Re 6.24e6",
+   "inputs": {
+    "re": 6240000,
+    "mach": 0.33
+   },
+   "measured": 0.671,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.119 Re 2.33e6",
+   "inputs": {
+    "re": 2330000,
+    "mach": 0.119
+   },
+   "measured": 0.5,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.167 Re 3.27e6",
+   "inputs": {
+    "re": 3270000,
+    "mach": 0.167
+   },
+   "measured": 0.545,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.187 Re 3.66e6",
+   "inputs": {
+    "re": 3660000,
+    "mach": 0.187
+   },
+   "measured": 0.556,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.204 Re 3.99e6",
+   "inputs": {
+    "re": 3990000,
+    "mach": 0.204
+   },
+   "measured": 0.547,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.236 Re 4.62e6",
+   "inputs": {
+    "re": 4620000,
+    "mach": 0.236
+   },
+   "measured": 0.552,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.265 Re 5.15e6",
+   "inputs": {
+    "re": 5150000,
+    "mach": 0.265
+   },
+   "measured": 0.582,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.296 Re 5.72e6",
+   "inputs": {
+    "re": 5720000,
+    "mach": 0.296
+   },
+   "measured": 0.632,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.308 Re 5.94e6",
+   "inputs": {
+    "re": 5940000,
+    "mach": 0.308
+   },
+   "measured": 0.632,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.323 Re 6.22e6",
+   "inputs": {
+    "re": 6220000,
+    "mach": 0.323
+   },
+   "measured": 0.643,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.333 Re 6.38e6",
+   "inputs": {
+    "re": 6380000,
+    "mach": 0.333
+   },
+   "measured": 0.655,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.344 Re 6.55e6",
+   "inputs": {
+    "re": 6550000,
+    "mach": 0.344
+   },
+   "measured": 0.68,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.369 Re 6.98e6",
+   "inputs": {
+    "re": 6980000,
+    "mach": 0.369
+   },
+   "measured": 0.746,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.377 Re 7.12e6",
+   "inputs": {
+    "re": 7120000,
+    "mach": 0.377
+   },
+   "measured": 0.795,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.386 Re 7.25e6",
+   "inputs": {
+    "re": 7250000,
+    "mach": 0.386
+   },
+   "measured": 0.846,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.388 Re 7.25e6",
+   "inputs": {
+    "re": 7250000,
+    "mach": 0.388
+   },
+   "measured": 0.81,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.086 Re 1.74e6",
+   "inputs": {
+    "re": 1740000,
+    "mach": 0.086
+   },
+   "measured": 0.384,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.146 Re 2.92e6",
+   "inputs": {
+    "re": 2920000,
+    "mach": 0.146
+   },
+   "measured": 0.521,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.187 Re 3.69e6",
+   "inputs": {
+    "re": 3690000,
+    "mach": 0.187
+   },
+   "measured": 0.561,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.221 Re 4.31e6",
+   "inputs": {
+    "re": 4310000,
+    "mach": 0.221
+   },
+   "measured": 0.603,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.250 Re 4.86e6",
+   "inputs": {
+    "re": 4860000,
+    "mach": 0.25
+   },
+   "measured": 0.636,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.301 Re 5.75e6",
+   "inputs": {
+    "re": 5750000,
+    "mach": 0.301
+   },
+   "measured": 0.676,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.353 Re 6.52e6",
+   "inputs": {
+    "re": 6520000,
+    "mach": 0.353
+   },
+   "measured": 0.725,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Air, 1 atm M 0.404 Re 7.33e6",
+   "inputs": {
+    "re": 7330000,
+    "mach": 0.404
+   },
+   "measured": 0.812,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.099 Re 4.38e6",
+   "inputs": {
+    "re": 4380000,
+    "mach": 0.099
+   },
+   "measured": 0.661,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.130 Re 5.75e6",
+   "inputs": {
+    "re": 5750000,
+    "mach": 0.13
+   },
+   "measured": 0.567,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.158 Re 6.97e6",
+   "inputs": {
+    "re": 6970000,
+    "mach": 0.158
+   },
+   "measured": 0.518,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.183 Re 8.04e6",
+   "inputs": {
+    "re": 8040000,
+    "mach": 0.183
+   },
+   "measured": 0.538,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.208 Re 9.11e6",
+   "inputs": {
+    "re": 9110000,
+    "mach": 0.208
+   },
+   "measured": 0.526,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.236 Re 10.33e6",
+   "inputs": {
+    "re": 10330000,
+    "mach": 0.236
+   },
+   "measured": 0.542,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.257 Re 11.22e6",
+   "inputs": {
+    "re": 11220000,
+    "mach": 0.257
+   },
+   "measured": 0.531,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.275 Re 11.95e6",
+   "inputs": {
+    "re": 11950000,
+    "mach": 0.275
+   },
+   "measured": 0.558,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.288 Re 12.44e6",
+   "inputs": {
+    "re": 12440000,
+    "mach": 0.288
+   },
+   "measured": 0.553,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.305 Re 13.16e6",
+   "inputs": {
+    "re": 13160000,
+    "mach": 0.305
+   },
+   "measured": 0.547,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.329 Re 14.12e6",
+   "inputs": {
+    "re": 14120000,
+    "mach": 0.329
+   },
+   "measured": 0.558,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.353 Re 15.10e6",
+   "inputs": {
+    "re": 15100000,
+    "mach": 0.353
+   },
+   "measured": 0.571,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.356 Re 15.21e6",
+   "inputs": {
+    "re": 15210000,
+    "mach": 0.356
+   },
+   "measured": 0.576,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.366 Re 15.62e6",
+   "inputs": {
+    "re": 15620000,
+    "mach": 0.366
+   },
+   "measured": 0.583,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.384 Re 16.26e6",
+   "inputs": {
+    "re": 16260000,
+    "mach": 0.384
+   },
+   "measured": 0.573,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.400 Re 16.88e6",
+   "inputs": {
+    "re": 16880000,
+    "mach": 0.4
+   },
+   "measured": 0.62,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.416 Re 17.51e6",
+   "inputs": {
+    "re": 17510000,
+    "mach": 0.416
+   },
+   "measured": 0.617,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.418 Re 17.57e6",
+   "inputs": {
+    "re": 17570000,
+    "mach": 0.418
+   },
+   "measured": 0.616,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.099 Re 4.57e6",
+   "inputs": {
+    "re": 4570000,
+    "mach": 0.099
+   },
+   "measured": 0.466,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.139 Re 6.40e6",
+   "inputs": {
+    "re": 6400000,
+    "mach": 0.139
+   },
+   "measured": 0.463,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.167 Re 7.67e6",
+   "inputs": {
+    "re": 7670000,
+    "mach": 0.167
+   },
+   "measured": 0.511,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.212 Re 9.64e6",
+   "inputs": {
+    "re": 9640000,
+    "mach": 0.212
+   },
+   "measured": 0.529,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.276 Re 12.42e6",
+   "inputs": {
+    "re": 12420000,
+    "mach": 0.276
+   },
+   "measured": 0.534,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.334 Re 14.86e6",
+   "inputs": {
+    "re": 14860000,
+    "mach": 0.334
+   },
+   "measured": 0.545,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.382 Re 16.84e6",
+   "inputs": {
+    "re": 16840000,
+    "mach": 0.382
+   },
+   "measured": 0.585,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.418 Re 18.27e6",
+   "inputs": {
+    "re": 18270000,
+    "mach": 0.418
+   },
+   "measured": 0.627,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.116 Re 5.12e6",
+   "inputs": {
+    "re": 5120000,
+    "mach": 0.116
+   },
+   "measured": 0.541,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.235 Re 10.25e6",
+   "inputs": {
+    "re": 10250000,
+    "mach": 0.235
+   },
+   "measured": 0.531,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.306 Re 13.17e6",
+   "inputs": {
+    "re": 13170000,
+    "mach": 0.306
+   },
+   "measured": 0.55,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.350 Re 14.96e6",
+   "inputs": {
+    "re": 14960000,
+    "mach": 0.35
+   },
+   "measured": 0.556,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.350 Re 14.96e6",
+   "inputs": {
+    "re": 14960000,
+    "mach": 0.35
+   },
+   "measured": 0.556,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.364 Re 15.47e6",
+   "inputs": {
+    "re": 15470000,
+    "mach": 0.364
+   },
+   "measured": 0.58,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.416 Re 17.55e6",
+   "inputs": {
+    "re": 17550000,
+    "mach": 0.416
+   },
+   "measured": 0.628,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.229 Re 10.82e6",
+   "inputs": {
+    "re": 10820000,
+    "mach": 0.229
+   },
+   "measured": 0.577,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.186 Re 8.84e6",
+   "inputs": {
+    "re": 8840000,
+    "mach": 0.186
+   },
+   "measured": 0.597,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.192 Re 9.11e6",
+   "inputs": {
+    "re": 9110000,
+    "mach": 0.192
+   },
+   "measured": 0.604,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1 atm M 0.131 Re 6.27e6",
+   "inputs": {
+    "re": 6270000,
+    "mach": 0.131
+   },
+   "measured": 0.62,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.138 Re 3.25e6",
+   "inputs": {
+    "re": 3250000,
+    "mach": 0.138
+   },
+   "measured": 0.521,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.184 Re 4.47e6",
+   "inputs": {
+    "re": 4470000,
+    "mach": 0.184
+   },
+   "measured": 0.596,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.237 Re 5.72e6",
+   "inputs": {
+    "re": 5720000,
+    "mach": 0.237
+   },
+   "measured": 0.566,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.259 Re 6.22e6",
+   "inputs": {
+    "re": 6220000,
+    "mach": 0.259
+   },
+   "measured": 0.598,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.290 Re 6.93e6",
+   "inputs": {
+    "re": 6930000,
+    "mach": 0.29
+   },
+   "measured": 0.622,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.316 Re 7.49e6",
+   "inputs": {
+    "re": 7490000,
+    "mach": 0.316
+   },
+   "measured": 0.613,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.330 Re 7.82e6",
+   "inputs": {
+    "re": 7820000,
+    "mach": 0.33
+   },
+   "measured": 0.632,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.374 Re 8.77e6",
+   "inputs": {
+    "re": 8770000,
+    "mach": 0.374
+   },
+   "measured": 0.676,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.385 Re 9.00e6",
+   "inputs": {
+    "re": 9000000,
+    "mach": 0.385
+   },
+   "measured": 0.688,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.390 Re 9.10e6",
+   "inputs": {
+    "re": 9100000,
+    "mach": 0.39
+   },
+   "measured": 0.704,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.135 Re 3.38e6",
+   "inputs": {
+    "re": 3380000,
+    "mach": 0.135
+   },
+   "measured": 0.474,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.185 Re 4.61e6",
+   "inputs": {
+    "re": 4610000,
+    "mach": 0.185
+   },
+   "measured": 0.49,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.236 Re 5.66e6",
+   "inputs": {
+    "re": 5660000,
+    "mach": 0.236
+   },
+   "measured": 0.541,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.274 Re 6.54e6",
+   "inputs": {
+    "re": 6540000,
+    "mach": 0.274
+   },
+   "measured": 0.565,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.303 Re 7.18e6",
+   "inputs": {
+    "re": 7180000,
+    "mach": 0.303
+   },
+   "measured": 0.583,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.363 Re 8.49e6",
+   "inputs": {
+    "re": 8490000,
+    "mach": 0.363
+   },
+   "measured": 0.648,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.385 Re 8.95e6",
+   "inputs": {
+    "re": 8950000,
+    "mach": 0.385
+   },
+   "measured": 0.651,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.410 Re 9.47e6",
+   "inputs": {
+    "re": 9470000,
+    "mach": 0.41
+   },
+   "measured": 0.693,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.162 Re 3.92e6",
+   "inputs": {
+    "re": 3920000,
+    "mach": 0.162
+   },
+   "measured": 0.59,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/2 atm M 0.218 Re 5.26e6",
+   "inputs": {
+    "re": 5260000,
+    "mach": 0.218
+   },
+   "measured": 0.597,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.175 Re 2.95e6",
+   "inputs": {
+    "re": 2950000,
+    "mach": 0.175
+   },
+   "measured": 0.509,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.163 Re 2.75e6",
+   "inputs": {
+    "re": 2750000,
+    "mach": 0.163
+   },
+   "measured": 0.537,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.164 Re 2.77e6",
+   "inputs": {
+    "re": 2770000,
+    "mach": 0.164
+   },
+   "measured": 0.532,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.171 Re 2.89e6",
+   "inputs": {
+    "re": 2890000,
+    "mach": 0.171
+   },
+   "measured": 0.525,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.219 Re 3.67e6",
+   "inputs": {
+    "re": 3670000,
+    "mach": 0.219
+   },
+   "measured": 0.53,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.231 Re 3.87e6",
+   "inputs": {
+    "re": 3870000,
+    "mach": 0.231
+   },
+   "measured": 0.557,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.253 Re 4.22e6",
+   "inputs": {
+    "re": 4220000,
+    "mach": 0.253
+   },
+   "measured": 0.573,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.282 Re 4.69e6",
+   "inputs": {
+    "re": 4690000,
+    "mach": 0.282
+   },
+   "measured": 0.594,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.291 Re 4.84e6",
+   "inputs": {
+    "re": 4840000,
+    "mach": 0.291
+   },
+   "measured": 0.622,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.318 Re 5.26e6",
+   "inputs": {
+    "re": 5260000,
+    "mach": 0.318
+   },
+   "measured": 0.636,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.335 Re 5.54e6",
+   "inputs": {
+    "re": 5540000,
+    "mach": 0.335
+   },
+   "measured": 0.654,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.350 Re 5.75e6",
+   "inputs": {
+    "re": 5750000,
+    "mach": 0.35
+   },
+   "measured": 0.676,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.369 Re 6.04e6",
+   "inputs": {
+    "re": 6040000,
+    "mach": 0.369
+   },
+   "measured": 0.692,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.379 Re 6.19e6",
+   "inputs": {
+    "re": 6190000,
+    "mach": 0.379
+   },
+   "measured": 0.694,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.383 Re 6.25e6",
+   "inputs": {
+    "re": 6250000,
+    "mach": 0.383
+   },
+   "measured": 0.7,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.400 Re 6.38e6",
+   "inputs": {
+    "re": 6380000,
+    "mach": 0.4
+   },
+   "measured": 0.707,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.453 Re 7.14e6",
+   "inputs": {
+    "re": 7140000,
+    "mach": 0.453
+   },
+   "measured": 0.781,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.500 Re 7.78e6",
+   "inputs": {
+    "re": 7780000,
+    "mach": 0.5
+   },
+   "measured": 1.027,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.187 Re 3.10e6",
+   "inputs": {
+    "re": 3100000,
+    "mach": 0.187
+   },
+   "measured": 0.588,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.248 Re 4.10e6",
+   "inputs": {
+    "re": 4100000,
+    "mach": 0.248
+   },
+   "measured": 0.601,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.316 Re 5.19e6",
+   "inputs": {
+    "re": 5190000,
+    "mach": 0.316
+   },
+   "measured": 0.647,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.315 Re 5.20e6",
+   "inputs": {
+    "re": 5200000,
+    "mach": 0.315
+   },
+   "measured": 0.631,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.382 Re 6.21e6",
+   "inputs": {
+    "re": 6210000,
+    "mach": 0.382
+   },
+   "measured": 0.689,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.184 Re 2.90e6",
+   "inputs": {
+    "re": 2900000,
+    "mach": 0.184
+   },
+   "measured": 0.577,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.246 Re 3.82e6",
+   "inputs": {
+    "re": 3820000,
+    "mach": 0.246
+   },
+   "measured": 0.591,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/3 atm M 0.312 Re 4.81e6",
+   "inputs": {
+    "re": 4810000,
+    "mach": 0.312
+   },
+   "measured": 0.7,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.120 Re 0.59e6",
+   "inputs": {
+    "re": 590000,
+    "mach": 0.12
+   },
+   "measured": 0.157,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.173 Re 0.84e6",
+   "inputs": {
+    "re": 840000,
+    "mach": 0.173
+   },
+   "measured": 0.208,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.217 Re 1.05e6",
+   "inputs": {
+    "re": 1050000,
+    "mach": 0.217
+   },
+   "measured": 0.228,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.257 Re 1.24e6",
+   "inputs": {
+    "re": 1240000,
+    "mach": 0.257
+   },
+   "measured": 0.277,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.284 Re 1.36e6",
+   "inputs": {
+    "re": 1360000,
+    "mach": 0.284
+   },
+   "measured": 0.318,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.320 Re 1.53e6",
+   "inputs": {
+    "re": 1530000,
+    "mach": 0.32
+   },
+   "measured": 0.363,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.344 Re 1.63e6",
+   "inputs": {
+    "re": 1630000,
+    "mach": 0.344
+   },
+   "measured": 0.402,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.371 Re 1.75e6",
+   "inputs": {
+    "re": 1750000,
+    "mach": 0.371
+   },
+   "measured": 0.495,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.386 Re 1.82e6",
+   "inputs": {
+    "re": 1820000,
+    "mach": 0.386
+   },
+   "measured": 0.535,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.421 Re 1.96e6",
+   "inputs": {
+    "re": 1960000,
+    "mach": 0.421
+   },
+   "measured": 0.543,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.401 Re 1.90e6",
+   "inputs": {
+    "re": 1900000,
+    "mach": 0.401
+   },
+   "measured": 0.509,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.288 Re 1.41e6",
+   "inputs": {
+    "re": 1410000,
+    "mach": 0.288
+   },
+   "measured": 0.422,
+   "unit": "-",
+   "toleranceAbs": 0.05,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.413 Re 2.08e6",
+   "inputs": {
+    "re": 2080000,
+    "mach": 0.413
+   },
+   "measured": 0.642,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.457 Re 2.29e6",
+   "inputs": {
+    "re": 2290000,
+    "mach": 0.457
+   },
+   "measured": 0.718,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.510 Re 2.59e6",
+   "inputs": {
+    "re": 2590000,
+    "mach": 0.51
+   },
+   "measured": 1.266,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.553 Re 2.77e6",
+   "inputs": {
+    "re": 2770000,
+    "mach": 0.553
+   },
+   "measured": 1.545,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  },
+  {
+   "label": "표 I(a) Freon, 1/10 atm M 0.603 Re 3.02e6",
+   "inputs": {
+    "re": 3020000,
+    "mach": 0.603
+   },
+   "measured": 1.856,
+   "unit": "-",
+   "toleranceAbs": 0.1,
+   "role": "info",
+   "provenance": "table (TR R-300 Table I(a))"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/cylinder_crossflow_mach/case.json",
+  "sha256": "aa4f689d24ab69904b960ba41dc87fe8563b65dc41d41afb8fd7c994fb6b9666",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

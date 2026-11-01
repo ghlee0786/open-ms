@@ -1,0 +1,12 @@
+{
+  "schema": "mns.environment/1",
+  "id": "analysis",
+  "displayName": {
+    "ko": "기본 (분석)",
+    "en": "Analysis"
+  },
+  "style": "analysis",
+  "features": [],
+  "lights": [],
+  "soilMatch": []
+}

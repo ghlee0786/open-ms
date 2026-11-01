@@ -1,0 +1,39 @@
+{
+  "schema": "mns.validation-case/1",
+  "id": "parachute_iris_ultra_ratings",
+  "title": "Fruity Chutes Iris Ultra(환형) 낙하산 제조사 정격 하강률 — 박스 낙하산(48\") 계열",
+  "vv": "VV-42",
+  "grade": "C",
+  "use": "consistency",
+  "kind": "parachute-steady-descent",
+  "model": "낙하산 정상 하강(F절 Parachute, CdS₀)",
+  "envelope": "환형(Iris Ultra) 36~96\", 1.8~22.7 kg, 하강률 4.5~6.1 m/s, 해면 ISA",
+  "provenance": "manufacturer",
+  "tolerance": { "relative": 0.10 },
+  "sources": [
+    { "title": "Fruity Chutes — Iris Ultra 48\" Compact Parachute (12.5 lb @ 20 fps; 7 lb @ 15 fps, Cd 2.2)", "url": "https://shop.fruitychutes.com/products/iris-ultra-48-compact-parachute-12-5lbs-20fps-7lbs-15fps", "note": "2026-10-07 웹 검색 요약으로 확인(WebFetch 불가 — 원 페이지 미열람)" },
+    { "title": "Fruity Chutes — Iris Ultra 60\" (19 lb @ 20 fps; 12 lb @ 15 fps)", "url": "https://shop.fruitychutes.com/products/iris-ultra-60-compact-parachute-19lbs-20fps-12lbs-15fps" },
+    { "title": "Fruity Chutes — Iris Ultra 84\" (39 lb @ 20 fps; 22 lb @ 15 fps)", "url": "https://shop.fruitychutes.com/products/iris-ultra-84-compact-parachute-39lbs-20fps-22lbs-15fps" },
+    { "title": "Fruity Chutes — Iris Ultra 36\" HP (7 lb @ 20 fps; 3.9 lb @ 15 fps)", "url": "https://shop.fruitychutes.com/products/iris-ultra-36-hp-compact-chute-7lb-20fps-3-9lb-15fps" },
+    { "title": "Fruity Chutes — Iris Ultra Compact Parachutes 목록(72\" 28 lb, 96\" 50 lb @ 20 fps)", "url": "https://shop.fruitychutes.com/collections/iris-ultra-compact-chutes" }
+  ],
+  "inputs": { "cd0": 2.2, "altitude_m": 0 },
+  "points": [
+    { "label": "36\"HP 7 lb @ 20 fps", "inputs": { "d0_m": 0.9144, "mass_kg": 3.17515 }, "measured": 6.096, "unit": "m/s" },
+    { "label": "36\"HP 3.9 lb @ 15 fps", "inputs": { "d0_m": 0.9144, "mass_kg": 1.76901 }, "measured": 4.572, "unit": "m/s" },
+    { "label": "48\" 12.5 lb @ 20 fps", "inputs": { "d0_m": 1.2192, "mass_kg": 5.66990 }, "measured": 6.096, "unit": "m/s" },
+    { "label": "48\" 7 lb @ 15 fps", "inputs": { "d0_m": 1.2192, "mass_kg": 3.17515 }, "measured": 4.572, "unit": "m/s" },
+    { "label": "60\" 19 lb @ 20 fps", "inputs": { "d0_m": 1.5240, "mass_kg": 8.61826 }, "measured": 6.096, "unit": "m/s" },
+    { "label": "60\" 12 lb @ 15 fps", "inputs": { "d0_m": 1.5240, "mass_kg": 5.44311 }, "measured": 4.572, "unit": "m/s" },
+    { "label": "72\" 28 lb @ 20 fps", "inputs": { "d0_m": 1.8288, "mass_kg": 12.70059 }, "measured": 6.096, "unit": "m/s" },
+    { "label": "84\" 39 lb @ 20 fps", "inputs": { "d0_m": 2.1336, "mass_kg": 17.69010 }, "measured": 6.096, "unit": "m/s" },
+    { "label": "84\" 22 lb @ 15 fps", "inputs": { "d0_m": 2.1336, "mass_kg": 9.97903 }, "measured": 4.572, "unit": "m/s" },
+    { "label": "96\" 50 lb @ 20 fps", "inputs": { "d0_m": 2.4384, "mass_kg": 22.67962 }, "measured": 6.096, "unit": "m/s" }
+  ],
+  "notes": [
+    "모델 입력 Cd 2.2 가 같은 제조사 자료이므로 독립 검증이 아니라 '엔진의 낙하산 정상 하강 계산 + 대기 + 단위 변환' 일관성 확인이다(VV-50).",
+    "제조사 정격의 기준 대기(해면 표준 가정)·측정 방법은 공개되지 않았다. 실측 하강률 자료(VV-42 A/B 등급)가 생기면 이 사례를 대체한다.",
+    "36\" 는 HP 모델 — Cd 2.2 가 같은지 확인되지 않았다(정격이 2.2 와 일관적임만 확인).",
+    "질량은 lb×0.45359237, 하강률은 fps×0.3048 로 변환. 탑재체 자체 항력은 무시(제조사 정격과 같은 가정)."
+  ]
+}

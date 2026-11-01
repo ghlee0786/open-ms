@@ -1,0 +1,19 @@
+# 빌드 산출물
+bin/
+obj/
+.vs/
+*.user
+# 실행 결과 · 임시
+results/
+_probe/
+# 파이썬
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+# 설치 프로그램 빌드(scripts/build-installer.ps1)
+publish/
+installer/Output/
+# 원자료 · 실모델 내보내기(저장소 밖에 둠)
+validation/sources/
+validation/fusion_live_*/

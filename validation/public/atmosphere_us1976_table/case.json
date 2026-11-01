@@ -1,0 +1,41 @@
+{
+  "schema": "mns.validation-case/1",
+  "id": "atmosphere_us1976_table",
+  "title": "U.S. Standard Atmosphere 1976 표값(0~10 km, 기하고도) — 밀도·기압·온도",
+  "vv": "FR-ENV-01",
+  "grade": "C",
+  "use": "validation",
+  "kind": "atmosphere-table",
+  "model": "대기(ISA/US1976, FR-ENV-01)",
+  "envelope": "0~10 km 기하고도, 표준일",
+  "provenance": "secondary-table",
+  "tolerance": { "relative": 0.005 },
+  "sources": [
+    { "title": "U.S. Standard Atmosphere, 1976 (NOAA-S/T 76-1562) — 2차 표(Engineering ToolBox 'U.S. Standard Atmosphere' SI 표 형식)", "url": "https://en.wikipedia.org/wiki/U.S._Standard_Atmosphere", "note": "표값은 2차 표에서 옮김(원표 대조 전이라 C 등급). 원표: PDAS BigTables https://www.pdas.com/bigtables.html" }
+  ],
+  "inputs": {},
+  "points": [
+    { "label": "ρ @ 0 m", "inputs": { "altitude_m": 0, "quantity": "density" }, "measured": 1.225 },
+    { "label": "ρ @ 1000 m", "inputs": { "altitude_m": 1000, "quantity": "density" }, "measured": 1.112 },
+    { "label": "ρ @ 2000 m", "inputs": { "altitude_m": 2000, "quantity": "density" }, "measured": 1.007 },
+    { "label": "ρ @ 3000 m", "inputs": { "altitude_m": 3000, "quantity": "density" }, "measured": 0.9093 },
+    { "label": "ρ @ 4000 m", "inputs": { "altitude_m": 4000, "quantity": "density" }, "measured": 0.8194 },
+    { "label": "ρ @ 5000 m", "inputs": { "altitude_m": 5000, "quantity": "density" }, "measured": 0.7364 },
+    { "label": "ρ @ 6000 m", "inputs": { "altitude_m": 6000, "quantity": "density" }, "measured": 0.6601 },
+    { "label": "ρ @ 7000 m", "inputs": { "altitude_m": 7000, "quantity": "density" }, "measured": 0.5900 },
+    { "label": "ρ @ 8000 m", "inputs": { "altitude_m": 8000, "quantity": "density" }, "measured": 0.5258 },
+    { "label": "ρ @ 9000 m", "inputs": { "altitude_m": 9000, "quantity": "density" }, "measured": 0.4671 },
+    { "label": "ρ @ 10000 m", "inputs": { "altitude_m": 10000, "quantity": "density" }, "measured": 0.4135 },
+    { "label": "p @ 1000 m", "inputs": { "altitude_m": 1000, "quantity": "pressure" }, "measured": 89880 },
+    { "label": "p @ 3000 m", "inputs": { "altitude_m": 3000, "quantity": "pressure" }, "measured": 70120 },
+    { "label": "p @ 5000 m", "inputs": { "altitude_m": 5000, "quantity": "pressure" }, "measured": 54050 },
+    { "label": "p @ 10000 m", "inputs": { "altitude_m": 10000, "quantity": "pressure" }, "measured": 26500 },
+    { "label": "T @ 1000 m", "inputs": { "altitude_m": 1000, "quantity": "temperature" }, "measured": 281.65 },
+    { "label": "T @ 5000 m", "inputs": { "altitude_m": 5000, "quantity": "temperature" }, "measured": 255.68 },
+    { "label": "T @ 10000 m", "inputs": { "altitude_m": 10000, "quantity": "temperature" }, "measured": 223.25 }
+  ],
+  "notes": [
+    "엔진은 기하고도를 지오퍼텐셜 고도로 근사한다(Atmosphere.cs). 표는 기하고도 기준이라 10 km 에서 밀도 약 0.2% 차이가 예상된다 — 작전 고도(≤3 km)에서는 0.05% 미만.",
+    "표값을 원표(NOAA-S/T 76-1562)와 대조하면 A 등급으로 올린다."
+  ]
+}

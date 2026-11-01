@@ -1,0 +1,165 @@
+{
+  "schema": "mns.massprops/1",
+  "name": "spike_sensor_sample",
+  "source": "fusion",
+  "frame": "fusion",
+  "frameNote": "Fusion 360 모델 좌표(Y-up). 시뮬레이터는 config/frames.json 의 fusionToBody 로 동체 FRD 로 변환.",
+  "units": {
+    "length": "m",
+    "mass": "kg",
+    "inertia": "kg*m^2"
+  },
+  "mass": 1.0,
+  "cg": [
+    -2.819359918283902e-18,
+    -6.505213034913027e-19,
+    0.17700274519025744
+  ],
+  "inertia": [
+    [
+      0.00706242058121003,
+      -1.9067111428772622e-20,
+      -4.1448641455896977e-19
+    ],
+    [
+      -1.9067111428772622e-20,
+      0.0070624205812100296,
+      -5.421010862427522e-20
+    ],
+    [
+      -4.1448641455896977e-19,
+      -5.421010862427522e-20,
+      0.0009961265147651359
+    ]
+  ],
+  "principalMoments": [
+    0.0009961265147651359,
+    0.0070624205812100296,
+    0.00706242058121003
+  ],
+  "bboxMin": [
+    -0.1,
+    -0.1,
+    -0.03
+  ],
+  "bboxMax": [
+    0.1,
+    0.1,
+    0.3
+  ],
+  "stl": "spike_sensor_sample.stl",
+  "stlUnit": "m",
+  "parts": [
+    {
+      "body": "SpikeTip",
+      "material": "Steel",
+      "density_kg_m3": 7850.0,
+      "mass": 0.01568214044494446,
+      "cg": [
+        -2.0703066113129253e-19,
+        1.5850784992864583e-19,
+        -0.007499999999999996
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      }
+    },
+    {
+      "body": "Spike",
+      "material": "Steel",
+      "density_kg_m3": 7850.0,
+      "mass": 0.15682140444944445,
+      "cg": [
+        -8.798803098079942e-19,
+        3.3771876597042127e-19,
+        0.05000000000000008
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      }
+    },
+    {
+      "body": "Body",
+      "material": "등가(전장·배터리 포함)",
+      "density_kg_m3": 752.7527499579094,
+      "mass": 0.7518964551056111,
+      "cg": [
+        -3.564239862036332e-18,
+        -8.099039463456165e-19,
+        0.20000000000000007
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      }
+    },
+    {
+      "body": "Fin1",
+      "material": "ABS",
+      "density_kg_m3": 1050.0,
+      "mass": 0.01889999999999999,
+      "cg": [
+        0.07000000000000002,
+        0.0,
+        0.25
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      }
+    },
+    {
+      "body": "Fin2",
+      "material": "ABS",
+      "density_kg_m3": 1050.0,
+      "mass": 0.018899999999999993,
+      "cg": [
+        -0.07,
+        0.0,
+        0.25
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      }
+    },
+    {
+      "body": "Fin3",
+      "material": "ABS",
+      "density_kg_m3": 1050.0,
+      "mass": 0.018899999999999993,
+      "cg": [
+        0.0,
+        0.07,
+        0.24999999999999994
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      }
+    },
+    {
+      "body": "Fin4",
+      "material": "ABS",
+      "density_kg_m3": 1050.0,
+      "mass": 0.018899999999999993,
+      "cg": [
+        -2.297723923758411e-20,
+        -0.07,
+        0.24999999999999992
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      }
+    }
+  ],
+  "exportedAt": "2026-11-01T18:20:31",
+  "exporter": "MnS_ExportForSim 1.1",
+  "document": "SYNTHETIC SAMPLE (not a real design) — spike toward Fusion -Z",
+  "fusionUnits": "mm",
+  "noseAxisHint": "-Z",
+  "warnings": []
+}

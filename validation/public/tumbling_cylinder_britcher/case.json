@@ -1,0 +1,78 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "tumbling_cylinder_britcher",
+ "title": "Time-averaged drag of free-to-tumble L/D = 1 cylinders in air (magnetic suspension wind tunnel, 6-22 m/s)",
+ "vv": "VV-46",
+ "grade": "B",
+ "use": "validation",
+ "kind": "tumbling-mean-drag",
+ "model": "L1 형상 항력(원통) — 텀블링 회전각 평균",
+ "tolerance": {
+  "relative": 0.1
+ },
+ "envelope": "L1 형상 Cd: Re ≤ 2×10⁵",
+ "sources": [
+  {
+   "title": "Studies of Tumbling Bluff Bodies at Low Speeds (NTRS 20250007080)",
+   "url": "https://ntrs.nasa.gov/api/citations/20250007080/downloads/Tumbling_ICFD%20v4.pdf",
+   "note": "Fig.6 vector-digitized"
+  }
+ ],
+ "notes": [
+  "L1 은 회전각별 투영 항력의 평균만 계산(마그누스·자동회전·회전 유발 항력 없음). 기준면적 = 원형 단면 πD²/4.",
+  "저주파 고정(lock-in, 회전비 0.02) 모드는 참고.",
+  "공기 중 원통·상자 자유낙하 6-DOF 자세 실측은 공개 자료 없음(원 INDEX) — 물속 MIDEX 자료는 매질이 달라 변환하지 않음."
+ ],
+ "points": [
+  {
+   "label": "L/D 1, Ø31.75 mm",
+   "inputs": {
+    "diameter_m": 0.03175,
+    "length_m": 0.03175,
+    "re": 29500.0
+   },
+   "measured": 1.59,
+   "unit": "-",
+   "provenance": "digitized (range 1.36-1.69)"
+  },
+  {
+   "label": "L/D 1, Ø34.925 mm",
+   "inputs": {
+    "diameter_m": 0.034925,
+    "length_m": 0.034925,
+    "re": 32400.0
+   },
+   "measured": 1.51,
+   "unit": "-",
+   "provenance": "digitized (range 1.32-1.56)"
+  },
+  {
+   "label": "L/D 1, Ø34.925 mm (lock-in)",
+   "inputs": {
+    "diameter_m": 0.034925,
+    "length_m": 0.034925,
+    "re": 32400.0
+   },
+   "measured": 1.36,
+   "unit": "-",
+   "provenance": "digitized (range 1.24-1.43)",
+   "role": "info"
+  },
+  {
+   "label": "L/D 1, Ø38.1 mm",
+   "inputs": {
+    "diameter_m": 0.0381,
+    "length_m": 0.0381,
+    "re": 35400.0
+   },
+   "measured": 1.53,
+   "unit": "-",
+   "provenance": "digitized (range 1.37-1.62)"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/freefall_cylinder/case.json",
+  "sha256": "da587360c314119beace5e1a980e928cfa08179acd6f6cfa0bf5d3a94c105f83",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

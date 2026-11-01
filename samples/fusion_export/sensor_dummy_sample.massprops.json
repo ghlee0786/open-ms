@@ -1,0 +1,85 @@
+{
+  "schema": "mns.massprops/1",
+  "name": "sensor_dummy_sample",
+  "source": "fusion",
+  "frame": "fusion",
+  "frameNote": "Fusion 360 모델 좌표(Y-up). 시뮬레이터는 config/frames.json 의 fusionToBody 로 동체 FRD 로 변환.",
+  "units": {
+    "length": "m",
+    "mass": "kg",
+    "inertia": "kg*m^2"
+  },
+  "mass": 1.0,
+  "cg": [
+    0.02,
+    0.01,
+    0.15
+  ],
+  "inertia": [
+    [
+      0.0079,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0079,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0008
+    ]
+  ],
+  "principalMoments": [
+    0.0008,
+    0.0079,
+    0.0079
+  ],
+  "bboxMin": [
+    -0.02,
+    -0.03,
+    0.0
+  ],
+  "bboxMax": [
+    0.06,
+    0.05,
+    0.3
+  ],
+  "stl": "sensor_dummy_sample.stl",
+  "stlUnit": "m",
+  "parts": [
+    {
+      "body": "SensorBody",
+      "material": "합성 샘플(균일)",
+      "mass": 1.0,
+      "cg": [
+        0.02,
+        0.01,
+        0.15
+      ],
+      "inertiaCheck": {
+        "reference": "world-origin",
+        "productSign": "tensor=-product",
+        "principalMomentsFusion_kgm2": [
+          0.0008,
+          0.0079,
+          0.0079
+        ],
+        "maxRelativeEigenError": 0.0,
+        "usedPrincipalAxes": true,
+        "tiedCandidates": 0,
+        "maxTiedTensorDifference": 0.0,
+        "ambiguous": false,
+        "ok": true
+      },
+      "stlScaleDetected": 0.001
+    }
+  ],
+  "exportedAt": "2026-11-01T18:20:31",
+  "exporter": "MnS_ExportForSim 1.1",
+  "document": "SYNTHETIC SAMPLE (not a real design)",
+  "fusionUnits": "mm",
+  "warnings": []
+}

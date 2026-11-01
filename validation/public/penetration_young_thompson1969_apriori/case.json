@@ -1,0 +1,259 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "penetration_young_thompson1969_apriori",
+ "title": "Young penetration depth with S chosen a priori from Young Table 4-2 by moisture class (no calibration)",
+ "vv": "VV-45",
+ "grade": "B",
+ "use": "validation",
+ "kind": "young-penetration",
+ "model": "Young 관입식(SAND97-2426, FR-GND-02)",
+ "tolerance": {
+  "relative": 0.5
+ },
+ "envelope": "토양, 관입체 ≥ 5 lb(2.27 kg), 수직·받음각 0",
+ "sources": [
+  {
+   "title": "Penetration Equations (SAND97-2426 (contractor report, Applied Research Associates), 1997)",
+   "url": "https://www.osti.gov/servlets/purl/562498",
+   "note": "equations and S-number tables"
+  },
+  {
+   "title": "The Effect of Soil Parameters on Earth Penetration of Projectiles, Vol. II (Draft) (SC-CR-69-3231 (Vol. 2), 1969)",
+   "url": "https://www.osti.gov/servlets/purl/1109375",
+   "note": "measured validation points"
+  }
+ ],
+ "notes": [
+  "S 를 표 4-2 범위의 중앙값으로 고른 사전 예측: 포화도 ≤ 30 % → '저·중 함수 실트·점토 5–10'(7.5), 그 외 → '습윤 실트·점토 10–20'(15).",
+  "S 선택 자체가 판단(범위 2배 폭)이라 등급 B·허용 ±50 %(원 README 제안)."
+ ],
+ "points": [
+  {
+   "label": "시험 1 (타깃 2, 2.505 kg, 61.87 m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 61.87,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.29,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 2 (타깃 3, 2.505 kg, 56.39 m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 56.39,
+    "nose": "flat",
+    "soilS": 7.5
+   },
+   "measured": 0.317,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 3 (타깃 6, 2.505 kg, 55.78 m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 55.78,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.521,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 4 (타깃 7, 2.505 kg, 60.96 m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 60.96,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.253,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 5 (타깃 8, 2.505 kg, 61.87 m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 61.87,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.418,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 6 (타깃 8, 1.67 kg, 82.6 m/s)",
+   "inputs": {
+    "mass_kg": 1.67,
+    "diameter_m": 0.0397,
+    "speed_mps": 82.6,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.396,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 7 (타깃 8, 3.339 kg, 59.13 m/s)",
+   "inputs": {
+    "mass_kg": 3.339,
+    "diameter_m": 0.0397,
+    "speed_mps": 59.13,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.472,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 8 (타깃 2, 2.825 kg, 51.82 m/s)",
+   "inputs": {
+    "mass_kg": 2.825,
+    "diameter_m": 0.0397,
+    "speed_mps": 51.82,
+    "nose": "ogive",
+    "lOverD": 2.5,
+    "soilS": 15.0
+   },
+   "measured": 0.299,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 10 (타깃 4, 2.505 kg, 54.86* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 54.86,
+    "nose": "flat",
+    "soilS": 7.5
+   },
+   "measured": 0.296,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 11 (타깃 5, 2.505 kg, 109.73* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 109.73,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.991,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 13 (타깃 2, 2.505 kg, 53.34* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 53.34,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.293,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 14 (타깃 3, 2.505 kg, 56.69* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 56.69,
+    "nose": "flat",
+    "soilS": 7.5
+   },
+   "measured": 0.287,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 15 (타깃 1, 2.505 kg, 51.21* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 51.21,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.835,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 16 (타깃 7, 2.505 kg, 88.39* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 88.39,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.689,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 17 (타깃 7, 2.505 kg, 71.63* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 71.63,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.253,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 18 (타깃 6, 2.505 kg, 57.0* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 57.0,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.521,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 19 (타깃 7, 2.505 kg, 61.57* m/s)",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 61.57,
+    "nose": "flat",
+    "soilS": 15.0
+   },
+   "measured": 0.277,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/penetration_young/case.json",
+  "sha256": "c39239d24cdf937dfeae029f09b70c4ac4c132b15a03cce8e1aad84ec69937b3",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

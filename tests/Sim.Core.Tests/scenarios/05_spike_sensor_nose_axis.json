@@ -1,0 +1,34 @@
+{
+  "schema": "mns.scenario/1",
+  "name": "05_spike_sensor_nose_axis",
+  "description": "스파이크 선행형 센서(합성 샘플, Fusion 모델에서 스파이크가 −Z) 100 m 정지비행 투하. FX-01 noseAxis(−Z) · FX-02 관입체 자동 추정(스파이크 단면) · FX-03 메시 측면 투영 CP 자동(정적 여유 표시) 확인용.",
+  "sim": { "dt": 0.001, "tEnd": 120, "outputRate": 100, "seed": 5 },
+  "environment": {
+    "wind": { "speed": 3, "directionFrom": 270, "refHeight": 10, "shear": "log", "roughness": 0.03 },
+    "turbulence": "none",
+    "soil": "farmland"
+  },
+  "carrier": { "name": "drone_hover", "altitude": 100, "speed": 0, "heading": 0,
+    "shape": { "type": "box", "size": [0.35, 0.35, 0.12] } },
+  "bodies": [
+    {
+      "name": "sensor",
+      "parent": "drone_hover",
+      "mount": [0, 0, 0.3],
+      "mountAttitude": [0, -60, 0],
+      "massProps": "../../../samples/fusion_export/spike_sensor_sample.massprops.json",
+      "modelFrame": "fusion",
+      "noseAxis": "-Z",
+      "aero": { "cp": "auto", "damping": [-2, -10, -10] },
+      "color": "#d08040"
+    }
+  ],
+  "events": [
+    { "name": "drop", "when": { "type": "time", "t": 0.5 }, "do": [ { "type": "separate", "body": "sensor" } ] }
+  ],
+  "monteCarlo": { "runs": 100, "impactBody": "sensor", "sampling": "lhs", "seed": 51 },
+  "dispersions": [
+    { "path": "environment.wind.speed", "dist": "truncnormal", "sd": 1.5, "min": -3, "max": 5 },
+    { "path": "environment.wind.directionFrom", "dist": "normal", "sd": 20 }
+  ]
+}

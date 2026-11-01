@@ -1,0 +1,130 @@
+{
+  "schema": "mns.environment/1",
+  "id": "snow",
+  "displayName": {
+    "ko": "눈",
+    "en": "Snow Field"
+  },
+  "style": "scene",
+  "centerAngleDeg": 0,
+  "scaling": {
+    "fitTo": 2,
+    "autoScale": true,
+    "autoScaleFactor": 10
+  },
+  "features": [
+    {
+      "kind": "ground",
+      "shape": "plane",
+      "isGroundPlane": true,
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "snow",
+          "seed": 1,
+          "colors": [
+            [
+              0.8,
+              0.84,
+              0.92
+            ],
+            [
+              0.96,
+              0.97,
+              1.0
+            ],
+            [
+              0.7,
+              0.76,
+              0.88
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "kind": "dome",
+      "shape": "hemisphere",
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "sky",
+          "seed": 1,
+          "zenith": [
+            0.38,
+            0.52,
+            0.75
+          ],
+          "horizon": [
+            0.86,
+            0.89,
+            0.93
+          ],
+          "haze": [
+            0.85,
+            0.88,
+            0.92
+          ],
+          "trees": false
+        }
+      }
+    }
+  ],
+  "ibl": {
+    "source": "procedural-sky",
+    "exposureEV": -0.152
+  },
+  "lights": [
+    {
+      "type": "directional",
+      "label": "sun",
+      "color": [
+        0.8,
+        0.76,
+        0.7
+      ],
+      "gain": 1.0,
+      "space": "ground",
+      "direction": [
+        -0.2346,
+        0.8754,
+        -0.4226
+      ],
+      "shadowColor": [
+        -0.3,
+        -0.3,
+        -0.3
+      ],
+      "enabled": true
+    },
+    {
+      "type": "hemisphere",
+      "label": "sky/ground",
+      "sky": [
+        0.5,
+        0.55,
+        0.64
+      ],
+      "ground": [
+        0.48,
+        0.5,
+        0.54
+      ],
+      "gain": 1.0,
+      "enabled": true
+    }
+  ],
+  "ambient": {
+    "color": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "gain": 0.0
+  },
+  "soilMatch": [
+    "frozen",
+    "snow",
+    "ice"
+  ]
+}

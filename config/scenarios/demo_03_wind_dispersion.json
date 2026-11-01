@@ -1,0 +1,93 @@
+{
+  "schema": "mns.scenario/1",
+  "name": "demo_03_wind_dispersion",
+  "description": "데모 3 — 고도별 바람 표 · 강한 난류 · 몬테카를로(CPU 6DOF 와 GPU 질점) · 낙하산 고장 주입 · 착지 분산 · 장면 환경(눈). 소형 고정익 무인기(600 m AGL, 25 m/s)에서 원통형 센서 더미 2개를 3 s 간격으로 투하 → 각자 낙하산 전개 → 바람에 밀려 착지. 두 번째 낙하산에는 확률 고장(부분 충만)을 넣어 몬테카를로에서 고장 비율과 착지 분산(CEP)이 함께 나온다. 모든 값은 일반값(가정)이다.",
+  "sim": { "dt": 0.001, "tEnd": 400, "outputRate": 25, "seed": 303 },
+  "environment": {
+    "groundAltitude": 0,
+    "temperatureOffset": -15,
+    "wind": {
+      "speed": 8, "directionFrom": 270, "refHeight": 10, "shear": "log", "roughness": 0.001,
+      "profile": [[0, 4, 280], [100, 7, 275], [300, 10, 265], [600, 14, 255], [1000, 16, 250]]
+    },
+    "turbulence": "severe",
+    "soil": "frozen"
+  },
+  "carrier": {
+    "name": "uav",
+    "altitude": 600,
+    "speed": 25,
+    "heading": 45,
+    "color": "#6c7a88",
+    "shape": { "type": "box", "size": [2.0, 3.0, 0.3] }
+  },
+  "bodies": [
+    {
+      "name": "probe1",
+      "parent": "uav",
+      "mount": [0.3, 0, 0.25],
+      "mass": 4.0,
+      "cg": [0.03, 0, 0],
+      "shape": { "type": "cylinder", "radius": 0.06, "length": 0.45, "axis": "x" },
+      "aero": { "cp": [-0.06, 0, 0], "damping": [-2, -10, -10], "refLength": 0.45 },
+      "structure": { "material": "nylon66", "thickness": 0.003, "section": "thinWall" },
+      "color": "#e0a030",
+      "devices": [
+        { "type": "parachute", "name": "chute", "d0": 1.5, "cd0": 0.8, "attach": [-0.225, 0, 0], "riser": 2.0,
+          "fillConstant": 8, "fillExponent": 2, "lineStretchTime": 0.3 }
+      ]
+    },
+    {
+      "name": "probe2",
+      "parent": "uav",
+      "mount": [-0.3, 0, 0.25],
+      "mass": 4.0,
+      "cg": [0.03, 0, 0],
+      "shape": { "type": "cylinder", "radius": 0.06, "length": 0.45, "axis": "x" },
+      "aero": { "cp": [-0.06, 0, 0], "damping": [-2, -10, -10], "refLength": 0.45 },
+      "structure": { "material": "nylon66", "thickness": 0.003, "section": "thinWall" },
+      "color": "#4f8fd8",
+      "devices": [
+        { "type": "parachute", "name": "chute", "d0": 1.5, "cd0": 0.8, "attach": [-0.225, 0, 0], "riser": 2.0,
+          "fillConstant": 8, "fillExponent": 2, "lineStretchTime": 0.3,
+          "failure": { "mode": "partial", "fill": 0.5, "probability": 0.2 } }
+      ]
+    }
+  ],
+  "events": [
+    { "name": "drop1", "when": { "type": "time", "t": 1.0 }, "do": [ { "type": "separate", "body": "probe1", "relVel": [0, 0, 1.0] } ] },
+    { "name": "chute1", "when": { "type": "after", "event": "probe1.separated", "delay": 1.5 }, "do": [ { "type": "deploy", "device": "probe1.chute" } ] },
+    { "name": "drop2", "when": { "type": "after", "event": "drop1", "delay": 3.0 }, "do": [ { "type": "separate", "body": "probe2", "relVel": [0, 0, 1.0] } ] },
+    { "name": "chute2", "when": { "type": "after", "event": "probe2.separated", "delay": 1.5 }, "do": [ { "type": "deploy", "device": "probe2.chute" } ] }
+  ],
+  "metrics": [
+    { "type": "landingSeparation", "name": "probeSpread", "bodies": ["probe1", "probe2"], "target": 100 },
+    { "type": "maxLoad", "name": "probeLoad", "bodies": ["probe1", "probe2"], "limitG": 30 }
+  ],
+  "dispersions": [
+    { "path": "environment.wind.profile.1.1", "dist": "normal", "mode": "scale", "sd": 0.2 },
+    { "path": "environment.wind.profile.2.1", "dist": "normal", "mode": "scale", "sd": 0.2 },
+    { "path": "environment.wind.profile.3.1", "dist": "normal", "mode": "scale", "sd": 0.2 },
+    { "path": "environment.wind.profile.3.2", "dist": "normal", "sd": 15 },
+    { "path": "bodies.probe1.devices.chute.cd0", "dist": "normal", "mode": "scale", "sd": 0.08 },
+    { "path": "bodies.probe1.mass", "dist": "normal", "mode": "scale", "sd": 0.03 },
+    { "path": "events.chute1.when.delay", "dist": "uniform", "min": -0.5, "max": 1.0 }
+  ],
+  "monteCarlo": { "runs": 100, "impactBody": "probe1", "sampling": "lhs", "seed": 313 },
+  "gpuMonteCarlo": {
+    "runs": 100000,
+    "seed": 7,
+    "sampling": "lhs",
+    "model": {
+      "mass": 4.0, "cdA": 0.012, "dt": 0.005, "tMax": 400,
+      "chute": { "d0": 1.5, "cd0": 0.8, "delay": 1.5, "lineStretchTime": 0.3, "fillConstant": 8, "fillExponent": 2 },
+      "release": { "altitude": 600, "speed": 25, "heading": 45, "vd": 1.0 }
+    },
+    "dispersions": [
+      { "path": "environment.wind.speed", "dist": "truncnormal", "sd": 2.0, "min": -8, "max": 8 },
+      { "path": "environment.wind.directionFrom", "dist": "normal", "sd": 20 },
+      { "path": "model.chute.cd0", "dist": "normal", "mode": "scale", "sd": 0.08 },
+      { "path": "model.chute.delay", "dist": "uniform", "min": -0.5, "max": 1.0 }
+    ]
+  }
+}

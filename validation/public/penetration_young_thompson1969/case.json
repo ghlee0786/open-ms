@@ -1,0 +1,303 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "penetration_young_thompson1969",
+ "title": "Young penetration depth vs Thompson 1969 lab shots (2.5 kg, 40 mm, 51-110 m/s into compacted kaolin): S calibrated on one shot per target, other shots predicted",
+ "vv": "VV-45",
+ "grade": "A",
+ "use": "validation",
+ "kind": "young-penetration",
+ "model": "Young 관입식(SAND97-2426, FR-GND-02)",
+ "tolerance": {
+  "relative": 0.3
+ },
+ "envelope": "토양, 관입체 ≥ 5 lb(2.27 kg), 수직·받음각 0, 깊이 > 3 구경",
+ "sources": [
+  {
+   "title": "Penetration Equations (SAND97-2426 (contractor report, Applied Research Associates), 1997)",
+   "url": "https://www.osti.gov/servlets/purl/562498",
+   "note": "equations and S-number tables"
+  },
+  {
+   "title": "The Effect of Soil Parameters on Earth Penetration of Projectiles, Vol. II (Draft) (SC-CR-69-3231 (Vol. 2), 1969)",
+   "url": "https://www.osti.gov/servlets/purl/1109375",
+   "note": "measured validation points"
+  }
+ ],
+ "notes": [
+  "S-number 는 측정값이 아니므로 타깃별로 첫 1차 시험 한 발로 S 를 보정하고(보정), 같은 타깃의 나머지 시험을 예측한다(검증).",
+  "단일 시험 타깃(1, 4, 5)은 보정만 가능 — 보정된 S 를 참고로 보고.",
+  "허용치 ±30 %(PRD VV-45, 원식의 통계적 산포 수준).",
+  "속도 * 표시는 가스 압력에서 추정한 값(크로노그래프 없음, 원 보고서)."
+ ],
+ "points": [
+  {
+   "label": "시험 1 (타깃 2, 2.505 kg, 61.87 m/s)",
+   "group": "T2",
+   "role": "calibration",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 61.87,
+    "nose": "flat"
+   },
+   "measured": 0.29,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 2 (타깃 3, 2.505 kg, 56.39 m/s)",
+   "group": "T3",
+   "role": "calibration",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 56.39,
+    "nose": "flat"
+   },
+   "measured": 0.317,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 3 (타깃 6, 2.505 kg, 55.78 m/s)",
+   "group": "T6",
+   "role": "calibration",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 55.78,
+    "nose": "flat"
+   },
+   "measured": 0.521,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 4 (타깃 7, 2.505 kg, 60.96 m/s)",
+   "group": "T7",
+   "role": "calibration",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 60.96,
+    "nose": "flat"
+   },
+   "measured": 0.253,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 5 (타깃 8, 2.505 kg, 61.87 m/s)",
+   "group": "T8",
+   "role": "calibration",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 61.87,
+    "nose": "flat"
+   },
+   "measured": 0.418,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 6 (타깃 8, 1.67 kg, 82.6 m/s)",
+   "group": "T8",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 1.67,
+    "diameter_m": 0.0397,
+    "speed_mps": 82.6,
+    "nose": "flat"
+   },
+   "measured": 0.396,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 7 (타깃 8, 3.339 kg, 59.13 m/s)",
+   "group": "T8",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 3.339,
+    "diameter_m": 0.0397,
+    "speed_mps": 59.13,
+    "nose": "flat"
+   },
+   "measured": 0.472,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)"
+  },
+  {
+   "label": "시험 8 (타깃 2, 2.825 kg, 51.82 m/s)",
+   "group": "T2",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 2.825,
+    "diameter_m": 0.0397,
+    "speed_mps": 51.82,
+    "nose": "ogive",
+    "lOverD": 2.5
+   },
+   "measured": 0.299,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "노즈 종류가 원표에 없음: Ln/d 2.5·첨예각 22.6° 에서 탄젠트 오자이브(CRH 6.5)로 추정해 N = 1.01 → 점 등급 B"
+  },
+  {
+   "label": "시험 10 (타깃 4, 2.505 kg, 54.86* m/s)",
+   "group": "T4",
+   "role": "calibration",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 54.86,
+    "nose": "flat"
+   },
+   "measured": 0.296,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  },
+  {
+   "label": "시험 11 (타깃 5, 2.505 kg, 109.73* m/s)",
+   "group": "T5",
+   "role": "calibration",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 109.73,
+    "nose": "flat"
+   },
+   "measured": 0.991,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  },
+  {
+   "label": "시험 13 (타깃 2, 2.505 kg, 53.34* m/s)",
+   "group": "T2",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 53.34,
+    "nose": "flat"
+   },
+   "measured": 0.293,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  },
+  {
+   "label": "시험 14 (타깃 3, 2.505 kg, 56.69* m/s)",
+   "group": "T3",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 56.69,
+    "nose": "flat"
+   },
+   "measured": 0.287,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  },
+  {
+   "label": "시험 15 (타깃 1, 2.505 kg, 51.21* m/s)",
+   "group": "T1",
+   "role": "calibration",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 51.21,
+    "nose": "flat"
+   },
+   "measured": 0.835,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  },
+  {
+   "label": "시험 16 (타깃 7, 2.505 kg, 88.39* m/s)",
+   "group": "T7",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 88.39,
+    "nose": "flat"
+   },
+   "measured": 0.689,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  },
+  {
+   "label": "시험 17 (타깃 7, 2.505 kg, 71.63* m/s)",
+   "group": "T7",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 71.63,
+    "nose": "flat"
+   },
+   "measured": 0.253,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  },
+  {
+   "label": "시험 18 (타깃 6, 2.505 kg, 57.0* m/s)",
+   "group": "T6",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 57.0,
+    "nose": "flat"
+   },
+   "measured": 0.521,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  },
+  {
+   "label": "시험 19 (타깃 7, 2.505 kg, 61.57* m/s)",
+   "group": "T7",
+   "role": "validation",
+   "inputs": {
+    "mass_kg": 2.505,
+    "diameter_m": 0.0397,
+    "speed_mps": 61.57,
+    "nose": "flat"
+   },
+   "measured": 0.277,
+   "unit": "m",
+   "provenance": "table (Thompson 1969 Tables 3-5)",
+   "grade": "B",
+   "note": "충돌 속도가 가스 압력 추정값(크로노그래프 없음, 원 README: 1순위 검증점은 시험 1–8) → 점 등급 B"
+  }
+ ],
+ "calibration": {
+  "parameter": "soilS",
+  "lo": 0.5,
+  "hi": 200
+ },
+ "origin": {
+  "source_case": "validation/sources/penetration_young/case.json",
+  "sha256": "c39239d24cdf937dfeae029f09b70c4ac4c132b15a03cce8e1aad84ec69937b3",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

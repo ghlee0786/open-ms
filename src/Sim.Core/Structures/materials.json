@@ -1,0 +1,129 @@
+{
+  "schema": "mns.materials/1",
+  "note": "대표값 라이브러리(FR-MAT-01). 단위: density kg/m3, E GPa, 강도 MPa, elongation 비(0~1). 값은 공개 자료의 대표값이며 실제 부품(로트·성형 조건·두께)과 다를 수 있다 — 시험값이 있으면 시나리오 structure.override 로 덮어쓴다. source 의 '(가정)' 은 출처 확인 전 대표값.",
+  "materials": [
+    {
+      "key": "al6061-t6", "name": "알루미늄 6061-T6", "class": "metal", "brittle": false,
+      "density": 2700, "E_GPa": 68.9, "nu": 0.33, "yield_MPa": 276, "ultimate_MPa": 310, "elongation": 0.12,
+      "jc": { "A_MPa": 324, "B_MPa": 114, "n": 0.42, "C": 0.002, "m": 1.34, "epsDot0": 1.0 },
+      "aliases": ["Aluminum 6061", "Aluminum 6061-T6", "알루미늄 6061", "알루미늄 6061-T6", "AL6061", "6061"],
+      "source": "ASM Handbook Vol.2 / MatWeb 6061-T6 대표값; Johnson-Cook 계수 Johnson & Cook (1983) 7th Int. Symp. Ballistics"
+    },
+    {
+      "key": "al7075-t6", "name": "알루미늄 7075-T6", "class": "metal", "brittle": false,
+      "density": 2810, "E_GPa": 71.7, "nu": 0.33, "yield_MPa": 503, "ultimate_MPa": 572, "elongation": 0.11,
+      "jc": { "A_MPa": 546, "B_MPa": 678, "n": 0.71, "C": 0.024, "m": 1.56, "epsDot0": 1.0 },
+      "aliases": ["Aluminum 7075", "Aluminum 7075-T6", "알루미늄 7075", "알루미늄 7075-T6", "AL7075", "7075"],
+      "source": "ASM Handbook Vol.2 / MatWeb 7075-T6 대표값; Johnson-Cook 계수 Brar et al. (2009) 공개 값(가정 — 문헌별 편차 큼)"
+    },
+    {
+      "key": "ss304", "name": "스테인리스강 AISI 304", "class": "metal", "brittle": false,
+      "density": 8000, "E_GPa": 193, "nu": 0.29, "yield_MPa": 215, "ultimate_MPa": 505, "elongation": 0.70,
+      "jc": { "A_MPa": 310, "B_MPa": 1000, "n": 0.65, "C": 0.07, "m": 1.0, "epsDot0": 1.0 },
+      "aliases": ["Stainless Steel AISI 304", "스테인리스스틸 AISI 304", "스테인리스 스틸 AISI 304", "Stainless Steel 304", "SUS304", "STS304", "304"],
+      "source": "ASM Handbook / MatWeb AISI 304 annealed 대표값; Johnson-Cook 계수는 문헌 대표값(가정)"
+    },
+    {
+      "key": "mild-steel", "name": "연강 (구조용 A36/SS400 급)", "class": "metal", "brittle": false,
+      "density": 7850, "E_GPa": 200, "nu": 0.29, "yield_MPa": 250, "ultimate_MPa": 400, "elongation": 0.20,
+      "jc": { "A_MPa": 350, "B_MPa": 275, "n": 0.36, "C": 0.022, "m": 1.0, "epsDot0": 1.0 },
+      "aliases": ["Steel", "스틸", "강철", "Mild Steel", "연강", "A36", "SS400", "Steel, Mild"],
+      "source": "ASTM A36 최소값; Johnson-Cook 계수 1006 강 Johnson & Cook (1983)"
+    },
+    {
+      "key": "tinplate", "name": "양철 (주석 도금 강판, T3 템퍼)", "class": "metal", "brittle": false,
+      "density": 7850, "E_GPa": 200, "nu": 0.30, "yield_MPa": 290, "ultimate_MPa": 350, "elongation": 0.20,
+      "jc": { "A_MPa": 290, "B_MPa": 275, "n": 0.36, "C": 0.022, "m": 1.0, "epsDot0": 1.0 },
+      "defaultThickness_m": 0.00025,
+      "aliases": ["Tinplate", "Tin Plate", "양철", "주석 도금 강판", "주석도금강판", "Tin-plated steel"],
+      "source": "EN 10202 템퍼 T3 대표 항복값(가정); 속도 계수는 저탄소강 1006 Johnson & Cook (1983) 차용(가정)"
+    },
+    {
+      "key": "abs", "name": "ABS 플라스틱", "class": "polymer", "brittle": true,
+      "density": 1050, "E_GPa": 2.3, "nu": 0.35, "yield_MPa": 40, "ultimate_MPa": 43, "elongation": 0.10,
+      "dif": { "k": 0.06, "epsDot0": 0.001 },
+      "aliases": ["ABS Plastic", "ABS 플라스틱", "ABS", "플라스틱 ABS"],
+      "source": "MatWeb ABS 일반 사출 등급 대표값; 충격·저온 취성 거동으로 취성 판정(가정); 동적 증가 계수 k(로그 10배당) 대표값(가정)"
+    },
+    {
+      "key": "nylon66", "name": "나일론 6/6", "class": "polymer", "brittle": false,
+      "density": 1140, "E_GPa": 2.8, "nu": 0.39, "yield_MPa": 70, "ultimate_MPa": 80, "elongation": 0.30,
+      "dif": { "k": 0.05, "epsDot0": 0.001 },
+      "aliases": ["Nylon 6/6", "나일론 6/6", "Nylon 66", "PA66", "나일론"],
+      "source": "MatWeb PA66 건조 상태 대표값(흡습 시 강성·강도 감소); DIF k 대표값(가정)"
+    },
+    {
+      "key": "pc", "name": "폴리카보네이트", "class": "polymer", "brittle": false,
+      "density": 1200, "E_GPa": 2.4, "nu": 0.37, "yield_MPa": 62, "ultimate_MPa": 65, "elongation": 1.00,
+      "dif": { "k": 0.04, "epsDot0": 0.001 },
+      "aliases": ["Polycarbonate", "폴리카보네이트", "PC"],
+      "source": "MatWeb PC 일반 등급 대표값; DIF k 대표값(가정)"
+    },
+    {
+      "key": "pla", "name": "PLA", "class": "polymer", "brittle": true,
+      "density": 1240, "E_GPa": 3.5, "nu": 0.36, "yield_MPa": 50, "ultimate_MPa": 55, "elongation": 0.05,
+      "dif": { "k": 0.05, "epsDot0": 0.001 },
+      "aliases": ["PLA", "Polylactic Acid", "폴리락트산"],
+      "source": "3D 프린팅 PLA 공개 대표값(적층 방향 의존 큼, 가정)"
+    },
+    {
+      "key": "cfrp-qi", "name": "CFRP (준등방 적층 대표값)", "class": "composite", "brittle": true,
+      "density": 1550, "E_GPa": 50, "nu": 0.30, "yield_MPa": 600, "ultimate_MPa": 600, "elongation": 0.012,
+      "ply": { "E1_GPa": 135, "E2_GPa": 10, "G12_GPa": 5, "nu12": 0.30, "Xt_MPa": 2000, "Xc_MPa": 1200, "Yt_MPa": 50, "Yc_MPa": 200, "S_MPa": 80, "thickness_m": 0.000125 },
+      "layup": [0, 45, -45, 90, 90, -45, 45, 0],
+      "aliases": ["Carbon Fiber", "카본 파이버", "탄소섬유", "CFRP", "Carbon Fiber Reinforced Polymer", "Composite, Carbon Fiber"],
+      "source": "T300/에폭시급 일방향 ply 대표값(MIL-HDBK-17 계열 공개 값, 가정); 적층 데이터 없으면 준등방 [0/45/-45/90]s 가정"
+    },
+    {
+      "key": "gfrp-qi", "name": "GFRP (E-glass/에폭시 준등방 적층 대표값)", "class": "composite", "brittle": true,
+      "density": 1900, "E_GPa": 19, "nu": 0.30, "yield_MPa": 250, "ultimate_MPa": 250, "elongation": 0.018,
+      "ply": { "E1_GPa": 39, "E2_GPa": 8.6, "G12_GPa": 3.8, "nu12": 0.28, "Xt_MPa": 1080, "Xc_MPa": 620, "Yt_MPa": 39, "Yc_MPa": 128, "S_MPa": 89, "thickness_m": 0.000125 },
+      "layup": [0, 45, -45, 90, 90, -45, 45, 0],
+      "aliases": ["GFRP", "Glass Fiber", "Glass Fibre", "E-glass", "유리섬유", "Glass Fiber Reinforced Polymer"],
+      "source": "E-glass/에폭시 일방향 ply 대표값(Daniel & Ishai, Engineering Mechanics of Composite Materials 표 A.4, 가정); 준등방 [0/45/-45/90]s 등가 E ≈ 19 GPa, 강도 = 첫 ply 파손 근사 250 MPa(가정)"
+    },
+    {
+      "key": "ti6al4v", "name": "티타늄 Ti-6Al-4V (어닐링)", "class": "metal", "brittle": false,
+      "density": 4430, "E_GPa": 113.8, "nu": 0.342, "yield_MPa": 880, "ultimate_MPa": 950, "elongation": 0.14,
+      "jc": { "A_MPa": 1098, "B_MPa": 1092, "n": 0.93, "C": 0.014, "m": 1.1, "epsDot0": 1.0 },
+      "aliases": ["Ti-6Al-4V", "Ti6Al4V", "Titanium 6Al-4V", "Titanium Ti-6Al-4V", "티타늄 6Al-4V", "티타늄 Ti-6Al-4V"],
+      "source": "ASM Aerospace Specification Metals / MatWeb Ti-6Al-4V (Grade 5, annealed) 대표값; Johnson-Cook 계수 Lesuer (2000) LLNL UCRL-ID-138984"
+    },
+    {
+      "key": "steel-4130", "name": "합금강 AISI 4130 (노멀라이즈)", "class": "metal", "brittle": false,
+      "density": 7850, "E_GPa": 205, "nu": 0.29, "yield_MPa": 435, "ultimate_MPa": 670, "elongation": 0.25,
+      "aliases": ["AISI 4130", "Steel AISI 4130", "4130 Steel", "SCM430", "크롬몰리브덴강 4130", "강 4130"],
+      "source": "ASM / MatWeb AISI 4130 normalized 870 °C 대표값(항공용 튜브 재질, MIL-T-6736 계열)"
+    },
+    {
+      "key": "17-4ph-h1150", "name": "석출경화 스테인리스 17-4PH (H1150, 보수)", "class": "metal", "brittle": false,
+      "density": 7800, "E_GPa": 196.5, "nu": 0.27, "yield_MPa": 724, "ultimate_MPa": 931, "elongation": 0.16,
+      "aliases": ["17-4PH", "17-4 PH", "17-4PH H1150", "SUS630", "AISI 630", "UNS S17400"],
+      "source": "MMPDS / ASTM A564 Type 630 H1150 최소값(Fty 105 ksi · Ftu 135 ksi). CAD 이름에 열처리 조건이 없어 가장 낮은 강도 조건(H1150)을 보수로 택함(가정 — H1025 이면 Fty 145 ksi = 1000 MPa)"
+    },
+    {
+      "key": "17-4ph-h1025", "name": "석출경화 스테인리스 17-4PH (H1025)", "class": "metal", "brittle": false,
+      "density": 7800, "E_GPa": 196.5, "nu": 0.27, "yield_MPa": 1000, "ultimate_MPa": 1069, "elongation": 0.12,
+      "aliases": ["17-4PH H1025", "17-4 PH H1025", "SUS630 H1025", "AISI 630 H1025"],
+      "source": "MMPDS / ASTM A564 Type 630 H1025 최소값(Fty 145 ksi = 1000 MPa · Ftu 155 ksi = 1069 MPa, 전단 Fsu ≈ 640 MPa) — 래치 하중핀·캐리지 래치 이어 용도. 연신율 12 %(A564 H1025 최소)"
+    },
+    {
+      "key": "iglidur-j", "name": "iglidur J (igus 미끄럼 패드 — 허용 면압)", "class": "polymer", "brittle": false,
+      "density": 1490, "E_GPa": 2.4, "nu": 0.38, "yield_MPa": 35, "ultimate_MPa": 60, "elongation": 0.10,
+      "aliases": ["iglidur J", "iglidur-J", "drylin T pad"],
+      "source": "igus iglidur J 카탈로그: 최대 권장 정적 면압 35 MPa(23 °C — yield_MPa 자리에 허용 면압, 제조사 C). ultimate 60 MPa 는 압축강도 대표값(가정) — drylin T 캐리지(TW-04-09) 미끄럼 패드 지압 판정용"
+    },
+    {
+      "key": "epp", "name": "EPP 폼 (45 g/L)", "class": "foam", "brittle": false,
+      "density": 45, "E_GPa": 0.012, "nu": 0.0, "yield_MPa": 0.30, "ultimate_MPa": 0.55, "elongation": 0.25,
+      "aliases": ["EPP", "Expanded Polypropylene", "EPP 폼", "발포 폴리프로필렌"],
+      "source": "EPP 45 g/L 제조사 공개 대표값(압축 25% 응력 ≈ 항복으로 취급, 가정)"
+    },
+    {
+      "key": "eva", "name": "EVA 폼", "class": "foam", "brittle": false,
+      "density": 100, "E_GPa": 0.005, "nu": 0.0, "yield_MPa": 0.8, "ultimate_MPa": 1.5, "elongation": 2.0,
+      "aliases": ["EVA", "EVA Foam", "EVA 폼", "에바폼"],
+      "source": "EVA 폼 공개 대표값(가정)"
+    }
+  ]
+}

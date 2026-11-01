@@ -1,0 +1,16 @@
+{
+  "schema": "mns.frames/1",
+  "description": "좌표계 변환 표(FR-GEO-03). 코드 상수 Sim.Core.Geometry.Frames 와 같은 값이며 VV-06 단위 테스트로 고정한다. 행렬은 행 우선, v_to = M · v_from.",
+  "frames": {
+    "fusion": "Fusion 360 모델 좌표: Y-up, 길이축 Z, 문서 mm / API cm·kg·kg·cm²",
+    "body": "동체 FRD (Forward-Right-Down), 원점 = 모델 원점, m",
+    "ned": "관성 NED (North-East-Down), 원점 = 해발 0 m, m",
+    "gl": "OpenGL 뷰: x=동, y=위, z=−북",
+    "blender": "Blender ENU: x=동, y=북, z=위 (Z-up), m"
+  },
+  "fusionToBody": [[0, 0, 1], [-1, 0, 0], [0, -1, 0]],
+  "nedToGl": [[0, 1, 0], [0, 0, -1], [-1, 0, 0]],
+  "nedToBlender": [[0, 1, 0], [1, 0, 0], [0, 0, -1]],
+  "quaternion": "q = 동체(FRD) → NED, (w, x, y, z), v_ned = q ⊗ v_body ⊗ q*",
+  "euler": "3-2-1 (yaw ψ → pitch θ → roll φ), |θ|=90° 에서는 roll=0 으로 두고 yaw 에 합침"
+}

@@ -1,0 +1,189 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "drag_cylinder_cd_re_gowen1953",
+ "title": "2-D circular cylinder crossflow CD vs Re 1e4-1e6 (NACA TN 2960 Fig.6, digitized band centre)",
+ "vv": "VV-47",
+ "grade": "B",
+ "use": "validation",
+ "kind": "drag-coefficient",
+ "model": "L1 형상 항력(원통 횡류 Cd, L/D→∞ 1.2)",
+ "tolerance": {
+  "relative": 0.05
+ },
+ "envelope": "L1 형상 Cd: Re ≤ 2×10⁵(아임계)",
+ "sources": [
+  {
+   "title": "Drag of Circular Cylinders for a Wide Range of Reynolds Numbers and Mach Numbers (NACA TN 2960)",
+   "url": "https://ntrs.nasa.gov/api/citations/19930084018/downloads/19930084018.pdf",
+   "note": "Fig.6 digitized"
+  }
+ ],
+ "notes": [
+  "2-D(무한 길이) 비교라 L/D = 1000 원통으로 계산. 항력 위기(Re > 2×10⁵) 구간은 L1 적용 범위 밖 → 외삽.",
+  "중요: 컨테이너(Ø0.41 m, 최대 139 m/s)는 Re ~4×10⁶ — 매끈한 원통이면 초임계(CD ~0.3–0.6)라 L1 횡류 Cd 가 과대일 수 있음(CFD/풍동 필요)."
+ ],
+ "points": [
+  {
+   "label": "Re 1e+04",
+   "inputs": {
+    "re": 10000.0
+   },
+   "measured": 1.17,
+   "unit": "-",
+   "provenance": "digitized (band 1.1-1.2)"
+  },
+  {
+   "label": "Re 2e+04",
+   "inputs": {
+    "re": 20000.0
+   },
+   "measured": 1.19,
+   "unit": "-",
+   "provenance": "digitized (band 1.15-1.21)"
+  },
+  {
+   "label": "Re 5e+04",
+   "inputs": {
+    "re": 50000.0
+   },
+   "measured": 1.2,
+   "unit": "-",
+   "provenance": "digitized (band 1.18-1.22)"
+  },
+  {
+   "label": "Re 1e+05",
+   "inputs": {
+    "re": 100000.0
+   },
+   "measured": 1.21,
+   "unit": "-",
+   "provenance": "digitized (band 1.19-1.23)"
+  },
+  {
+   "label": "Re 1.5e+05",
+   "inputs": {
+    "re": 150000.0
+   },
+   "measured": 1.21,
+   "unit": "-",
+   "provenance": "digitized (band 1.19-1.23)"
+  },
+  {
+   "label": "Re 2e+05",
+   "inputs": {
+    "re": 200000.0
+   },
+   "measured": 1.19,
+   "unit": "-",
+   "provenance": "digitized (band 1.17-1.2)"
+  },
+  {
+   "label": "Re 2.6e+05",
+   "inputs": {
+    "re": 260000.0
+   },
+   "measured": 1.08,
+   "unit": "-",
+   "provenance": "digitized (band 1.04-1.1)"
+  },
+  {
+   "label": "Re 3e+05",
+   "inputs": {
+    "re": 300000.0
+   },
+   "measured": 0.97,
+   "unit": "-",
+   "provenance": "digitized (band 0.93-1.0)"
+  },
+  {
+   "label": "Re 3.4e+05",
+   "inputs": {
+    "re": 340000.0
+   },
+   "measured": 0.82,
+   "unit": "-",
+   "provenance": "digitized (band 0.75-0.88)"
+  },
+  {
+   "label": "Re 3.6e+05",
+   "inputs": {
+    "re": 360000.0
+   },
+   "measured": 0.66,
+   "unit": "-",
+   "provenance": "digitized (band 0.55-0.8)"
+  },
+  {
+   "label": "Re 3.8e+05",
+   "inputs": {
+    "re": 380000.0
+   },
+   "measured": 0.42,
+   "unit": "-",
+   "provenance": "digitized (band 0.33-0.7)"
+  },
+  {
+   "label": "Re 4e+05",
+   "inputs": {
+    "re": 400000.0
+   },
+   "measured": 0.3,
+   "unit": "-",
+   "provenance": "digitized (band 0.26-0.63)"
+  },
+  {
+   "label": "Re 4.5e+05",
+   "inputs": {
+    "re": 450000.0
+   },
+   "measured": 0.27,
+   "unit": "-",
+   "provenance": "digitized (band 0.24-0.47)"
+  },
+  {
+   "label": "Re 5e+05",
+   "inputs": {
+    "re": 500000.0
+   },
+   "measured": 0.27,
+   "unit": "-",
+   "provenance": "digitized (band 0.24-0.33)"
+  },
+  {
+   "label": "Re 7e+05",
+   "inputs": {
+    "re": 700000.0
+   },
+   "measured": 0.28,
+   "unit": "-",
+   "provenance": "digitized (band 0.25-0.34)"
+  },
+  {
+   "label": "Re 1e+06",
+   "inputs": {
+    "re": 1000000.0
+   },
+   "measured": 0.3,
+   "unit": "-",
+   "provenance": "digitized (band 0.25-0.35)"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/reference_drag_curves/case.json",
+  "sha256": "fd3b47e42b602bedce92f99e37c4d989d97ccd0b34783518bad09cce5c1324e5",
+  "converter": "tools/validation/convert_public.py"
+ },
+ "inputs": {
+  "shape": {
+   "type": "cylinder",
+   "radius": 0.5,
+   "length": 1000.0,
+   "axis": "x"
+  },
+  "flowDirection": [
+   0,
+   0,
+   1
+  ]
+ }
+}

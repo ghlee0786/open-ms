@@ -1,0 +1,34 @@
+{
+  "schema": "mns.scenario/1",
+  "name": "04_fusion_model_drop",
+  "description": "Fusion 360 내보내기(STL + massprops.json) 모델 단일 낙하 템플릿. massProps 경로만 바꾸면 실제 모델로 시험. 기본은 합성 샘플(samples/fusion_export).",
+  "sim": { "dt": 0.001, "tEnd": 120, "outputRate": 100, "seed": 4 },
+  "environment": {
+    "wind": { "speed": 3, "directionFrom": 270, "refHeight": 10, "shear": "log", "roughness": 0.03 },
+    "turbulence": "none"
+  },
+  "carrier": { "name": "drone_hover", "altitude": 100, "speed": 0, "heading": 0,
+    "shape": { "type": "box", "size": [0.35, 0.35, 0.12] } },
+  "bodies": [
+    {
+      "name": "model",
+      "parent": "drone_hover",
+      "mount": [0, 0, 0.3],
+      "mountAttitude": [0, -60, 0],
+      "massProps": "../../../samples/fusion_export/sensor_dummy_sample.massprops.json",
+      "modelFrame": "fusion",
+      "noseAxis": "+Z",
+      "aero": { "cp": "auto", "damping": [-2, -10, -10] },
+      "noseCoefficient": 0.8,
+      "color": "#d08040"
+    }
+  ],
+  "events": [
+    { "name": "drop", "when": { "type": "time", "t": 0.5 }, "do": [ { "type": "separate", "body": "model" } ] }
+  ],
+  "monteCarlo": { "runs": 100, "impactBody": "model", "sampling": "lhs", "seed": 41 },
+  "dispersions": [
+    { "path": "environment.wind.speed", "dist": "truncnormal", "sd": 1.5, "min": -3, "max": 5 },
+    { "path": "environment.wind.directionFrom", "dist": "normal", "sd": 20 }
+  ]
+}

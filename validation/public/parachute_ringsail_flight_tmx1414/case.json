@@ -1,0 +1,50 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "parachute_ringsail_flight_tmx1414",
+ "title": "31.2-ft ringsail supersonic mortar deployment (M 1.39, 37.3 km): peak opening load and time",
+ "vv": "VV-40",
+ "grade": "A",
+ "use": "validation",
+ "kind": "parachute-deployment-flight",
+ "model": "낙하산 충만·개방하중(F절: 충만 곡선 + 겉보기 질량 유입 항 k0)",
+ "tolerance": {
+  "relative": 0.2
+ },
+ "envelope": "비압축(M ≤ 0.5) — 이 시험은 M 1.39 라 외삽",
+ "sources": [
+  {
+   "title": "Flight Test of a 31.2-Foot-Diameter Modified Ringsail Parachute Deployed at a Mach Number of 1.39 and a Dynamic Pressure of 11.0 Pounds per Square Foot (NASA TM X-1414)",
+   "url": "https://ntrs.nasa.gov/api/citations/19670022936/downloads/19670022936.pdf",
+   "note": "tensiometer +-50 lb"
+  }
+ ],
+ "notes": [
+  "충만 n = 8.2, k0 = 1.2623(DGB 풍동 보정값을 링세일에 그대로 — 캐노피 종류 차이는 모델에 없음). 경로각 21.4° 는 정점에서 역산."
+ ],
+ "points": [
+  {
+   "label": "TM X-1414 ringsail",
+   "inputs": {
+    "mass_kg": 100.2,
+    "d0_m": 9.51,
+    "cd0": 0.52,
+    "altitude_m": 37300,
+    "speed_mps": 428,
+    "flightPathDeg": 21.4,
+    "lineStretchTime_s": 0.35,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "apparentMassK0": 1.2623,
+    "peakTime_s": 0.71
+   },
+   "measured": 17700,
+   "unit": "N",
+   "provenance": "table (TM X-1414)"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/parachute_ringsail_tmx1414/case.json",
+  "sha256": "f1bf85cbe3cc233c0170107f995456c880cf330f2fa533fc84c7ce736f5be61b",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

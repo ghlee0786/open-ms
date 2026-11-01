@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Sim.Core\Sim.Core.csproj" />
+    <ProjectReference Include="..\..\src\Sim.Gpu\Sim.Gpu.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- 3D 뷰 카메라 수학(Sim.App, Avalonia 없음) — 앱(WinExe) 참조 대신 같은 소스를 넣어 조작 시나리오를 시험 -->
+    <Compile Include="..\..\src\Sim.App\Rendering\ViewCamera.cs" Link="App\ViewCamera.cs" />
+    <!-- 3D 뷰 분할 배치 · GPU 버퍼 장부(메시 1벌 공유) · 색 모드 표 -->
+    <Compile Include="..\..\src\Sim.App\Rendering\ViewSplit.cs" Link="App\ViewSplit.cs" />
+    <Compile Include="..\..\src\Sim.App\Rendering\SurfaceBuffers.cs" Link="App\SurfaceBuffers.cs" />
+    <Compile Include="..\..\src\Sim.App\Rendering\ColorMaps.cs" Link="App\ColorMaps.cs" />
+    <!-- 테마 · "?" 도움말(Avalonia 없는 부분): 글 표기 · 설명 목록 · 말풍선 배치 · 테마 저장 · 3D 팔레트 -->
+    <Compile Include="..\..\src\Sim.App\Rendering\ViewLayers.cs" Link="App\ViewLayers.cs" />
+    <Compile Include="..\..\src\Sim.App\Rendering\ViewPalette.cs" Link="App\ViewPalette.cs" />
+    <!-- 장면 환경: 프리셋 · 절차적 텍스처 · 토양 매핑 · 설정 저장 -->
+    <Compile Include="..\..\src\Sim.App\Rendering\SceneEnvironment.cs" Link="App\SceneEnvironment.cs" />
+    <Compile Include="..\..\src\Sim.App\Help\HelpModel.cs" Link="App\Help\HelpModel.cs" />
+    <Compile Include="..\..\src\Sim.App\Help\HelpKeys.cs" Link="App\Help\HelpKeys.cs" />
+    <Compile Include="..\..\src\Sim.App\Help\AppHelp.cs" Link="App\Help\AppHelp.cs" />
+    <Compile Include="..\..\src\Sim.App\Help\HelpCalloutPlacement.cs" Link="App\Help\HelpCalloutPlacement.cs" />
+    <Compile Include="..\..\src\Sim.App\HelpContent.cs" Link="App\Help\HelpContent.cs" />
+    <Compile Include="..\..\src\Sim.App\Theme\ThemeStore.cs" Link="App\Theme\ThemeStore.cs" />
+    <!-- 자동 업데이트(GitHub Releases): 판정 · 내려받기 · 검증 · 설정 — Avalonia 없음 -->
+    <Compile Include="..\..\src\Sim.App\Update\UpdateChecker.cs" Link="App\Update\UpdateChecker.cs" />
+  </ItemGroup>
+</Project>

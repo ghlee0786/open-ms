@@ -1,0 +1,88 @@
+{
+  "schema": "mns.scenario/1",
+  "name": "demo_02_impact_materials",
+  "description": "데모 2 — 착지 충돌 재질 판정 · 낙하산 개방 충격(리핑) · 관입체 · 구조 분석 · 장면 환경(흙). 헬기(250 m AGL, 20 m/s)에서 일반 화물 4개를 1 s 간격으로 투하: 알루미늄 상자(1단 리핑 낙하산 → 개방 충격 완화) · ABS 상자(낙하산 없음 → 착지 충돌 판정) · 스파이크 센서(공개 합성 샘플 STL, 기수 선행 관입) · 강철 구(속이 찬 단면 비교). 구조 분석(F6 / --structural)이 물체별 응력 · 안전율과 착지 손상(손상 없음 · 찌그러짐 · 깨짐)을 낸다. 모든 값은 일반값(가정)이다.",
+  "sim": { "dt": 0.001, "tEnd": 120, "outputRate": 50, "seed": 202 },
+  "environment": {
+    "groundAltitude": 0,
+    "wind": { "speed": 3, "directionFrom": 300, "refHeight": 10, "shear": "log", "roughness": 0.05 },
+    "turbulence": "light",
+    "soil": "clay"
+  },
+  "carrier": {
+    "name": "helicopter",
+    "altitude": 250,
+    "speed": 20,
+    "heading": 90,
+    "color": "#7d8790",
+    "shape": { "type": "box", "size": [6.0, 2.0, 2.0] }
+  },
+  "bodies": [
+    {
+      "name": "crate_chute",
+      "parent": "helicopter",
+      "mount": [1.5, 0, 1.3],
+      "mass": 40,
+      "shape": { "type": "box", "size": [0.6, 0.5, 0.5] },
+      "aero": { "cp": [0, 0, 0], "damping": [-3, -3, -3] },
+      "structure": { "material": "al6061-t6", "thickness": 0.002, "section": "thinWall" },
+      "color": "#9aa6b4",
+      "devices": [
+        { "type": "parachute", "name": "chute", "d0": 5.0, "cd0": 0.8, "attach": [0, 0, -0.25], "riser": 4,
+          "fillConstant": 8, "fillExponent": 2, "lineStretchTime": 0.4,
+          "reefing": { "ratio": 0.2, "disreefDelay": 1.5 } }
+      ]
+    },
+    {
+      "name": "crate_free",
+      "parent": "helicopter",
+      "mount": [0.5, 0, 1.3],
+      "mass": 12,
+      "shape": { "type": "box", "size": [0.5, 0.4, 0.4] },
+      "aero": { "cp": [0, 0, 0], "damping": [-3, -3, -3] },
+      "structure": { "material": "abs", "thickness": 0.004, "section": "thinWall" },
+      "color": "#d9d2c3"
+    },
+    {
+      "name": "spike",
+      "parent": "helicopter",
+      "mount": [-0.5, 0, 1.3],
+      "mountAttitude": [0, -80, 0],
+      "massProps": "../../samples/fusion_export/spike_sensor_sample.massprops.json",
+      "modelFrame": "fusion",
+      "noseAxis": "-Z",
+      "aero": { "cp": "auto", "damping": [-2, -10, -10] },
+      "structure": { "material": "al6061-t6", "section": "solid" },
+      "color": "#d08040"
+    },
+    {
+      "name": "ball",
+      "parent": "helicopter",
+      "mount": [-1.5, 0, 1.3],
+      "mass": 4,
+      "shape": { "type": "sphere", "radius": 0.06 },
+      "aero": { "damping": [-1, -1, -1] },
+      "structure": { "material": "mild-steel", "section": "solid" },
+      "color": "#5a6068"
+    }
+  ],
+  "events": [
+    { "name": "drop_crate_chute", "when": { "type": "time", "t": 1.0 }, "do": [ { "type": "separate", "body": "crate_chute", "relVel": [0, 0, 1.5] } ] },
+    { "name": "crate_chute_open", "when": { "type": "after", "event": "crate_chute.separated", "delay": 1.0 }, "do": [ { "type": "deploy", "device": "crate_chute.chute" } ] },
+    { "name": "drop_crate_free", "when": { "type": "time", "t": 2.0 }, "do": [ { "type": "separate", "body": "crate_free", "relVel": [0, 0, 1.5] } ] },
+    { "name": "drop_spike", "when": { "type": "time", "t": 3.0 }, "do": [ { "type": "separate", "body": "spike", "relVel": [0, 0, 1.0] } ] },
+    { "name": "drop_ball", "when": { "type": "time", "t": 4.0 }, "do": [ { "type": "separate", "body": "ball", "relVel": [0, 0, 1.0] } ] }
+  ],
+  "metrics": [
+    { "type": "maxLoad", "name": "openingShock", "bodies": ["crate_chute"], "limitG": 15 },
+    { "type": "landingSeparation", "name": "landingSpread", "bodies": ["crate_chute", "crate_free", "spike", "ball"] }
+  ],
+  "dispersions": [
+    { "path": "environment.wind.speed", "dist": "truncnormal", "sd": 1.5, "min": -3, "max": 5 },
+    { "path": "environment.wind.directionFrom", "dist": "normal", "sd": 25 },
+    { "path": "bodies.crate_chute.devices.chute.cd0", "dist": "normal", "mode": "scale", "sd": 0.06 },
+    { "path": "bodies.crate_chute.devices.chute.reefing.ratio", "dist": "uniform", "mode": "set", "min": 0.15, "max": 0.25 },
+    { "path": "events.crate_chute_open.when.delay", "dist": "uniform", "min": -0.3, "max": 0.5 }
+  ],
+  "monteCarlo": { "runs": 100, "impactBody": "crate_chute", "sampling": "lhs", "seed": 212 }
+}

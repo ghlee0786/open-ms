@@ -1,0 +1,154 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "parachute_dgb_descent_tmx1451",
+ "title": "30-ft DGB steady descent velocity vs altitude 24-39 km (Fig.18 digitized) with the reported effective CD0 0.47",
+ "vv": "VV-40",
+ "grade": "B",
+ "use": "consistency",
+ "kind": "parachute-steady-descent",
+ "model": "낙하산 정상 하강(CdS 평형) + US1976 고고도 밀도",
+ "tolerance": {
+  "relative": 0.08
+ },
+ "envelope": "정상 하강, M < 0.5, 24–39 km",
+ "sources": [
+  {
+   "title": "Flight Test of a 30-Foot-Nominal-Diameter Disk-Gap-Band Parachute Deployed at a Mach Number of 1.56 and a Dynamic Pressure of 11.4 Pounds per Square Foot (NASA TM X-1451)",
+   "url": "https://ntrs.nasa.gov/api/citations/19670026287/downloads/19670026287.pdf",
+   "note": "Fig.18 digitized (+-300 ft, +-5 ft/s)"
+  }
+ ],
+ "notes": [
+  "유효 CD0 0.47 은 같은 하강 자료에서 저자가 구한 값 → 독립 검증이 아니라 일관성 확인(대기 모델 37 km 까지 + 평형 하강 계산).",
+  "허용 ±8 %(원 README: 디지타이즈 ±5 ft/s + 밀도 ±3 % → 속도 ±1.5 % + 잔여 감속)."
+ ],
+ "points": [
+  {
+   "label": "38.7 km",
+   "inputs": {
+    "altitude_m": 38679.1
+   },
+   "measured": 124.36,
+   "unit": "m/s",
+   "provenance": "digitized",
+   "role": "info",
+   "note": "110 kft 위는 잔여 감속(평형 전, 원 README) → 참고"
+  },
+  {
+   "label": "37.8 km",
+   "inputs": {
+    "altitude_m": 37764.7
+   },
+   "measured": 120.09,
+   "unit": "m/s",
+   "provenance": "digitized",
+   "role": "info",
+   "note": "110 kft 위는 잔여 감속(평형 전, 원 README) → 참고"
+  },
+  {
+   "label": "36.3 km",
+   "inputs": {
+    "altitude_m": 36271.2
+   },
+   "measured": 104.24,
+   "unit": "m/s",
+   "provenance": "digitized",
+   "role": "info",
+   "note": "110 kft 위는 잔여 감속(평형 전, 원 README) → 참고"
+  },
+  {
+   "label": "34.7 km",
+   "inputs": {
+    "altitude_m": 34716.7
+   },
+   "measured": 93.27,
+   "unit": "m/s",
+   "provenance": "digitized",
+   "role": "info",
+   "note": "110 kft 위는 잔여 감속(평형 전, 원 README) → 참고"
+  },
+  {
+   "label": "33.2 km",
+   "inputs": {
+    "altitude_m": 33192.7
+   },
+   "measured": 79.86,
+   "unit": "m/s",
+   "provenance": "digitized"
+  },
+  {
+   "label": "31.7 km",
+   "inputs": {
+    "altitude_m": 31668.7
+   },
+   "measured": 68.58,
+   "unit": "m/s",
+   "provenance": "digitized"
+  },
+  {
+   "label": "30.4 km",
+   "inputs": {
+    "altitude_m": 30449.5
+   },
+   "measured": 64.62,
+   "unit": "m/s",
+   "provenance": "digitized"
+  },
+  {
+   "label": "29.3 km",
+   "inputs": {
+    "altitude_m": 29260.8
+   },
+   "measured": 56.39,
+   "unit": "m/s",
+   "provenance": "digitized"
+  },
+  {
+   "label": "27.7 km",
+   "inputs": {
+    "altitude_m": 27706.3
+   },
+   "measured": 49.68,
+   "unit": "m/s",
+   "provenance": "digitized"
+  },
+  {
+   "label": "26.2 km",
+   "inputs": {
+    "altitude_m": 26212.8
+   },
+   "measured": 45.11,
+   "unit": "m/s",
+   "provenance": "digitized"
+  },
+  {
+   "label": "24.7 km",
+   "inputs": {
+    "altitude_m": 24688.8
+   },
+   "measured": 39.62,
+   "unit": "m/s",
+   "provenance": "digitized"
+  },
+  {
+   "label": "23.3 km",
+   "inputs": {
+    "altitude_m": 23286.7
+   },
+   "measured": 35.97,
+   "unit": "m/s",
+   "provenance": "digitized"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/parachute_dgb_200lb/case.json",
+  "sha256": "5f1a4eac83abdf0c08698a42ad94b1698a5e6b957ca3adb5aca01e441d0c0933",
+  "converter": "tools/validation/convert_public.py"
+ },
+ "inputs": {
+  "mass_kg": 102.5,
+  "d0_m": 9.144,
+  "cd0": 0.47,
+  "geopotential": true
+ }
+}

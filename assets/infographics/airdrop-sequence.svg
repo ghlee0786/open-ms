@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="'Segoe UI','Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">공중투하 이벤트 시퀀스</title>
+  <desc id="d">사출(레일) → 덮개 분리 → 드로그 전개 → 감속 조건에서 주낙하산 → 바람 속 하강 · 표류 → 착지 · 충격 · 관입. 단계마다 엔진이 내는 값을 함께 적었다.</desc>
+  <!-- Open M&amp;S README 인포그래픽. 단계가 차례로 켜지고 흐름이 움직인다(CSS keyframes · SMIL, 자바스크립트 없음). 다시 만들기: scripts/make_infographics.py -->
+  <style>
+    .flow { stroke-dasharray: 7 7; animation: dash 1s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -14; } }
+    @keyframes on0 { 0%, 3.0% { opacity: 0; } 6.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on0 { opacity: 0; animation: on0 12s infinite; }
+    @keyframes now0 { 0%, 3.0% { opacity: 0; } 6.0% { opacity: .55; } 16.7%, 100% { opacity: 0; } }
+    .now0 { opacity: 0; animation: now0 12s infinite; }
+    @keyframes on1 { 0%, 16.7% { opacity: 0; } 19.7%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on1 { opacity: 0; animation: on1 12s infinite; }
+    @keyframes now1 { 0%, 16.7% { opacity: 0; } 19.7% { opacity: .55; } 30.3%, 100% { opacity: 0; } }
+    .now1 { opacity: 0; animation: now1 12s infinite; }
+    @keyframes on2 { 0%, 30.3% { opacity: 0; } 33.3%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on2 { opacity: 0; animation: on2 12s infinite; }
+    @keyframes now2 { 0%, 30.3% { opacity: 0; } 33.3% { opacity: .55; } 44.0%, 100% { opacity: 0; } }
+    .now2 { opacity: 0; animation: now2 12s infinite; }
+    @keyframes on3 { 0%, 44.0% { opacity: 0; } 47.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on3 { opacity: 0; animation: on3 12s infinite; }
+    @keyframes now3 { 0%, 44.0% { opacity: 0; } 47.0% { opacity: .55; } 57.7%, 100% { opacity: 0; } }
+    .now3 { opacity: 0; animation: now3 12s infinite; }
+    @keyframes on4 { 0%, 57.7% { opacity: 0; } 60.7%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on4 { opacity: 0; animation: on4 12s infinite; }
+    @keyframes now4 { 0%, 57.7% { opacity: 0; } 60.7% { opacity: .55; } 71.3%, 100% { opacity: 0; } }
+    .now4 { opacity: 0; animation: now4 12s infinite; }
+    @keyframes on5 { 0%, 71.3% { opacity: 0; } 74.3%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on5 { opacity: 0; animation: on5 12s infinite; }
+    @keyframes now5 { 0%, 71.3% { opacity: 0; } 74.3% { opacity: .55; } 85.0%, 100% { opacity: 0; } }
+    .now5 { opacity: 0; animation: now5 12s infinite; }
+    
+  </style>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b8b95"/></marker>
+    <marker id="headR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+  </defs>
+  <rect width="960" height="540" rx="18" fill="#111318" stroke="#2a2f3a"/>
+  <text x="28" y="38" font-size="20" fill="#f4f4f5" font-weight="700">공중투하 이벤트 시퀀스</text>
+  <text x="28" y="60" font-size="13.5" fill="#a1a1aa">시나리오의 events[] 가 시간 · 고도 · 속도 조건으로 다음 단계를 켠다 — 데모 1(수송기 후방 램프 사출)의 흐름</text>
+  <rect x="24" y="76" width="912" height="248" rx="12" fill="#141b26"/>
+  <rect x="24" y="300" width="912" height="24" fill="#2b2418"/>
+  <path d="M24 300H936" stroke="#6b5a3a" stroke-width="2"/>
+  <path d="M40 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M62 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M84 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M106 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M128 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M150 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M172 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M194 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M216 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M238 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M260 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M282 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M304 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M326 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M348 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M370 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M392 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M414 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M436 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M458 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M480 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M502 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M524 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M546 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M568 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M590 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M612 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M634 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M656 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M678 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M700 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M722 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M744 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M766 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M788 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M810 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M832 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M854 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M876 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M898 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path d="M920 304l-8 14" stroke="#4a3f2a" stroke-width="1.5"/>
+  <path class="flow" d="M640 110H760" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#head)"/>
+  <path class="flow" d="M640 140H780" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#head)"/>
+  <path class="flow" d="M640 170H800" stroke="#334155" stroke-width="2" fill="none" marker-end="url(#head)"/>
+  <text x="700" y="98" font-size="12.5" fill="#64748b" text-anchor="middle">바람 · 난류 →</text>
+  <g transform="translate(200 86) rotate(-6)"><rect width="160" height="24" rx="12" fill="#8a949e"/><path d="M2 4 L-4 -20 L12 -20 L34 5z" fill="#6b7480"/><path d="M64 16 L44 34 L58 34 L98 16z" fill="#6b7480"/></g>
+  <text x="372" y="92" font-size="12" fill="#94a3b8">운반체 (수송기) — 진행 방향 →</text>
+  <path d="M205 112 C330 118 420 210 560 250 C700 290 820 294 880 298" stroke="#334155" stroke-width="2" stroke-dasharray="3 6" fill="none"/>
+  <circle class="now0" cx="212" cy="112" r="16" fill="#f59e0b"/>
+  <circle cx="212" cy="112" r="5" fill="#475569"/><circle class="on0" cx="212" cy="112" r="5" fill="#f59e0b"/>
+  <g class="on0"><text x="198.459" y="138.462" font-size="12.5" fill="#f59e0b" font-weight="700" text-anchor="middle">1 사출</text></g>
+  <circle class="now1" cx="304" cy="134" r="16" fill="#94a3b8"/>
+  <circle cx="304" cy="134" r="5" fill="#475569"/><circle class="on1" cx="304" cy="134" r="5" fill="#94a3b8"/>
+  <g class="on1"><text x="303.634" y="160.238" font-size="12.5" fill="#94a3b8" font-weight="700" text-anchor="middle">2 분리</text></g>
+  <circle class="now2" cx="394" cy="177" r="16" fill="#06b6d4"/>
+  <circle cx="394" cy="177" r="5" fill="#475569"/><circle class="on2" cx="394" cy="177" r="5" fill="#06b6d4"/>
+  <g class="on2"><text x="393.629" y="202.985" font-size="12.5" fill="#06b6d4" font-weight="700" text-anchor="middle">3 드로그</text></g>
+  <circle class="now3" cx="539" cy="244" r="16" fill="#3b82f6"/>
+  <circle cx="539" cy="244" r="5" fill="#475569"/><circle class="on3" cx="539" cy="244" r="5" fill="#3b82f6"/>
+  <g class="on3"><text x="539.364" y="269.627" font-size="12.5" fill="#3b82f6" font-weight="700" text-anchor="middle">4 주낙하산</text></g>
+  <circle class="now4" cx="766" cy="289" r="16" fill="#a78bfa"/>
+  <circle cx="766" cy="289" r="5" fill="#475569"/><circle class="on4" cx="766" cy="289" r="5" fill="#a78bfa"/>
+  <g class="on4"><text x="766.195" y="275.319" font-size="12.5" fill="#a78bfa" font-weight="700" text-anchor="middle">5 하강</text></g>
+  <circle class="now5" cx="880" cy="298" r="16" fill="#ef4444"/>
+  <circle cx="880" cy="298" r="5" fill="#475569"/><circle class="on5" cx="880" cy="298" r="5" fill="#ef4444"/>
+  <g class="on5"><text x="880" y="284" font-size="12.5" fill="#ef4444" font-weight="700" text-anchor="middle">6 착지</text></g>
+  <rect class="on1" x="310" y="112" width="5" height="14" fill="#c8a050" transform="rotate(25 312 119)"/>
+  <g class="on2"><path d="M383 155 a11 9 0 0 1 22 0z" fill="#06b6d4"/><path d="M383 155L394 173L405 155" stroke="#06b6d4" fill="none"/></g>
+  <g class="on3"><path d="M513 200 a26 18 0 0 1 52 0z" fill="#3b82f6"/><path d="M513 200L539 238L565 200" stroke="#3b82f6" fill="none"/></g>
+  <ellipse class="on5" cx="880" cy="306" rx="22" ry="4" fill="#7c2d12" opacity=".8"/>
+  <circle cx="880" cy="298" r="4" fill="none" stroke="#ef4444" stroke-width="2" opacity="0"><animate attributeName="r" values="4;4;30;30" keyTimes="0;0.84;0.94;1" dur="12s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;.9;0;0" keyTimes="0;0.84;0.85;0.94;1" dur="12s" repeatCount="indefinite"/></circle>
+  <circle r="6" fill="#fafafa"><animateMotion dur="12s" repeatCount="indefinite" path="M205 112 C330 118 420 210 560 250 C700 290 820 294 880 298" keyPoints="0;1;1" keyTimes="0;0.86;1" calcMode="linear"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.03;0.86;0.90;1" dur="12s" repeatCount="indefinite"/></circle>
+  <g transform="translate(24 340)"><rect class="now0" x="-5" y="-5" width="306" height="96" rx="16" fill="#f59e0b"/><rect width="296" height="86" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on0" width="296" height="86" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><rect class="on0" x="0" y="10" width="4" height="66" rx="2" fill="#f59e0b"/><circle cx="22" cy="21" r="11" fill="#f59e0b" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">1</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">사출</text><text x="16" y="47" font-size="13" fill="#a1a1aa">레일을 미끄러져 나감 (마찰 · 밀어내기)</text><text x="16" y="65" font-size="13" fill="#a1a1aa">값: 레일 이탈 시각 · 사출 속도</text></g>
+  <g transform="translate(332 340)"><rect class="now1" x="-5" y="-5" width="306" height="96" rx="16" fill="#94a3b8"/><rect width="296" height="86" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="296" height="86" rx="12" fill="none" stroke="#94a3b8" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="66" rx="2" fill="#94a3b8"/><circle cx="22" cy="21" r="11" fill="#94a3b8" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">2</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">분리</text><text x="16" y="47" font-size="13" fill="#a1a1aa">덮개가 정해진 상대 속도로 떨어짐</text><text x="16" y="65" font-size="13" fill="#a1a1aa">값: 분리 시각 · 물체 사이 이격</text></g>
+  <g transform="translate(640 340)"><rect class="now2" x="-5" y="-5" width="306" height="96" rx="16" fill="#06b6d4"/><rect width="296" height="86" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="296" height="86" rx="12" fill="none" stroke="#06b6d4" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="66" rx="2" fill="#06b6d4"/><circle cx="22" cy="21" r="11" fill="#06b6d4" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">3</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">드로그 전개</text><text x="16" y="47" font-size="13" fill="#a1a1aa">라인 신장 → 충만 곡선 → 감속</text><text x="16" y="65" font-size="13" fill="#a1a1aa">값: 개방하중 피크 [N] · 감속도 [G]</text></g>
+  <g transform="translate(24 438)"><rect class="now3" x="-5" y="-5" width="306" height="96" rx="16" fill="#3b82f6"/><rect width="296" height="86" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="296" height="86" rx="12" fill="none" stroke="#3b82f6" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="66" rx="2" fill="#3b82f6"/><circle cx="22" cy="21" r="11" fill="#3b82f6" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">4</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">주낙하산</text><text x="16" y="47" font-size="13" fill="#a1a1aa">속도 조건(예 35 m/s 이하)에서 교체</text><text x="16" y="65" font-size="13" fill="#a1a1aa">조건이 안 맞으면 시간 백업으로 전개</text></g>
+  <g transform="translate(332 438)"><rect class="now4" x="-5" y="-5" width="306" height="96" rx="16" fill="#a78bfa"/><rect width="296" height="86" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on4" width="296" height="86" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on4" x="0" y="10" width="4" height="66" rx="2" fill="#a78bfa"/><circle cx="22" cy="21" r="11" fill="#a78bfa" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">5</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">하강 · 표류</text><text x="16" y="47" font-size="13" fill="#a1a1aa">평균풍 + Dryden 난류에 밀려 내려옴</text><text x="16" y="65" font-size="13" fill="#a1a1aa">값: 하강률 · 표류 거리 · 흔들림 각</text></g>
+  <g transform="translate(640 438)"><rect class="now5" x="-5" y="-5" width="306" height="96" rx="16" fill="#ef4444"/><rect width="296" height="86" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on5" width="296" height="86" rx="12" fill="none" stroke="#ef4444" stroke-width="2.5"/><rect class="on5" x="0" y="10" width="4" height="66" rx="2" fill="#ef4444"/><circle cx="22" cy="21" r="11" fill="#ef4444" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">6</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">착지 · 충격 · 관입</text><text x="16" y="47" font-size="13" fill="#a1a1aa">지면 충돌 → 재질 판정 · 토양 관입</text><text x="16" y="65" font-size="13" fill="#a1a1aa">값: 충돌 속도 · 자세 · 관입 깊이 · 손상</text></g>
+</svg>

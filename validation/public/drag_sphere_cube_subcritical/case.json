@@ -1,0 +1,27 @@
+{
+  "schema": "mns.validation-case/1",
+  "id": "drag_sphere_cube_subcritical",
+  "title": "구·정육면체·원통(축류) 항력계수 (Re ≈ 10⁴, 아임계)",
+  "vv": "VV-47",
+  "grade": "C",
+  "use": "calibration",
+  "kind": "drag-coefficient",
+  "model": "L1 형상 공력(구·상자·원통 축류)",
+  "envelope": "구·정육면체 면 정면·원통 축류(l/d ≥ 2), Re 10⁴~10⁵",
+  "provenance": "textbook-table",
+  "tolerance": { "relative": 0.05 },
+  "sources": [
+    { "title": "F. M. White, Fluid Mechanics, Table 7.3 (Re≈10⁴): 구 0.47, 정육면체 1.07", "url": "https://volupe.com/support/c_d-and-c_l-calculation/", "note": "2026-10-07 웹 검색 요약(White 인용 표)으로 확인" },
+    { "title": "S. F. Hoerner, Fluid-Dynamic Drag — 원통 축류(평면 끝) l/d > 2 에서 Cd ≈ 0.81", "url": "https://aerospaceweb.org/question/aerodynamics/q0231.shtml", "note": "2차 인용(aerospaceweb)" }
+  ],
+  "inputs": {},
+  "points": [
+    { "label": "구", "inputs": { "shape": { "type": "sphere", "radius": 0.1 }, "flowDirection": [1, 0, 0] }, "measured": 0.47 },
+    { "label": "정육면체(면 정면)", "inputs": { "shape": { "type": "box", "size": [0.3, 0.3, 0.3] }, "flowDirection": [1, 0, 0] }, "measured": 1.07 },
+    { "label": "원통 축류 l/d = 3", "inputs": { "shape": { "type": "cylinder", "radius": 0.05, "length": 0.3, "axis": "x" }, "flowDirection": [1, 0, 0] }, "measured": 0.81 }
+  ],
+  "notes": [
+    "L1 상수(구 0.47, 상자 1.05, 원통 축류 0.82)는 같은 계열 교과서 값에서 정했으므로 '보정용'으로 분류한다(VV-50).",
+    "구 Cd 는 Re 10³~2×10⁵ 에서 0.39~0.5 로 변한다(Re 의존성 미모델). 임계 Re(≈3×10⁵) 이상에서는 L1 값이 크게 틀린다."
+  ]
+}

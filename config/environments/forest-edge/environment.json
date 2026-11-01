@@ -1,0 +1,128 @@
+{
+  "schema": "mns.environment/1",
+  "id": "forest-edge",
+  "displayName": {
+    "ko": "숲 가장자리",
+    "en": "Forest Edge"
+  },
+  "style": "scene",
+  "centerAngleDeg": 0,
+  "scaling": {
+    "fitTo": 2,
+    "autoScale": true,
+    "autoScaleFactor": 10
+  },
+  "features": [
+    {
+      "kind": "ground",
+      "shape": "plane",
+      "isGroundPlane": true,
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "forestFloor",
+          "seed": 1,
+          "colors": [
+            [
+              0.14,
+              0.24,
+              0.09
+            ],
+            [
+              0.26,
+              0.36,
+              0.13
+            ],
+            [
+              0.36,
+              0.27,
+              0.16
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "kind": "dome",
+      "shape": "hemisphere",
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "sky",
+          "seed": 1,
+          "zenith": [
+            0.28,
+            0.46,
+            0.74
+          ],
+          "horizon": [
+            0.74,
+            0.8,
+            0.84
+          ],
+          "haze": [
+            0.4,
+            0.46,
+            0.38
+          ],
+          "trees": true
+        }
+      }
+    }
+  ],
+  "ibl": {
+    "source": "procedural-sky",
+    "exposureEV": 0.0
+  },
+  "lights": [
+    {
+      "type": "directional",
+      "label": "sun",
+      "color": [
+        0.86,
+        0.8,
+        0.68
+      ],
+      "gain": 1.0,
+      "space": "ground",
+      "direction": [
+        0.4777,
+        0.5693,
+        -0.6691
+      ],
+      "shadowColor": [
+        -0.3,
+        -0.3,
+        -0.3
+      ],
+      "enabled": true
+    },
+    {
+      "type": "hemisphere",
+      "label": "sky/ground",
+      "sky": [
+        0.38,
+        0.44,
+        0.5
+      ],
+      "ground": [
+        0.15,
+        0.19,
+        0.11
+      ],
+      "gain": 1.0,
+      "enabled": true
+    }
+  ],
+  "ambient": {
+    "color": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "gain": 0.0
+  },
+  "soilMatch": [
+    "forest"
+  ]
+}

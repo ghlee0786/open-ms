@@ -1,0 +1,31 @@
+{
+  "schema": "mns.scenario/1",
+  "name": "08_material_drop_compare",
+  "description": "재질 비교 낙하(PRD X, FR-MAT-01~04): 같은 상자(□400×270×270 mm, 5.5 kg)를 재질·두께만 바꿔 3 m 에서 암반(강체에 가까운 지면)으로 면/꼭짓점 착지. 구조 분석(F6 / run --structural)이 착지 충돌 재질 판정(깨짐·찌그러짐·손상 없음)과 손상 시작 속도를 낸다. 얇은 벽은 thinWall, 비교용 속이 찬 단면(solid)·폼 블록 포함. 값은 재질 라이브러리 대표값 — 근사(FEA 아님), 정밀 판정은 물체 선택 후 OpenCourant 착지 충돌 해석.",
+  "sim": { "dt": 0.001, "tEnd": 5, "outputRate": 200, "seed": 1 },
+  "environment": { "groundAltitude": 0, "wind": { "speed": 0, "directionFrom": 270, "shear": "none" }, "turbulence": "none", "soil": "rock" },
+  "bodies": [
+    { "name": "abs_face", "position": [0, 0, -3], "mass": 5.5, "attitude": [0, 0, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "ABS 플라스틱", "thickness": 0.002 }, "color": "#d9d2c3" },
+    { "name": "abs_corner", "position": [2, 0, -3], "mass": 5.5, "attitude": [45, 35.264, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "ABS 플라스틱", "thickness": 0.002 }, "color": "#d9d2c3" },
+    { "name": "pc_corner", "position": [4, 0, -3], "mass": 5.5, "attitude": [45, 35.264, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "폴리카보네이트", "thickness": 0.002 }, "color": "#9fc7e8" },
+    { "name": "pla_corner", "position": [6, 0, -3], "mass": 5.5, "attitude": [45, 35.264, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "PLA", "thickness": 0.002 }, "color": "#e8d27a" },
+    { "name": "tin_face", "position": [0, 2, -3], "mass": 5.5, "attitude": [0, 0, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "양철", "thickness": 0.00025 }, "color": "#c9ccd1" },
+    { "name": "tin_corner", "position": [2, 2, -3], "mass": 5.5, "attitude": [45, 35.264, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "양철", "thickness": 0.00025 }, "color": "#c9ccd1" },
+    { "name": "al_face", "position": [4, 2, -3], "mass": 5.5, "attitude": [0, 0, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "알루미늄 6061-T6", "thickness": 0.0015 }, "color": "#b0b8c4" },
+    { "name": "cfrp_corner", "position": [6, 2, -3], "mass": 5.5, "attitude": [45, 35.264, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "CFRP", "thickness": 0.001 }, "color": "#3a3d42" },
+    { "name": "epp_block", "position": [0, 4, -3], "mass": 5.5, "attitude": [0, 0, 0],
+      "shape": { "type": "box", "size": [0.40, 0.27, 0.27] }, "structure": { "material": "EPP" }, "color": "#e05a4a" },
+    { "name": "al_sensor_solid", "position": [2, 4, -3], "mass": 1.0, "attitude": [0, -90, 0],
+      "shape": { "type": "cylinder", "radius": 0.04, "length": 0.30, "axis": "x" }, "structure": { "material": "알루미늄 6061", "section": "solid" }, "color": "#e0a030" },
+    { "name": "abs_puck_solid", "position": [4, 4, -3], "mass": 0.5, "attitude": [0, -90, 0],
+      "shape": { "type": "cylinder", "radius": 0.05, "length": 0.06, "axis": "x" }, "structure": { "material": "ABS", "section": "solid" }, "color": "#d9d2c3" }
+  ]
+}

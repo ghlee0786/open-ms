@@ -1,0 +1,34 @@
+{
+  "schema": "mns.validation-case/1",
+  "id": "drag_cylinder_crossflow_finite",
+  "title": "유한 길이 원통 횡류 항력계수 vs L/D (Re 10⁴~10⁵)",
+  "vv": "VV-47",
+  "grade": "C",
+  "use": "calibration",
+  "kind": "drag-coefficient",
+  "model": "L1 형상 공력(원통)",
+  "envelope": "원통 횡류, L/D 1~40(+무한), Re 10⁴~10⁵(아임계)",
+  "provenance": "textbook-table",
+  "tolerance": { "relative": 0.05 },
+  "sources": [
+    { "title": "F. M. White, Fluid Mechanics, Table 7.3 (Hoerner, Fluid-Dynamic Drag 자료 인용) — 유한 원통 횡류 Cd", "note": "2026-10-07 웹 검색 요약으로 값 확인: L/D 1 0.64, 2 0.68, 3 0.72, 5 0.74, 10 0.82, 20 0.91, 40 0.98, ∞ 1.20" },
+    { "title": "fchartsoftware EES drag coefficient 표 (White 인용)", "url": "https://fchartsoftware.com/ees/drag_coefficients/hs1024.htm" }
+  ],
+  "inputs": { "flowDirection": [0, 1, 0] },
+  "points": [
+    { "label": "L/D = 1", "inputs": { "shape": { "type": "cylinder", "radius": 0.5, "length": 1, "axis": "x" } }, "measured": 0.64 },
+    { "label": "L/D = 2", "inputs": { "shape": { "type": "cylinder", "radius": 0.5, "length": 2, "axis": "x" } }, "measured": 0.68 },
+    { "label": "L/D = 3", "inputs": { "shape": { "type": "cylinder", "radius": 0.5, "length": 3, "axis": "x" } }, "measured": 0.72 },
+    { "label": "L/D = 4.7 (보간 기대값)", "inputs": { "shape": { "type": "cylinder", "radius": 0.2, "length": 1.88, "axis": "x" } }, "measured": 0.737, "provenance": "interpolated(table)" },
+    { "label": "L/D = 5", "inputs": { "shape": { "type": "cylinder", "radius": 0.5, "length": 5, "axis": "x" } }, "measured": 0.74 },
+    { "label": "L/D = 10", "inputs": { "shape": { "type": "cylinder", "radius": 0.5, "length": 10, "axis": "x" } }, "measured": 0.82 },
+    { "label": "L/D = 20", "inputs": { "shape": { "type": "cylinder", "radius": 0.5, "length": 20, "axis": "x" } }, "measured": 0.91 },
+    { "label": "L/D = 40", "inputs": { "shape": { "type": "cylinder", "radius": 0.5, "length": 40, "axis": "x" } }, "measured": 0.98 },
+    { "label": "L/D = 1000 (≈∞)", "inputs": { "shape": { "type": "cylinder", "radius": 0.5, "length": 1000, "axis": "x" } }, "measured": 1.20 }
+  ],
+  "notes": [
+    "발견(2026-10-07): 이전 L1 모델은 L/D 와 무관하게 횡류 Cd 1.2 를 써서 컨테이너(L/D≈4.7)·센서(L/D≈3.75) 횡류 항력을 약 60% 과대평가했다. 이 표로 L1 계수를 교체했다(Shape.CylinderCrossflowCd).",
+    "계수를 이 자료로 정했으므로 '보정용' — 같은 자료로 검증 통과를 주장하지 않는다(VV-50). 독립 검증은 CFD(VV-22) 또는 텀블링 낙하 시험(VV-46) 필요.",
+    "컨테이너 분리 직후 M≈0.41 은 압축성 영향 구간 — 이 표(비압축 아임계)의 범위 밖이다."
+  ]
+}

@@ -1,0 +1,75 @@
+# 릴리스: 태그 v1.2.3 을 올리면 시험 → 설치 프로그램 → zip → sha256 → GitHub 릴리스.
+# 앱의 자동 업데이트(src/Sim.App/Update/UpdateChecker.cs)가 이 릴리스의 OpenMS-Setup-<버전>.exe 와 .sha256 자산을 받는다.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    name: Installer (win-x64)
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - name: Test
+        run: dotnet test MnS.slnx -c Release
+      # 태그 v1.2.3 → 1.2.3 (앱 버전 = 자동 업데이트가 비교하는 값, 설치 프로그램 이름)
+      - name: Version from tag
+        id: ver
+        shell: pwsh
+        run: |
+          $v = "${{ github.ref_name }}".TrimStart('v').Split('-')[0]
+          if ($v -notmatch '^\d+\.\d+\.\d+$') { throw "태그 '${{ github.ref_name }}' 는 v1.2.3 꼴이어야 합니다" }
+          "version=$v" >> $env:GITHUB_OUTPUT
+      - name: Install Inno Setup
+        run: choco install innosetup -y --no-progress
+      # dotnet publish(-p:Version) + ISCC — 로컬과 같은 스크립트
+      - name: Build installer
+        shell: pwsh
+        run: ./scripts/build-installer.ps1 -Version ${{ steps.ver.outputs.version }}
+      # 설치 없이 쓰는 zip: 설치 프로그램과 같은 배치(앱 + config · samples · tools · validation 일부)
+      - name: Zip
+        shell: pwsh
+        run: |
+          $stage = "stage/OpenMS"
+          New-Item -ItemType Directory -Force $stage | Out-Null
+          Copy-Item -Recurse publish/win-x64/* $stage
+          foreach ($d in "config", "samples", "tools", "validation/public") {
+            if (Test-Path $d) { New-Item -ItemType Directory -Force (Split-Path (Join-Path $stage $d)) | Out-Null; Copy-Item -Recurse $d (Join-Path $stage $d) }
+          }
+          if (Test-Path validation/reports) {
+            New-Item -ItemType Directory -Force "$stage/validation/reports" | Out-Null
+            Get-ChildItem validation/reports | Copy-Item -Recurse -Destination "$stage/validation/reports"
+          }
+          Get-ChildItem $stage -Recurse -Directory -Include ".venv", "__pycache__", ".pytest_cache" | Remove-Item -Recurse -Force
+          Compress-Archive -Path "$stage/*" -DestinationPath "OpenMS-${{ github.ref_name }}-win-x64.zip"
+      # sha256sum 꼴(해시  파일이름) — 앱이 내려받은 설치 프로그램을 이것으로 검증한다
+      - name: SHA-256
+        shell: pwsh
+        run: |
+          $setup = "installer/Output/OpenMS-Setup-${{ steps.ver.outputs.version }}.exe"
+          $zip = "OpenMS-${{ github.ref_name }}-win-x64.zip"
+          foreach ($f in $setup, $zip) {
+            $h = (Get-FileHash -Algorithm SHA256 $f).Hash.ToLowerInvariant()
+            "$h  $(Split-Path -Leaf $f)" | Out-File -Encoding ascii -NoNewline "$f.sha256"
+          }
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            installer/Output/OpenMS-Setup-${{ steps.ver.outputs.version }}.exe
+            installer/Output/OpenMS-Setup-${{ steps.ver.outputs.version }}.exe.sha256
+            OpenMS-${{ github.ref_name }}-win-x64.zip
+            OpenMS-${{ github.ref_name }}-win-x64.zip.sha256
+          generate_release_notes: true
+          # v1.2.3-beta 같은 태그는 시험판 — 앱의 자동 업데이트가 건너뛴다
+          prerelease: ${{ contains(github.ref_name, '-') }}

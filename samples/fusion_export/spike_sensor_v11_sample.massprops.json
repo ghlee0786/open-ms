@@ -1,0 +1,424 @@
+{
+  "schema": "mns.massprops/1",
+  "name": "spike_sensor_v11_sample",
+  "source": "fusion",
+  "frame": "fusion",
+  "frameNote": "Fusion 360 모델 좌표(Y-up). 시뮬레이터는 config/frames.json 의 fusionToBody 로 동체 FRD 로 변환.",
+  "units": {
+    "length": "m",
+    "mass": "kg",
+    "inertia": "kg*m^2"
+  },
+  "mass": 1.0,
+  "cg": [
+    -2.819359918283902e-18,
+    -6.505213034913027e-19,
+    0.17700274519025744
+  ],
+  "inertia": [
+    [
+      0.00706242058121003,
+      -1.9067111428772622e-20,
+      -4.1448641455896977e-19
+    ],
+    [
+      -1.9067111428772622e-20,
+      0.0070624205812100296,
+      -5.421010862427522e-20
+    ],
+    [
+      -4.1448641455896977e-19,
+      -5.421010862427522e-20,
+      0.0009961265147651359
+    ]
+  ],
+  "principalMoments": [
+    0.0009961265147651359,
+    0.0070624205812100296,
+    0.00706242058121003
+  ],
+  "bboxMin": [
+    -0.1,
+    -0.1,
+    -0.03
+  ],
+  "bboxMax": [
+    0.1,
+    0.1,
+    0.3
+  ],
+  "stl": "spike_sensor_sample.stl",
+  "stlUnit": "m",
+  "parts": [
+    {
+      "body": "SpikeTip",
+      "material": "Steel",
+      "density_kg_m3": 7850.0,
+      "mass": 0.01568214044494446,
+      "cg": [
+        -2.0703066113129253e-19,
+        1.5850784992864583e-19,
+        -0.007499999999999996
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      },
+      "materialId": "PrismMaterial-Steel",
+      "materialLibrary": "Fusion Material Library",
+      "materialProperties": {
+        "density": 7850.0,
+        "E": 200000000000.0,
+        "nu": 0.29,
+        "yield": 250000000.0,
+        "ultimate": 400000000.0,
+        "thermalExpansion": 1.2e-05,
+        "thermalConductivity": 50.0,
+        "specificHeat": 470.0
+      },
+      "appearance": {
+        "name": "Steel - Satin",
+        "baseColor": [
+          0.5882352941176471,
+          0.596078431372549,
+          0.611764705882353
+        ],
+        "opacity": 1.0,
+        "metallic": 1.0,
+        "roughness": 0.35
+      },
+      "occurrence": "Spike:1"
+    },
+    {
+      "body": "Spike",
+      "material": "Steel",
+      "density_kg_m3": 7850.0,
+      "mass": 0.15682140444944445,
+      "cg": [
+        -8.798803098079942e-19,
+        3.3771876597042127e-19,
+        0.05000000000000008
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      },
+      "materialId": "PrismMaterial-Steel",
+      "materialLibrary": "Fusion Material Library",
+      "materialProperties": {
+        "density": 7850.0,
+        "E": 200000000000.0,
+        "nu": 0.29,
+        "yield": 250000000.0,
+        "ultimate": 400000000.0,
+        "thermalExpansion": 1.2e-05,
+        "thermalConductivity": 50.0,
+        "specificHeat": 470.0
+      },
+      "appearance": {
+        "name": "Steel - Satin",
+        "baseColor": [
+          0.5882352941176471,
+          0.596078431372549,
+          0.611764705882353
+        ],
+        "opacity": 1.0,
+        "metallic": 1.0,
+        "roughness": 0.35
+      },
+      "occurrence": "Spike:1"
+    },
+    {
+      "body": "Body",
+      "material": "Aluminum 6061",
+      "density_kg_m3": 752.7527499579094,
+      "mass": 0.7518964551056111,
+      "cg": [
+        -3.564239862036332e-18,
+        -8.099039463456165e-19,
+        0.20000000000000007
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      },
+      "materialId": "PrismMaterial-Aluminum6061",
+      "materialLibrary": "Fusion Material Library",
+      "materialProperties": {
+        "density": 752.7527499579094,
+        "E": 68900000000.0,
+        "nu": 0.33,
+        "yield": 276000000.0,
+        "ultimate": 310000000.0,
+        "thermalExpansion": 2.36e-05,
+        "thermalConductivity": 167.0,
+        "specificHeat": 896.0
+      },
+      "appearance": {
+        "name": "Aluminum - Anodized (Gray)",
+        "baseColor": [
+          0.3764705882352941,
+          0.40784313725490196,
+          0.4392156862745098
+        ],
+        "opacity": 1.0,
+        "metallic": 1.0,
+        "roughness": 0.4
+      },
+      "occurrence": "Body:1"
+    },
+    {
+      "body": "Fin1",
+      "material": "ABS",
+      "density_kg_m3": 1050.0,
+      "mass": 0.01889999999999999,
+      "cg": [
+        0.07000000000000002,
+        0.0,
+        0.25
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      },
+      "materialId": "PrismMaterial-ABS",
+      "materialLibrary": "Fusion Material Library",
+      "materialProperties": {
+        "density": 1050.0,
+        "E": 2200000000.0,
+        "nu": 0.35,
+        "yield": 40000000.0,
+        "ultimate": 44000000.0,
+        "thermalExpansion": 9e-05,
+        "thermalConductivity": 0.17,
+        "specificHeat": 1400.0
+      },
+      "appearance": {
+        "name": "Plastic - Matte (Orange)",
+        "baseColor": [
+          0.9098039215686274,
+          0.47058823529411764,
+          0.1568627450980392
+        ],
+        "opacity": 1.0,
+        "metallic": 0.0,
+        "roughness": 0.6
+      },
+      "occurrence": "Fins:1"
+    },
+    {
+      "body": "Fin2",
+      "material": "ABS",
+      "density_kg_m3": 1050.0,
+      "mass": 0.018899999999999993,
+      "cg": [
+        -0.07,
+        0.0,
+        0.25
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      },
+      "materialId": "PrismMaterial-ABS",
+      "materialLibrary": "Fusion Material Library",
+      "materialProperties": {
+        "density": 1050.0,
+        "E": 2200000000.0,
+        "nu": 0.35,
+        "yield": 40000000.0,
+        "ultimate": 44000000.0,
+        "thermalExpansion": 9e-05,
+        "thermalConductivity": 0.17,
+        "specificHeat": 1400.0
+      },
+      "appearance": {
+        "name": "Plastic - Matte (Orange)",
+        "baseColor": [
+          0.9098039215686274,
+          0.47058823529411764,
+          0.1568627450980392
+        ],
+        "opacity": 1.0,
+        "metallic": 0.0,
+        "roughness": 0.6
+      },
+      "occurrence": "Fins:1"
+    },
+    {
+      "body": "Fin3",
+      "material": "ABS",
+      "density_kg_m3": 1050.0,
+      "mass": 0.018899999999999993,
+      "cg": [
+        0.0,
+        0.07,
+        0.24999999999999994
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      },
+      "materialId": "PrismMaterial-ABS",
+      "materialLibrary": "Fusion Material Library",
+      "materialProperties": {
+        "density": 1050.0,
+        "E": 2200000000.0,
+        "nu": 0.35,
+        "yield": 40000000.0,
+        "ultimate": 44000000.0,
+        "thermalExpansion": 9e-05,
+        "thermalConductivity": 0.17,
+        "specificHeat": 1400.0
+      },
+      "appearance": {
+        "name": "Plastic - Matte (Orange)",
+        "baseColor": [
+          0.9098039215686274,
+          0.47058823529411764,
+          0.1568627450980392
+        ],
+        "opacity": 1.0,
+        "metallic": 0.0,
+        "roughness": 0.6
+      },
+      "occurrence": "Fins:1"
+    },
+    {
+      "body": "Fin4",
+      "material": "ABS",
+      "density_kg_m3": 1050.0,
+      "mass": 0.018899999999999993,
+      "cg": [
+        -2.297723923758411e-20,
+        -0.07,
+        0.24999999999999992
+      ],
+      "inertiaCheck": {
+        "reference": "synthetic-mesh-integration",
+        "ok": true
+      },
+      "materialId": "PrismMaterial-ABS",
+      "materialLibrary": "Fusion Material Library",
+      "materialProperties": {
+        "density": 1050.0,
+        "E": 2200000000.0,
+        "nu": 0.35,
+        "yield": 40000000.0,
+        "ultimate": 44000000.0,
+        "thermalExpansion": 9e-05,
+        "thermalConductivity": 0.17,
+        "specificHeat": 1400.0
+      },
+      "appearance": {
+        "name": "Plastic - Matte (Orange)",
+        "baseColor": [
+          0.9098039215686274,
+          0.47058823529411764,
+          0.1568627450980392
+        ],
+        "opacity": 1.0,
+        "metallic": 0.0,
+        "roughness": 0.6
+      },
+      "occurrence": "Fins:1"
+    }
+  ],
+  "exportedAt": "2026-01-01T00:00:00",
+  "exporter": "MnS_ExportForSim 1.1",
+  "document": "SYNTHETIC SAMPLE (not a real design) — export 1.1 fields example",
+  "fusionUnits": "mm",
+  "noseAxisHint": "-Z",
+  "warnings": [],
+  "userParameters": [
+    {
+      "name": "spike_length",
+      "expression": "100 mm",
+      "unit": "mm",
+      "value": 10.0,
+      "valueSI": 0.1,
+      "siUnit": "m",
+      "comment": "스파이크 길이"
+    },
+    {
+      "name": "body_dia",
+      "expression": "80 mm",
+      "unit": "mm",
+      "value": 8.0,
+      "valueSI": 0.08,
+      "siUnit": "m",
+      "comment": "몸통 지름"
+    },
+    {
+      "name": "body_length",
+      "expression": "200 mm",
+      "unit": "mm",
+      "value": 20.0,
+      "valueSI": 0.2,
+      "siUnit": "m"
+    },
+    {
+      "name": "fin_span",
+      "expression": "60 mm",
+      "unit": "mm",
+      "value": 6.0,
+      "valueSI": 0.06,
+      "siUnit": "m",
+      "comment": "날개 폭(몸통 밖)"
+    },
+    {
+      "name": "fin_thickness",
+      "expression": "3 mm",
+      "unit": "mm",
+      "value": 0.3,
+      "valueSI": 0.003,
+      "siUnit": "m"
+    },
+    {
+      "name": "fin_count",
+      "expression": "4",
+      "unit": "",
+      "value": 4.0,
+      "valueSI": 4.0,
+      "siUnit": "",
+      "comment": "날개 수"
+    }
+  ],
+  "joints": [
+    {
+      "name": "Rigid1",
+      "type": "Rigid",
+      "source": "joint",
+      "occurrenceOne": "Spike:1",
+      "occurrenceTwo": "Body:1",
+      "origin": [
+        0.0,
+        0.0,
+        0.1
+      ]
+    },
+    {
+      "name": "Rigid2",
+      "type": "Rigid",
+      "source": "joint",
+      "occurrenceOne": "Body:1",
+      "occurrenceTwo": "Fins:1",
+      "origin": [
+        0.0,
+        0.0,
+        0.2
+      ]
+    },
+    {
+      "name": "Spike:1 고정",
+      "type": "Rigid",
+      "source": "asBuiltJoint",
+      "occurrenceOne": "Spike:1",
+      "occurrenceTwo": ""
+    }
+  ],
+  "mesh": {
+    "method": "stl-export",
+    "refinement": "medium"
+  }
+}

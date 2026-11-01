@@ -1,0 +1,130 @@
+{
+  "schema": "mns.environment/1",
+  "id": "grass",
+  "displayName": {
+    "ko": "풀밭",
+    "en": "Field"
+  },
+  "style": "scene",
+  "centerAngleDeg": 0,
+  "scaling": {
+    "fitTo": 2,
+    "autoScale": true,
+    "autoScaleFactor": 10
+  },
+  "features": [
+    {
+      "kind": "ground",
+      "shape": "plane",
+      "isGroundPlane": true,
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "grass",
+          "seed": 1,
+          "colors": [
+            [
+              0.17,
+              0.3,
+              0.1
+            ],
+            [
+              0.33,
+              0.46,
+              0.16
+            ],
+            [
+              0.43,
+              0.36,
+              0.24
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "kind": "dome",
+      "shape": "hemisphere",
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "sky",
+          "seed": 1,
+          "zenith": [
+            0.25,
+            0.45,
+            0.78
+          ],
+          "horizon": [
+            0.72,
+            0.8,
+            0.88
+          ],
+          "haze": [
+            0.62,
+            0.66,
+            0.62
+          ],
+          "trees": false
+        }
+      }
+    }
+  ],
+  "ibl": {
+    "source": "procedural-sky",
+    "exposureEV": 0.0
+  },
+  "lights": [
+    {
+      "type": "directional",
+      "label": "sun",
+      "color": [
+        0.88,
+        0.84,
+        0.75
+      ],
+      "gain": 1.0,
+      "space": "ground",
+      "direction": [
+        -0.3346,
+        0.5795,
+        -0.7431
+      ],
+      "shadowColor": [
+        -0.3,
+        -0.3,
+        -0.3
+      ],
+      "enabled": true
+    },
+    {
+      "type": "hemisphere",
+      "label": "sky/ground",
+      "sky": [
+        0.42,
+        0.46,
+        0.54
+      ],
+      "ground": [
+        0.2,
+        0.22,
+        0.15
+      ],
+      "gain": 1.0,
+      "enabled": true
+    }
+  ],
+  "ambient": {
+    "color": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "gain": 0.0
+  },
+  "soilMatch": [
+    "farmland",
+    "grass",
+    "*"
+  ]
+}

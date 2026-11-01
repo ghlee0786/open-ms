@@ -1,0 +1,55 @@
+{
+  "schema": "mns.scenario/1",
+  "name": "02_box_parachute_drop",
+  "description": "낙하산 박스 투하: 헬기(300 m AGL, 20 m/s)에서 박스(5.5 kg) 이탈 → 1 s 후 Iris Ultra 48\" 전개 → 정상 하강.",
+  "sim": { "dt": 0.001, "tEnd": 200, "outputRate": 50, "seed": 2 },
+  "environment": {
+    "wind": { "speed": 4, "directionFrom": 300, "refHeight": 10, "shear": "log", "roughness": 0.05 },
+    "turbulence": "light"
+  },
+  "carrier": { "name": "helicopter", "altitude": 300, "speed": 20, "heading": 90,
+    "shape": { "type": "box", "size": [3.0, 1.2, 1.2] } },
+  "bodies": [
+    {
+      "name": "box",
+      "parent": "helicopter",
+      "mount": [0, 0, 0.9],
+      "mass": 5.5,
+      "cg": [0, 0, 0.03],
+      "shape": { "type": "box", "size": [0.28, 0.28, 0.39] },
+      "aero": { "cp": [0, 0, 0], "damping": [-3, -3, -3] },
+      "color": "#4f8fd8",
+      "devices": [
+        { "type": "parachute", "name": "chute", "d0": 1.22, "cd0": 2.2, "attach": [0, 0, -0.195], "riser": 2.5,
+          "fillConstant": 8, "fillExponent": 2, "lineStretchTime": 0.35 }
+      ]
+    }
+  ],
+  "events": [
+    { "name": "release", "when": { "type": "time", "t": 1.0 }, "do": [ { "type": "separate", "body": "box", "relVel": [0, 0, 1.5] } ] },
+    { "name": "chute_deploy", "when": { "type": "after", "event": "box.separated", "delay": 1.0 }, "do": [ { "type": "deploy", "device": "box.chute" } ] }
+  ],
+  "dispersions": [
+    { "path": "environment.wind.speed", "dist": "truncnormal", "sd": 1.5, "min": -4, "max": 6 },
+    { "path": "environment.wind.directionFrom", "dist": "normal", "sd": 25 },
+    { "path": "bodies.box.devices.chute.cd0", "dist": "normal", "mode": "scale", "sd": 0.08 },
+    { "path": "events.chute_deploy.when.delay", "dist": "uniform", "min": -0.3, "max": 0.5 }
+  ],
+  "monteCarlo": { "runs": 200, "impactBody": "box", "sampling": "lhs", "seed": 21 },
+  "gpuMonteCarlo": {
+    "runs": 100000,
+    "seed": 7,
+    "sampling": "lhs",
+    "model": {
+      "mass": 5.5, "cdA": 0.082, "dt": 0.005, "tMax": 300,
+      "chute": { "d0": 1.22, "cd0": 2.2, "delay": 1.0, "lineStretchTime": 0.35, "fillConstant": 8, "fillExponent": 2 },
+      "release": { "altitude": 300, "speed": 20, "heading": 90, "vd": 1.5 }
+    },
+    "dispersions": [
+      { "path": "environment.wind.speed", "dist": "truncnormal", "sd": 1.5, "min": -4, "max": 6 },
+      { "path": "environment.wind.directionFrom", "dist": "normal", "sd": 25 },
+      { "path": "model.chute.cd0", "dist": "normal", "mode": "scale", "sd": 0.08 },
+      { "path": "model.chute.delay", "dist": "uniform", "min": -0.3, "max": 0.5 }
+    ]
+  }
+}

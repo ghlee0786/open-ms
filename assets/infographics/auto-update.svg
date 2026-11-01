@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420" font-family="'Segoe UI','Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">자동 업데이트</title>
+  <desc id="d">시작 5초 뒤 하루 1회 확인 → GitHub 릴리스의 OpenMS-Setup-x.y.z.exe 찾기 → 새 버전 대화상자 → 내려받기 · SHA-256 검증 → /SILENT 설치 → 새 버전으로 재실행.</desc>
+  <!-- Open M&amp;S README 인포그래픽. 단계가 차례로 켜지고 흐름이 움직인다(CSS keyframes · SMIL, 자바스크립트 없음). 다시 만들기: scripts/make_infographics.py -->
+  <style>
+    .flow { stroke-dasharray: 7 7; animation: dash 1s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -14; } }
+    @keyframes on0 { 0%, 3.0% { opacity: 0; } 6.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on0 { opacity: 0; animation: on0 12s infinite; }
+    @keyframes now0 { 0%, 3.0% { opacity: 0; } 6.0% { opacity: .55; } 16.7%, 100% { opacity: 0; } }
+    .now0 { opacity: 0; animation: now0 12s infinite; }
+    @keyframes on1 { 0%, 16.7% { opacity: 0; } 19.7%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on1 { opacity: 0; animation: on1 12s infinite; }
+    @keyframes now1 { 0%, 16.7% { opacity: 0; } 19.7% { opacity: .55; } 30.3%, 100% { opacity: 0; } }
+    .now1 { opacity: 0; animation: now1 12s infinite; }
+    @keyframes on2 { 0%, 30.3% { opacity: 0; } 33.3%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on2 { opacity: 0; animation: on2 12s infinite; }
+    @keyframes now2 { 0%, 30.3% { opacity: 0; } 33.3% { opacity: .55; } 44.0%, 100% { opacity: 0; } }
+    .now2 { opacity: 0; animation: now2 12s infinite; }
+    @keyframes on3 { 0%, 44.0% { opacity: 0; } 47.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on3 { opacity: 0; animation: on3 12s infinite; }
+    @keyframes now3 { 0%, 44.0% { opacity: 0; } 47.0% { opacity: .55; } 57.7%, 100% { opacity: 0; } }
+    .now3 { opacity: 0; animation: now3 12s infinite; }
+    @keyframes on4 { 0%, 57.7% { opacity: 0; } 60.7%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on4 { opacity: 0; animation: on4 12s infinite; }
+    @keyframes now4 { 0%, 57.7% { opacity: 0; } 60.7% { opacity: .55; } 71.3%, 100% { opacity: 0; } }
+    .now4 { opacity: 0; animation: now4 12s infinite; }
+    @keyframes on5 { 0%, 71.3% { opacity: 0; } 74.3%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on5 { opacity: 0; animation: on5 12s infinite; }
+    @keyframes now5 { 0%, 71.3% { opacity: 0; } 74.3% { opacity: .55; } 85.0%, 100% { opacity: 0; } }
+    .now5 { opacity: 0; animation: now5 12s infinite; }
+    
+  </style>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b8b95"/></marker>
+    <marker id="headR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+  </defs>
+  <rect width="960" height="420" rx="18" fill="#111318" stroke="#2a2f3a"/>
+  <text x="28" y="38" font-size="20" fill="#f4f4f5" font-weight="700">자동 업데이트</text>
+  <text x="28" y="60" font-size="13.5" fill="#a1a1aa">설치판은 GitHub 릴리스를 스스로 확인하고, 사용자가 고르면 내려받아 검증한 뒤 조용히 설치하고 다시 켠다</text>
+  <g transform="translate(24 80)"><rect class="now0" x="-5" y="-5" width="294" height="102" rx="16" fill="#94a3b8"/><rect width="284" height="92" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on0" width="284" height="92" rx="12" fill="none" stroke="#94a3b8" stroke-width="2.5"/><rect class="on0" x="0" y="10" width="4" height="72" rx="2" fill="#94a3b8"/><circle cx="22" cy="21" r="11" fill="#94a3b8" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">1</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">시작 5초 뒤 확인</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">하루 1회 자동 (끌 수 있음)</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">도움말 → 업데이트 확인… 은 언제나</text></g>
+  <path class="flow" d="M310 126H330" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on1 flow" d="M310 126H330" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(332 80)"><rect class="now1" x="-5" y="-5" width="294" height="102" rx="16" fill="#06b6d4"/><rect width="284" height="92" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="284" height="92" rx="12" fill="none" stroke="#06b6d4" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="72" rx="2" fill="#06b6d4"/><circle cx="22" cy="21" r="11" fill="#06b6d4" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">2</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">GitHub 릴리스</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">최신 정식 태그 (초안 · 시험판 제외)</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">자산 OpenMS-Setup-x.y.z.exe · .sha256</text></g>
+  <path class="flow" d="M618 126H638" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on2 flow" d="M618 126H638" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(640 80)"><rect class="now2" x="-5" y="-5" width="294" height="102" rx="16" fill="#f59e0b"/><rect width="284" height="92" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="284" height="92" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="72" rx="2" fill="#f59e0b"/><circle cx="22" cy="21" r="11" fill="#f59e0b" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">3</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">새 버전 대화상자</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">현재 · 새 버전 · 릴리스 노트</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">[지금 업데이트] [나중에] [건너뛰기]</text></g>
+  <g transform="translate(24 202)"><rect class="now3" x="-5" y="-5" width="294" height="102" rx="16" fill="#3b82f6"/><rect width="284" height="92" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="284" height="92" rx="12" fill="none" stroke="#3b82f6" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="72" rx="2" fill="#3b82f6"/><circle cx="22" cy="21" r="11" fill="#3b82f6" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">4</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">내려받기 · 검증</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">진행 막대 · 실패 시 [다시 시도]</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">SHA-256 불일치 → 파일 삭제 · 거부</text></g>
+  <path class="flow" d="M310 248H330" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on4 flow" d="M310 248H330" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(332 202)"><rect class="now4" x="-5" y="-5" width="294" height="102" rx="16" fill="#a78bfa"/><rect width="284" height="92" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on4" width="284" height="92" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on4" x="0" y="10" width="4" height="72" rx="2" fill="#a78bfa"/><circle cx="22" cy="21" r="11" fill="#a78bfa" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">5</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">조용히 설치</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">설치 프로그램 /SILENT 실행 · 앱 닫힘</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">설정 · results 폴더는 그대로</text></g>
+  <path class="flow" d="M618 248H638" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on5 flow" d="M618 248H638" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(640 202)"><rect class="now5" x="-5" y="-5" width="294" height="102" rx="16" fill="#22c55e"/><rect width="284" height="92" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on5" width="284" height="92" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/><rect class="on5" x="0" y="10" width="4" height="72" rx="2" fill="#22c55e"/><circle cx="22" cy="21" r="11" fill="#22c55e" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">6</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">재실행</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">설치가 끝나면 새 버전이 다시 뜸</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">다시 확인하면 "최신 버전입니다"</text></g>
+  <path class="flow" d="M790 176V188H166V198" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on3 flow" d="M790 176V188H166V198" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <rect x="64" y="286" width="240" height="6" rx="3" fill="#2a3140"/><rect x="64" y="286" width="0" height="6" rx="3" fill="#3b82f6"><animate attributeName="width" values="0;0;240;240;0" keyTimes="0;0.440;0.577;0.94;1" dur="12s" repeatCount="indefinite"/></rect>
+  <rect x="24" y="324" width="912" height="72" rx="12" fill="#171b23"/>
+  <text x="44" y="350" font-size="13.5" fill="#f4f4f5" font-weight="700">조용히 넘기는 경우</text>
+  <text x="44" y="372" font-size="12.5" fill="#a1a1aa">오프라인 · 시간 초과 · 404(릴리스 없음) · 403/429(요청 한도)는 대화상자 없이 로그만 남기고 다음 시작 때 다시 확인한다.</text>
+  <text x="44" y="389" font-size="12.5" fill="#a1a1aa">개발 빌드(버전 0.0.0)는 확인하지 않는다 · 건너뛴 버전은 자동 확인에서만 숨긴다 · 설치 위치 %LOCALAPPDATA%\Programs\OpenMS (관리자 권한 불필요)</text>
+</svg>

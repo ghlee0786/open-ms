@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" width="960" height="470" font-family="'Segoe UI','Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">구조 · 충격 해석 파이프라인</title>
+  <desc id="d">하중 케이스(구간 최대 · 개방 충격 · 착지) → 메시(Gmsh 사면체) → CalculiX(정적 · 고유진동 · 좌굴 · 모달 과도) 또는 OpenCourant(착지 충돌) → 안전율 · 99 % 응력 · 고유진동 · 진동 피로 → 3D 응력 색 · 보고서.</desc>
+  <!-- Open M&amp;S README 인포그래픽. 단계가 차례로 켜지고 흐름이 움직인다(CSS keyframes · SMIL, 자바스크립트 없음). 다시 만들기: scripts/make_infographics.py -->
+  <style>
+    .flow { stroke-dasharray: 7 7; animation: dash 1s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -14; } }
+    @keyframes on0 { 0%, 3.0% { opacity: 0; } 6.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on0 { opacity: 0; animation: on0 11s infinite; }
+    @keyframes now0 { 0%, 3.0% { opacity: 0; } 6.0% { opacity: .55; } 19.4%, 100% { opacity: 0; } }
+    .now0 { opacity: 0; animation: now0 11s infinite; }
+    @keyframes on1 { 0%, 19.4% { opacity: 0; } 22.4%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on1 { opacity: 0; animation: on1 11s infinite; }
+    @keyframes now1 { 0%, 19.4% { opacity: 0; } 22.4% { opacity: .55; } 35.8%, 100% { opacity: 0; } }
+    .now1 { opacity: 0; animation: now1 11s infinite; }
+    @keyframes on2 { 0%, 35.8% { opacity: 0; } 38.8%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on2 { opacity: 0; animation: on2 11s infinite; }
+    @keyframes now2 { 0%, 35.8% { opacity: 0; } 38.8% { opacity: .55; } 52.2%, 100% { opacity: 0; } }
+    .now2 { opacity: 0; animation: now2 11s infinite; }
+    @keyframes on3 { 0%, 52.2% { opacity: 0; } 55.2%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on3 { opacity: 0; animation: on3 11s infinite; }
+    @keyframes now3 { 0%, 52.2% { opacity: 0; } 55.2% { opacity: .55; } 68.6%, 100% { opacity: 0; } }
+    .now3 { opacity: 0; animation: now3 11s infinite; }
+    @keyframes on4 { 0%, 68.6% { opacity: 0; } 71.6%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on4 { opacity: 0; animation: on4 11s infinite; }
+    @keyframes now4 { 0%, 68.6% { opacity: 0; } 71.6% { opacity: .55; } 85.0%, 100% { opacity: 0; } }
+    .now4 { opacity: 0; animation: now4 11s infinite; }
+    
+  </style>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b8b95"/></marker>
+    <marker id="headR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+  </defs>
+  <rect width="960" height="470" rx="18" fill="#111318" stroke="#2a2f3a"/>
+  <text x="28" y="38" font-size="20" fill="#f4f4f5" font-weight="700">구조 · 충격 해석 파이프라인</text>
+  <text x="28" y="60" font-size="13.5" fill="#a1a1aa">비행 중 하중을 뽑아 메시를 만들고 외부 해석기로 풀어 안전율 · 고유진동 · 피로로 판정한다 (빠른 근사 F6 는 바로 판정)</text>
+  <g transform="translate(24 150)"><rect class="now0" x="-5" y="-5" width="182" height="94" rx="16" fill="#f59e0b"/><rect width="172" height="84" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on0" width="172" height="84" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><rect class="on0" x="0" y="10" width="4" height="64" rx="2" fill="#f59e0b"/><circle cx="22" cy="21" r="11" fill="#f59e0b" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">1</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">하중 케이스</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">구간 최대 · 개방 충격</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">착지 충돌 가속도 [G]</text></g>
+  <path class="flow" d="M196 192H208" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on1 flow" d="M196 192H208" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(210 150)"><rect class="now1" x="-5" y="-5" width="182" height="94" rx="16" fill="#06b6d4"/><rect width="172" height="84" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="172" height="84" rx="12" fill="none" stroke="#06b6d4" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="64" rx="2" fill="#06b6d4"/><circle cx="22" cy="21" r="11" fill="#06b6d4" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">2</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">메시</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">Gmsh 사면체 (STEP/STL)</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">두께 2요소 규칙</text></g>
+  <path class="flow" d="M382 192H394" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on2 flow" d="M382 192H394" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(396 150)"><rect class="now2" x="-5" y="-5" width="182" height="94" rx="16" fill="#a78bfa"/><rect width="172" height="84" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="172" height="84" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="64" rx="2" fill="#a78bfa"/><circle cx="22" cy="21" r="11" fill="#a78bfa" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">3</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">외부 해석기</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">CalculiX 정적 · 진동 · 좌굴</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">OpenCourant 충돌 · 파단</text></g>
+  <path class="flow" d="M568 192H580" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on3 flow" d="M568 192H580" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(582 150)"><rect class="now3" x="-5" y="-5" width="182" height="94" rx="16" fill="#22c55e"/><rect width="172" height="84" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="172" height="84" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="64" rx="2" fill="#22c55e"/><circle cx="22" cy="21" r="11" fill="#22c55e" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">4</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">판정</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">안전율 · 99 % 응력</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">고유진동 · 진동 피로</text></g>
+  <path class="flow" d="M754 192H766" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on4 flow" d="M754 192H766" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(768 150)"><rect class="now4" x="-5" y="-5" width="182" height="94" rx="16" fill="#3b82f6"/><rect width="172" height="84" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on4" width="172" height="84" rx="12" fill="none" stroke="#3b82f6" stroke-width="2.5"/><rect class="on4" x="0" y="10" width="4" height="64" rx="2" fill="#3b82f6"/><circle cx="22" cy="21" r="11" fill="#3b82f6" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">5</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">표시 · 보고서</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">3D 응력 색 · 변형 배율</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">report.md · result.vtu</text></g>
+  <path class="flow" d="M109 146V108H668V142" stroke="#f59e0b" stroke-width="2" fill="none" marker-end="url(#head)" opacity=".8"/>
+  <rect x="198" y="94" width="380" height="28" rx="14" fill="#111318"/>
+  <text x="388" y="113" font-size="12.5" fill="#fcd34d" font-weight="700" text-anchor="middle">F6 구조 분석 (근사) — 보 · 박판 응력, 외부 도구 없이 몇 초</text>
+  <defs><linearGradient id="vm" x1="0" x2="1"><stop offset="0" stop-color="#2563eb"/><stop offset=".35" stop-color="#22c55e"/><stop offset=".65" stop-color="#eab308"/><stop offset="1" stop-color="#dc2626"/></linearGradient></defs>
+  <rect class="on4" x="784" y="240" width="170" height="8" rx="4" fill="url(#vm)"/>
+  <g class="on4"><text x="784" y="262" font-size="11" fill="#71717a">낮음</text><text x="954" y="262" font-size="11" fill="#71717a" text-anchor="end">항복 근접</text></g>
+  <g transform="translate(24 284)"><rect class="now2" x="-5" y="-5" width="306" height="118" rx="16" fill="#a78bfa"/><rect width="296" height="108" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="296" height="108" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="88" rx="2" fill="#a78bfa"/><text x="16" y="26" font-size="15.5" fill="#f4f4f5" font-weight="700">CalculiX (F7)</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">정적 · 고유진동 · 좌굴 — 선택 물체</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">모달 과도 — 개방 충격 창의 가속도 이력</text><text x="16" y="82" font-size="12.5" fill="#a1a1aa">값: von Mises · 변위 · 고유진동수 [Hz]</text></g>
+  <g transform="translate(332 284)"><rect class="now2" x="-5" y="-5" width="306" height="118" rx="16" fill="#f472b6"/><rect width="296" height="108" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="296" height="108" rx="12" fill="none" stroke="#f472b6" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="88" rx="2" fill="#f472b6"/><text x="16" y="26" font-size="15.5" fill="#f4f4f5" font-weight="700">OpenCourant (착지 충돌)</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">착지 순간을 양해법으로 짧게 계산</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">소성 변형 · 파단 요소 · 접촉</text><text x="16" y="82" font-size="12.5" fill="#a1a1aa">값: 최대 응력 · 소성 변형률 · 손상</text></g>
+  <g transform="translate(640 284)"><rect class="now3" x="-5" y="-5" width="306" height="118" rx="16" fill="#22c55e"/><rect width="296" height="108" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="296" height="108" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="88" rx="2" fill="#22c55e"/><text x="16" y="26" font-size="15.5" fill="#f4f4f5" font-weight="700">진동 피로 (근사)</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">와류 흘림 f_s 와 고유진동 f_n 비교</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">f_s / f_n 이 0.8 넘으면 공진 근접</text><text x="16" y="82" font-size="12.5" fill="#a1a1aa">공개 S-N 곡선 · Miner 손상 D</text></g>
+  <text x="480" y="426" font-size="12.5" fill="#71717a" text-anchor="middle">판정 기준: 안전율 = 허용 응력 / 응력. 최대값은 모서리 특이점에 민감해 99 % 백분위 응력과 메시 수렴(굵게 · 국부 절반)을 함께 본다</text>
+  <text x="480" y="448" font-size="12.5" fill="#71717a" text-anchor="middle">재질은 재질 라이브러리 · Fusion 재료 물성 · 시나리오 지정 순으로 우선한다</text>
+</svg>

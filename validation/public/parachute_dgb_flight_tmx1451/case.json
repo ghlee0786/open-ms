@@ -1,0 +1,51 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "parachute_dgb_flight_tmx1451",
+ "title": "30-ft DGB supersonic mortar deployment (M 1.56, 38.9 km): peak opening load and time",
+ "vv": "VV-40",
+ "grade": "A",
+ "use": "validation",
+ "kind": "parachute-deployment-flight",
+ "model": "낙하산 충만·개방하중(F절: 충만 곡선 + 겉보기 질량 유입 항 k0)",
+ "tolerance": {
+  "relative": 0.2
+ },
+ "envelope": "비압축(M ≤ 0.5) — 이 시험은 M 1.56 이라 외삽",
+ "sources": [
+  {
+   "title": "Flight Test of a 30-Foot-Nominal-Diameter Disk-Gap-Band Parachute Deployed at a Mach Number of 1.56 and a Dynamic Pressure of 11.4 Pounds per Square Foot (NASA TM X-1451)",
+   "url": "https://ntrs.nasa.gov/api/citations/19670026287/downloads/19670026287.pdf"
+  }
+ ],
+ "notes": [
+  "충만 n = 8.2, k0 = 1.2623 은 Cruz 2003 풍동 보정값(독립 예측). 경로각 25.0° 는 정점 고도에서 역산한 값(계산).",
+  "측정 최대 하중은 텐시오미터(리저) 값 — 시뮬레이터 하중도 탑재체에 걸리는 낙하산 하중.",
+  "쉬라우드 간섭으로 팽창이 0.60–0.73 s 정체(원 보고서) — 시각 비교는 참고 수준."
+ ],
+ "points": [
+  {
+   "label": "TM X-1451 DGB",
+   "inputs": {
+    "mass_kg": 102.5,
+    "d0_m": 9.144,
+    "cd0": 0.52,
+    "altitude_m": 38862,
+    "speed_mps": 492.3,
+    "flightPathDeg": 25.0,
+    "lineStretchTime_s": 0.37,
+    "fillConstant": 8.2,
+    "fillExponent": 2.0,
+    "apparentMassK0": 1.2623,
+    "peakTime_s": 0.94
+   },
+   "measured": 17400,
+   "unit": "N",
+   "provenance": "table (TM X-1451 Summary, p.7)"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/parachute_dgb_200lb/case.json",
+  "sha256": "5f1a4eac83abdf0c08698a42ad94b1698a5e6b957ca3adb5aca01e441d0c0933",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

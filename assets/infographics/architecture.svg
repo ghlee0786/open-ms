@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500" font-family="'Segoe UI','Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Open M&amp;S 전체 구조</title>
+  <desc id="d">입력(Fusion 내보내기 · 시나리오 JSON · 공개 샘플) → 시뮬레이터(6DOF 엔진 · GPU 몬테카를로 · 근사 구조 분석 · 3D 재생) → 외부 해석기(CalculiX · OpenCourant · OpenFOAM · XLB, 선택) → 결과(.mnsr · 결과 폴더 · 보고서 · Blender).</desc>
+  <!-- Open M&amp;S README 인포그래픽. 단계가 차례로 켜지고 흐름이 움직인다(CSS keyframes · SMIL, 자바스크립트 없음). 다시 만들기: scripts/make_infographics.py -->
+  <style>
+    .flow { stroke-dasharray: 7 7; animation: dash 1s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -14; } }
+    @keyframes on0 { 0%, 3.0% { opacity: 0; } 6.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on0 { opacity: 0; animation: on0 10s infinite; }
+    @keyframes now0 { 0%, 3.0% { opacity: 0; } 6.0% { opacity: .55; } 23.5%, 100% { opacity: 0; } }
+    .now0 { opacity: 0; animation: now0 10s infinite; }
+    @keyframes on1 { 0%, 23.5% { opacity: 0; } 26.5%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on1 { opacity: 0; animation: on1 10s infinite; }
+    @keyframes now1 { 0%, 23.5% { opacity: 0; } 26.5% { opacity: .55; } 44.0%, 100% { opacity: 0; } }
+    .now1 { opacity: 0; animation: now1 10s infinite; }
+    @keyframes on2 { 0%, 44.0% { opacity: 0; } 47.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on2 { opacity: 0; animation: on2 10s infinite; }
+    @keyframes now2 { 0%, 44.0% { opacity: 0; } 47.0% { opacity: .55; } 64.5%, 100% { opacity: 0; } }
+    .now2 { opacity: 0; animation: now2 10s infinite; }
+    @keyframes on3 { 0%, 64.5% { opacity: 0; } 67.5%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on3 { opacity: 0; animation: on3 10s infinite; }
+    @keyframes now3 { 0%, 64.5% { opacity: 0; } 67.5% { opacity: .55; } 85.0%, 100% { opacity: 0; } }
+    .now3 { opacity: 0; animation: now3 10s infinite; }
+    
+  </style>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b8b95"/></marker>
+    <marker id="headR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+  </defs>
+  <rect width="960" height="500" rx="18" fill="#111318" stroke="#2a2f3a"/>
+  <text x="28" y="38" font-size="20" fill="#f4f4f5" font-weight="700">Open M&amp;S 전체 구조</text>
+  <text x="28" y="60" font-size="13.5" fill="#a1a1aa">CAD 모델과 시나리오 JSON 을 넣으면 6DOF 엔진이 계산하고, 필요할 때만 외부 해석기를 불러 결과 · 보고서로 남긴다</text>
+  <rect x="16" y="80" width="212" height="370" rx="14" fill="#171b23"/>
+  <text x="122" y="102" font-size="14" fill="#f59e0b" font-weight="700" text-anchor="middle">① 입력</text>
+  <g transform="translate(24 116)"><rect class="now0" x="-5" y="-5" width="206" height="82" rx="16" fill="#f59e0b"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on0" width="196" height="72" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><rect class="on0" x="0" y="10" width="4" height="52" rx="2" fill="#f59e0b"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">Fusion 내보내기</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">STL · massprops.json</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">재료 물성 · 외관 · USD</text></g>
+  <g transform="translate(24 198)"><rect class="now0" x="-5" y="-5" width="206" height="82" rx="16" fill="#f59e0b"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on0" width="196" height="72" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><rect class="on0" x="0" y="10" width="4" height="52" rx="2" fill="#f59e0b"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">시나리오 JSON</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">물체 · 낙하산 · 이벤트</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">바람 · 난류 · 분산</text></g>
+  <g transform="translate(24 280)"><rect class="now0" x="-5" y="-5" width="206" height="82" rx="16" fill="#f59e0b"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on0" width="196" height="72" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><rect class="on0" x="0" y="10" width="4" height="52" rx="2" fill="#f59e0b"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">공개 샘플 · 데모</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">합성 STL 샘플</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">데모 시나리오 3종</text></g>
+  <rect x="250" y="80" width="212" height="370" rx="14" fill="#171b23"/>
+  <text x="356" y="102" font-size="14" fill="#3b82f6" font-weight="700" text-anchor="middle">② 시뮬레이터</text>
+  <g transform="translate(258 116)"><rect class="now1" x="-5" y="-5" width="206" height="82" rx="16" fill="#3b82f6"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="196" height="72" rx="12" fill="none" stroke="#3b82f6" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="52" rx="2" fill="#3b82f6"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">6DOF 다물체 엔진</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">RK4 · 이벤트 · 분리</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">충돌 · 착지 · 관입</text></g>
+  <g transform="translate(258 198)"><rect class="now1" x="-5" y="-5" width="206" height="82" rx="16" fill="#3b82f6"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="196" height="72" rx="12" fill="none" stroke="#3b82f6" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="52" rx="2" fill="#3b82f6"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">GPU 몬테카를로</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">ILGPU(CUDA) 질점 모델</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">수만 회 · 착지 분산</text></g>
+  <g transform="translate(258 280)"><rect class="now1" x="-5" y="-5" width="206" height="82" rx="16" fill="#3b82f6"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="196" height="72" rx="12" fill="none" stroke="#3b82f6" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="52" rx="2" fill="#3b82f6"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">구조 분석 (근사)</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">구간 최대 하중 · 안전율</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">최초 항복 · 파단 시각</text></g>
+  <g transform="translate(258 362)"><rect class="now1" x="-5" y="-5" width="206" height="82" rx="16" fill="#3b82f6"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="196" height="72" rx="12" fill="none" stroke="#3b82f6" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="52" rx="2" fill="#3b82f6"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">3D 재생 · 대시보드</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">Avalonia + OpenGL</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">그래프 · 로그 · 단면</text></g>
+  <rect x="484" y="80" width="212" height="370" rx="14" fill="#171b23"/>
+  <text x="590" y="102" font-size="14" fill="#a78bfa" font-weight="700" text-anchor="middle">③ 외부 해석기 (선택)</text>
+  <g transform="translate(492 116)"><rect class="now2" x="-5" y="-5" width="206" height="82" rx="16" fill="#a78bfa"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="196" height="72" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="52" rx="2" fill="#a78bfa"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">CalculiX</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">정적 · 고유진동 · 좌굴</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">모달 과도 (개방 충격)</text></g>
+  <g transform="translate(492 198)"><rect class="now2" x="-5" y="-5" width="206" height="82" rx="16" fill="#a78bfa"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="196" height="72" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="52" rx="2" fill="#a78bfa"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">OpenCourant</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">착지 충돌 양해법</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">소성 · 파단</text></g>
+  <g transform="translate(492 280)"><rect class="now2" x="-5" y="-5" width="206" height="82" rx="16" fill="#a78bfa"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="196" height="72" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="52" rx="2" fill="#a78bfa"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">OpenFOAM (Docker)</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">공력 계수 · 표면 압력</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">유선 · 유동 영역 규칙</text></g>
+  <g transform="translate(492 362)"><rect class="now2" x="-5" y="-5" width="206" height="82" rx="16" fill="#a78bfa"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="196" height="72" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="52" rx="2" fill="#a78bfa"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">XLB + Warp</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">GPU 가상 풍동</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">실시간 연기 · 와류</text></g>
+  <rect x="718" y="80" width="212" height="370" rx="14" fill="#171b23"/>
+  <text x="824" y="102" font-size="14" fill="#22c55e" font-weight="700" text-anchor="middle">④ 결과</text>
+  <g transform="translate(726 116)"><rect class="now3" x="-5" y="-5" width="206" height="82" rx="16" fill="#22c55e"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="196" height="72" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="52" rx="2" fill="#22c55e"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">결과 파일 .mnsr</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">계산 없이 다시 열기</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">MC 결과까지 함께</text></g>
+  <g transform="translate(726 198)"><rect class="now3" x="-5" y="-5" width="206" height="82" rx="16" fill="#22c55e"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="196" height="72" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="52" rx="2" fill="#22c55e"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">결과 폴더</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">CSV 시계열 · events.json</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">scene.json · meshes/</text></g>
+  <g transform="translate(726 280)"><rect class="now3" x="-5" y="-5" width="206" height="82" rx="16" fill="#22c55e"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="196" height="72" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="52" rx="2" fill="#22c55e"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">보고서 · 신뢰도</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">NASA-STD-7009A 8요인</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">신뢰 · 참고 · 추정 등급</text></g>
+  <g transform="translate(726 362)"><rect class="now3" x="-5" y="-5" width="206" height="82" rx="16" fill="#22c55e"/><rect width="196" height="72" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="196" height="72" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="52" rx="2" fill="#22c55e"/><text x="16" y="26" font-size="16" fill="#f4f4f5" font-weight="700">Blender</text><text x="16" y="47" font-size="12.5" fill="#a1a1aa">결과 폴더 가져오기</text><text x="16" y="64.5" font-size="12.5" fill="#a1a1aa">렌더 · 애니메이션</text></g>
+  <path class="flow" d="M228 192H250" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on1 flow" d="M228 192H250" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M228 274H250" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on1 flow" d="M228 274H250" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M228 356H250" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on1 flow" d="M228 356H250" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M462 180H484" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on2 flow" d="M462 180H484" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M484 205H462" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on2 flow" d="M484 205H462" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M462 344H484" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on2 flow" d="M462 344H484" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M484 369H462" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on2 flow" d="M484 369H462" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M696 192H718" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on3 flow" d="M696 192H718" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M696 274H718" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on3 flow" d="M696 274H718" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M696 356H718" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on3 flow" d="M696 356H718" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <text x="480" y="478" font-size="13" fill="#71717a" text-anchor="middle">외부 해석기는 별도 프로세스로만 실행한다 — 설치되어 있지 않으면 그 기능만 꺼지고 나머지는 그대로 동작한다</text>
+</svg>

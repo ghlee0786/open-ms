@@ -1,0 +1,499 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "parachute_cross40in_opening_noltr73157",
+ "title": "Small (40-in, S0 0.473 m2) cross parachutes in a wind tunnel: infinite-mass opening-shock factor Cx 1.07-1.41 (27 configurations, NOLTR 73-157) — k0 per cloth permeability",
+ "vv": "FR-REL-06",
+ "grade": "A",
+ "use": "validation",
+ "kind": "parachute-opening-infinite-mass",
+ "model": "낙하산 충만·개방하중(F절: 충만 곡선 + 겉보기 질량 유입 항 k0)",
+ "tolerance": {
+  "relative": 0.25
+ },
+ "envelope": "비압축(M ≤ 0.5), 무한 질량(풍동), 소형 캐노피 S0 0.47 m²",
+ "sources": [
+  {
+   "title": "Effects of Canopy Geometry on the Infinite Mass Opening-Shock Factor of a Cross Parachute with a W/L Ratio of 0.264 (NOLTR 73-157 (Naval Ordnance Laboratory), DTIC AD-768 755, 1973-07-31)",
+   "url": "https://archive.org/download/DTIC_AD0768755/DTIC_AD0768755.pdf",
+   "note": "Tables 3-4"
+  }
+ ],
+ "notes": [
+  "모델에 천 투과도 항이 없으므로 k0(겉보기 질량 계수)를 투과도 그룹(8/80/208 cfm)마다 한 구성(16 줄·줄 1.4D)으로 보정하고 같은 그룹의 나머지 8 구성을 예측한다(보정/검증 분리, VV-50). 보정된 k0 의 투과도 경향이 결과다.",
+  "D0 = √(4 S0/π) = 0.776 m(S0 = 2LW − W², 원문), CD0 = 표 4 정상 항력계수(같은 구성), 해면 ρ 1.225(무한 질량 Cx 는 ρ 무관).",
+  "충만 상수 n = 11.7(Knacke 표 5-6 십자형, A), 충만 곡선 지수 2(POC 기본).",
+  "측정 최대 하중 = Cx(표 3, 3회 평균) × q × CD0 × S0 (Cx 정의: 최대 충격력/정상 항력, 원문).",
+  "허용 ±25 %(VV-41 과 같음). 저자: 투과도가 지배, 줄 수·길이 영향 작음 → 구성 간 차 ±0.05–0.15."
+ ],
+ "points": [
+  {
+   "label": "208 cfm, 24 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.616,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.08
+   },
+   "measured": 1537.33,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "validation"
+  },
+  {
+   "label": "208 cfm, 16 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.585,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.068
+   },
+   "measured": 1443.74,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "validation"
+  },
+  {
+   "label": "208 cfm, 8 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.582,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.071
+   },
+   "measured": 1440.37,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "validation"
+  },
+  {
+   "label": "208 cfm, 24 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.693,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.119
+   },
+   "measured": 1791.95,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "validation"
+  },
+  {
+   "label": "208 cfm, 16 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.672,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.08
+   },
+   "measured": 1677.08,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "calibration"
+  },
+  {
+   "label": "208 cfm, 8 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.614,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.08
+   },
+   "measured": 1532.34,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "validation"
+  },
+  {
+   "label": "208 cfm, 24 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.733,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.124
+   },
+   "measured": 1903.85,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "validation"
+  },
+  {
+   "label": "208 cfm, 16 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.744,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.078
+   },
+   "measured": 1853.33,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "validation"
+  },
+  {
+   "label": "208 cfm, 8 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.61,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.101
+   },
+   "measured": 1551.95,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "208cfm",
+   "role": "validation"
+  },
+  {
+   "label": "80 cfm, 24 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.651,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.115
+   },
+   "measured": 1677.33,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "validation"
+  },
+  {
+   "label": "80 cfm, 16 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.628,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.11
+   },
+   "measured": 1610.81,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "validation"
+  },
+  {
+   "label": "80 cfm, 8 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.574,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.135
+   },
+   "measured": 1505.46,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "validation"
+  },
+  {
+   "label": "80 cfm, 24 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.708,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.104
+   },
+   "measured": 1806.19,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "validation"
+  },
+  {
+   "label": "80 cfm, 16 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.708,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.111
+   },
+   "measured": 1817.65,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "calibration"
+  },
+  {
+   "label": "80 cfm, 8 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.635,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.116
+   },
+   "measured": 1637.57,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "validation"
+  },
+  {
+   "label": "80 cfm, 24 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.812,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.104
+   },
+   "measured": 2071.51,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "validation"
+  },
+  {
+   "label": "80 cfm, 16 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.729,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.116
+   },
+   "measured": 1879.98,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "validation"
+  },
+  {
+   "label": "80 cfm, 8 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.635,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 89.3,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.257
+   },
+   "measured": 1844.47,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "80cfm",
+   "role": "validation"
+  },
+  {
+   "label": "8 cfm, 24 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.829,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.36
+   },
+   "measured": 1470.95,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "validation"
+  },
+  {
+   "label": "8 cfm, 16 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.817,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.406
+   },
+   "measured": 1498.69,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "validation"
+  },
+  {
+   "label": "8 cfm, 8 줄, 줄 1.0D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.788,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.321
+   },
+   "measured": 1358.1,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "validation"
+  },
+  {
+   "label": "8 cfm, 24 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.914,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.215
+   },
+   "measured": 1448.86,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "validation"
+  },
+  {
+   "label": "8 cfm, 16 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.894,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.228
+   },
+   "measured": 1432.32,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "calibration"
+  },
+  {
+   "label": "8 cfm, 8 줄, 줄 1.4D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.812,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.215
+   },
+   "measured": 1287.17,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "validation"
+  },
+  {
+   "label": "8 cfm, 24 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.928,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.356
+   },
+   "measured": 1641.77,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "validation"
+  },
+  {
+   "label": "8 cfm, 16 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.928,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.377
+   },
+   "measured": 1667.19,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "validation"
+  },
+  {
+   "label": "8 cfm, 8 줄, 줄 1.8D",
+   "inputs": {
+    "d0_m": 0.776125,
+    "cd0": 0.853,
+    "rho_kg_m3": 1.225,
+    "v_m_s": 67.1,
+    "fillConstant": 11.7,
+    "fillExponent": 2.0,
+    "measuredCx": 1.33
+   },
+   "measured": 1480.15,
+   "unit": "N",
+   "provenance": "table (NOLTR 73-157 Tables 3-4; force = Cx·q·CD0·S0 computed)",
+   "group": "8cfm",
+   "role": "validation"
+  }
+ ],
+ "calibration": {
+  "parameter": "apparentMassK0",
+  "lo": 0.0,
+  "hi": 10.0
+ },
+ "origin": {
+  "source_case": "validation/sources/parachute_cross_40in_opening_shock/case.json",
+  "sha256": "298fb7a35a212a6494ddb6240a3639496eee9c0c841b4c3ecf9ee6381b8538e5",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

@@ -1,0 +1,144 @@
+{
+ "schema": "mns.validation-case/1",
+ "id": "sphere_free_fall_bacon_reid1924",
+ "title": "Spheres dropped from an airplane (NACA Rep.185): maximum (terminal) speed, Re 3.5e5-1.5e6",
+ "vv": "VV-47",
+ "grade": "A",
+ "use": "validation",
+ "kind": "sphere-free-fall",
+ "model": "L1 형상 항력(구 Cd 0.47) + 6DOF 낙하",
+ "tolerance": {
+  "relative": 0.05
+ },
+ "envelope": "L1 형상 Cd: Re ≤ 2×10⁵(아임계)",
+ "sources": [
+  {
+   "title": "The Resistance of Spheres in Wind Tunnels and in Air (NACA Report No. 185)",
+   "url": "https://ntrs.nasa.gov/api/citations/19930091250/downloads/19930091250.pdf",
+   "note": "Table VI"
+  }
+ ],
+ "notes": [
+  "모든 낙하는 Re 3.5×10⁵ 이상(항력 위기·초임계)이라 L1 상수 Cd(0.47) 의 적용 범위 밖 → 외삽으로 오차만 보고.",
+  "저자가 신뢰 불가로 표시한 (?) 낙하(덧댄 고무구)는 제외, 종단에 이르지 않은 1회(j = 0.5 m/s²)는 참고.",
+  "허용 ±5 %(속도; Cd ±10 % 에 해당). 낙하 고도 = 측정 고도 근사(측정 고도의 밀도는 원 표에 없음)."
+ ],
+ "points": [
+  {
+   "label": "wax 0.471 kg, Ø0.2 m, 1000 ft",
+   "inputs": {
+    "mass_kg": 0.471,
+    "diameter_m": 0.2,
+    "dropHeight_m": 304.8
+   },
+   "measured": 24.8,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  },
+  {
+   "label": "wax 0.61 kg, Ø0.2 m, 1000 ft",
+   "inputs": {
+    "mass_kg": 0.61,
+    "diameter_m": 0.2,
+    "dropHeight_m": 304.8
+   },
+   "measured": 29.4,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  },
+  {
+   "label": "wax 0.81 kg, Ø0.2 m, 1000 ft",
+   "inputs": {
+    "mass_kg": 0.81,
+    "diameter_m": 0.2,
+    "dropHeight_m": 304.8
+   },
+   "measured": 42.0,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  },
+  {
+   "label": "wax 1.23 kg, Ø0.2 m, 1000 ft",
+   "inputs": {
+    "mass_kg": 1.23,
+    "diameter_m": 0.2,
+    "dropHeight_m": 304.8
+   },
+   "measured": 41.0,
+   "unit": "m/s",
+   "provenance": "table (Table VI)",
+   "role": "info"
+  },
+  {
+   "label": "rubber blue 1.33 kg, Ø0.324 m, 1000 ft",
+   "inputs": {
+    "mass_kg": 1.33,
+    "diameter_m": 0.324,
+    "dropHeight_m": 304.8
+   },
+   "measured": 32.0,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  },
+  {
+   "label": "rubber blue 1.33 kg, Ø0.324 m, 1000 ft",
+   "inputs": {
+    "mass_kg": 1.33,
+    "diameter_m": 0.324,
+    "dropHeight_m": 304.8
+   },
+   "measured": 33.3,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  },
+  {
+   "label": "rubber blue 1.33 kg, Ø0.324 m, 2000 ft",
+   "inputs": {
+    "mass_kg": 1.33,
+    "diameter_m": 0.324,
+    "dropHeight_m": 609.6
+   },
+   "measured": 37.8,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  },
+  {
+   "label": "rubber blue 1.33 kg, Ø0.324 m, 3000 ft",
+   "inputs": {
+    "mass_kg": 1.33,
+    "diameter_m": 0.324,
+    "dropHeight_m": 914.4000000000001
+   },
+   "measured": 33.5,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  },
+  {
+   "label": "wood 5.242 kg, Ø0.38 m, 2000 ft",
+   "inputs": {
+    "mass_kg": 5.242,
+    "diameter_m": 0.38,
+    "dropHeight_m": 609.6
+   },
+   "measured": 57.0,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  },
+  {
+   "label": "wood 2.493 kg, Ø0.299 m, 2000 ft",
+   "inputs": {
+    "mass_kg": 2.493,
+    "diameter_m": 0.299,
+    "dropHeight_m": 609.6
+   },
+   "measured": 53.0,
+   "unit": "m/s",
+   "provenance": "table (Table VI)"
+  }
+ ],
+ "origin": {
+  "source_case": "validation/sources/reference_drag_curves/case.json",
+  "sha256": "fd3b47e42b602bedce92f99e37c4d989d97ccd0b34783518bad09cce5c1324e5",
+  "converter": "tools/validation/convert_public.py"
+ }
+}

@@ -1,0 +1,1057 @@
+{
+  "schema": "mns.scenario/1",
+  "name": "06_munition_3petal_split",
+  "description": "운반 탄체 3분할 외피 분리(PRD V절 FR-SHL-01): 고도 1000 m, M 0.5 (ISA 168.22 m/s)에서 t=0.5 s 120° 절단 폭약 기폭 → 외피 조각 3개(Al7075 t3 mm, 5.958 kg)가 꼬리 힌지에 잡힌 채 벌어지다 40° 에서 이탈, 컨테이너 4개(□270×270×400, 5.5 kg) 노출·충격 펄스 15 G/10 ms → 드로그(지연 [0.3, 0.5, 0.7, 0.9]) → 주낙하산. 충돌 판정·잔해 간섭·컨테이너 최대 G(설계 50 G)·착지 이격 산출. 탄체 형상·질량·폭약 Δv 는 모두 (가정), 생성: tools/scenario_gen/make_munition_split.py",
+  "sim": {
+    "dt": 0.001,
+    "tEnd": 400,
+    "outputRate": 50,
+    "seed": 6
+  },
+  "environment": {
+    "wind": {
+      "speed": 5,
+      "directionFrom": 270,
+      "refHeight": 10,
+      "shear": "log",
+      "roughness": 0.03
+    },
+    "turbulence": "light",
+    "soil": "farmland"
+  },
+  "carrier": {
+    "name": "munition",
+    "altitude": 1000.0,
+    "speed": 168.22,
+    "heading": 0
+  },
+  "bodies": [
+    {
+      "name": "nose",
+      "parent": "munition",
+      "mount": [
+        1.025,
+        0,
+        0
+      ],
+      "mass": 6.0,
+      "shape": {
+        "type": "cylinder",
+        "radius": 0.2,
+        "length": 0.35,
+        "axis": "x"
+      },
+      "aero": {
+        "damping": [
+          -1,
+          -4,
+          -4
+        ],
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al7075-t6",
+        "thickness": 0.004
+      },
+      "color": "#8c939c"
+    },
+    {
+      "name": "tail",
+      "parent": "munition",
+      "mount": [
+        -1.0,
+        0,
+        0
+      ],
+      "mass": 7.0,
+      "shape": {
+        "type": "cylinder",
+        "radius": 0.2,
+        "length": 0.3,
+        "axis": "x"
+      },
+      "aero": {
+        "damping": [
+          -1,
+          -4,
+          -4
+        ],
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al7075-t6",
+        "thickness": 0.004
+      },
+      "color": "#6b7480"
+    },
+    {
+      "name": "petal1",
+      "parent": "munition",
+      "mount": [
+        0,
+        0,
+        0
+      ],
+      "mass": 5.958,
+      "shape": {
+        "type": "shellSegment",
+        "radius": 0.2,
+        "thickness": 0.003,
+        "length": 1.7,
+        "span": 120,
+        "centerAngle": 0.0,
+        "axis": "x"
+      },
+      "aero": {
+        "damping": [
+          -1,
+          -4,
+          -4
+        ],
+        "refLength": 1.7,
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al7075-t6"
+      },
+      "color": "#b8a27a"
+    },
+    {
+      "name": "petal2",
+      "parent": "munition",
+      "mount": [
+        0,
+        0,
+        0
+      ],
+      "mass": 5.958,
+      "shape": {
+        "type": "shellSegment",
+        "radius": 0.2,
+        "thickness": 0.003,
+        "length": 1.7,
+        "span": 120,
+        "centerAngle": 120.0,
+        "axis": "x"
+      },
+      "aero": {
+        "damping": [
+          -1,
+          -4,
+          -4
+        ],
+        "refLength": 1.7,
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al7075-t6"
+      },
+      "color": "#b8a27a"
+    },
+    {
+      "name": "petal3",
+      "parent": "munition",
+      "mount": [
+        0,
+        0,
+        0
+      ],
+      "mass": 5.958,
+      "shape": {
+        "type": "shellSegment",
+        "radius": 0.2,
+        "thickness": 0.003,
+        "length": 1.7,
+        "span": 120,
+        "centerAngle": 240.0,
+        "axis": "x"
+      },
+      "aero": {
+        "damping": [
+          -1,
+          -4,
+          -4
+        ],
+        "refLength": 1.7,
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al7075-t6"
+      },
+      "color": "#b8a27a"
+    },
+    {
+      "name": "c1",
+      "parent": "munition",
+      "mount": [
+        0.6,
+        0,
+        0
+      ],
+      "mass": 5.5,
+      "shape": {
+        "type": "box",
+        "size": [
+          0.4,
+          0.27,
+          0.27
+        ]
+      },
+      "aero": {
+        "damping": [
+          -3,
+          -3,
+          -3
+        ],
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al6061-t6",
+        "thickness": 0.002
+      },
+      "color": "#4f8fd8",
+      "devices": [
+        {
+          "type": "parachute",
+          "name": "drogue",
+          "d0": 0.5,
+          "cd0": 0.5,
+          "attach": [
+            -0.2,
+            0,
+            0
+          ],
+          "riser": 3.0,
+          "fillConstant": 6,
+          "fillExponent": 2,
+          "lineStretchTime": 0.15
+        },
+        {
+          "type": "parachute",
+          "name": "main",
+          "d0": 1.22,
+          "cd0": 2.2,
+          "attach": [
+            -0.2,
+            0,
+            0
+          ],
+          "riser": 2.5,
+          "fillConstant": 8,
+          "fillExponent": 2,
+          "lineStretchTime": 0.35
+        },
+        {
+          "type": "pulse",
+          "name": "shock",
+          "peakG": 15.0,
+          "duration": 0.01,
+          "direction": [
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "c2",
+      "parent": "munition",
+      "mount": [
+        0.2,
+        0,
+        0
+      ],
+      "mass": 5.5,
+      "shape": {
+        "type": "box",
+        "size": [
+          0.4,
+          0.27,
+          0.27
+        ]
+      },
+      "aero": {
+        "damping": [
+          -3,
+          -3,
+          -3
+        ],
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al6061-t6",
+        "thickness": 0.002
+      },
+      "color": "#4f8fd8",
+      "devices": [
+        {
+          "type": "parachute",
+          "name": "drogue",
+          "d0": 0.5,
+          "cd0": 0.5,
+          "attach": [
+            -0.2,
+            0,
+            0
+          ],
+          "riser": 3.0,
+          "fillConstant": 6,
+          "fillExponent": 2,
+          "lineStretchTime": 0.15
+        },
+        {
+          "type": "parachute",
+          "name": "main",
+          "d0": 1.22,
+          "cd0": 2.2,
+          "attach": [
+            -0.2,
+            0,
+            0
+          ],
+          "riser": 2.5,
+          "fillConstant": 8,
+          "fillExponent": 2,
+          "lineStretchTime": 0.35
+        },
+        {
+          "type": "pulse",
+          "name": "shock",
+          "peakG": 15.0,
+          "duration": 0.01,
+          "direction": [
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "c3",
+      "parent": "munition",
+      "mount": [
+        -0.2,
+        0,
+        0
+      ],
+      "mass": 5.5,
+      "shape": {
+        "type": "box",
+        "size": [
+          0.4,
+          0.27,
+          0.27
+        ]
+      },
+      "aero": {
+        "damping": [
+          -3,
+          -3,
+          -3
+        ],
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al6061-t6",
+        "thickness": 0.002
+      },
+      "color": "#4f8fd8",
+      "devices": [
+        {
+          "type": "parachute",
+          "name": "drogue",
+          "d0": 0.5,
+          "cd0": 0.5,
+          "attach": [
+            -0.2,
+            0,
+            0
+          ],
+          "riser": 3.0,
+          "fillConstant": 6,
+          "fillExponent": 2,
+          "lineStretchTime": 0.15
+        },
+        {
+          "type": "parachute",
+          "name": "main",
+          "d0": 1.22,
+          "cd0": 2.2,
+          "attach": [
+            -0.2,
+            0,
+            0
+          ],
+          "riser": 2.5,
+          "fillConstant": 8,
+          "fillExponent": 2,
+          "lineStretchTime": 0.35
+        },
+        {
+          "type": "pulse",
+          "name": "shock",
+          "peakG": 15.0,
+          "duration": 0.01,
+          "direction": [
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "name": "c4",
+      "parent": "munition",
+      "mount": [
+        -0.6,
+        0,
+        0
+      ],
+      "mass": 5.5,
+      "shape": {
+        "type": "box",
+        "size": [
+          0.4,
+          0.27,
+          0.27
+        ]
+      },
+      "aero": {
+        "damping": [
+          -3,
+          -3,
+          -3
+        ],
+        "machCorrection": true
+      },
+      "structure": {
+        "material": "al6061-t6",
+        "thickness": 0.002
+      },
+      "color": "#4f8fd8",
+      "devices": [
+        {
+          "type": "parachute",
+          "name": "drogue",
+          "d0": 0.5,
+          "cd0": 0.5,
+          "attach": [
+            -0.2,
+            0,
+            0
+          ],
+          "riser": 3.0,
+          "fillConstant": 6,
+          "fillExponent": 2,
+          "lineStretchTime": 0.15
+        },
+        {
+          "type": "parachute",
+          "name": "main",
+          "d0": 1.22,
+          "cd0": 2.2,
+          "attach": [
+            -0.2,
+            0,
+            0
+          ],
+          "riser": 2.5,
+          "fillConstant": 8,
+          "fillExponent": 2,
+          "lineStretchTime": 0.35
+        },
+        {
+          "type": "pulse",
+          "name": "shock",
+          "peakG": 15.0,
+          "duration": 0.01,
+          "direction": [
+            0,
+            0,
+            1
+          ]
+        }
+      ]
+    }
+  ],
+  "connectors": [
+    {
+      "type": "hinge",
+      "name": "hinge1",
+      "a": "tail",
+      "b": "petal1",
+      "pointA": [
+        0.15,
+        0.1985,
+        0.0
+      ],
+      "axisA": [
+        0,
+        -0.0,
+        1.0
+      ],
+      "stiffness": 1000000.0,
+      "rotStiffness": 50000.0,
+      "releaseAngle": 40.0,
+      "breakLoad": 60000
+    },
+    {
+      "type": "hinge",
+      "name": "hinge2",
+      "a": "tail",
+      "b": "petal2",
+      "pointA": [
+        0.15,
+        -0.09925,
+        0.171906
+      ],
+      "axisA": [
+        0,
+        -0.866025,
+        -0.5
+      ],
+      "stiffness": 1000000.0,
+      "rotStiffness": 50000.0,
+      "releaseAngle": 40.0,
+      "breakLoad": 60000
+    },
+    {
+      "type": "hinge",
+      "name": "hinge3",
+      "a": "tail",
+      "b": "petal3",
+      "pointA": [
+        0.15,
+        -0.09925,
+        -0.171906
+      ],
+      "axisA": [
+        0,
+        0.866025,
+        -0.5
+      ],
+      "stiffness": 1000000.0,
+      "rotStiffness": 50000.0,
+      "releaseAngle": 40.0,
+      "breakLoad": 60000
+    }
+  ],
+  "events": [
+    {
+      "name": "split_detonation",
+      "when": {
+        "type": "time",
+        "t": 0.5
+      },
+      "do": [
+        {
+          "type": "log",
+          "message": "3분할 절단 폭약 기폭 (120° 간격)"
+        },
+        {
+          "type": "separate",
+          "body": "nose",
+          "relVel": [
+            1.0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "petal1_cut",
+      "when": {
+        "type": "time",
+        "t": 0.5
+      },
+      "do": [
+        {
+          "type": "separate",
+          "body": "petal1",
+          "relVel": [
+            0,
+            6.0,
+            0.0
+          ],
+          "relOmega": [
+            0,
+            -0.0,
+            7.058824
+          ]
+        }
+      ]
+    },
+    {
+      "name": "petal2_cut",
+      "when": {
+        "type": "time",
+        "t": 0.5003
+      },
+      "do": [
+        {
+          "type": "separate",
+          "body": "petal2",
+          "relVel": [
+            0,
+            -3.0,
+            5.196152
+          ],
+          "relOmega": [
+            0,
+            -6.11312,
+            -3.529412
+          ]
+        }
+      ]
+    },
+    {
+      "name": "petal3_cut",
+      "when": {
+        "type": "time",
+        "t": 0.5006
+      },
+      "do": [
+        {
+          "type": "separate",
+          "body": "petal3",
+          "relVel": [
+            0,
+            -3.0,
+            -5.196152
+          ],
+          "relOmega": [
+            0,
+            6.11312,
+            -3.529412
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tail_free",
+      "when": {
+        "type": "after",
+        "event": "split_detonation",
+        "delay": 0.001
+      },
+      "do": [
+        {
+          "type": "separate",
+          "body": "tail",
+          "relVel": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "containers_exposed",
+      "when": {
+        "type": "after",
+        "event": "split_detonation",
+        "delay": 0.002
+      },
+      "do": [
+        {
+          "type": "separate",
+          "body": "c1",
+          "relVel": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "fire",
+          "device": "c1.shock"
+        },
+        {
+          "type": "separate",
+          "body": "c2",
+          "relVel": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "fire",
+          "device": "c2.shock"
+        },
+        {
+          "type": "separate",
+          "body": "c3",
+          "relVel": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "fire",
+          "device": "c3.shock"
+        },
+        {
+          "type": "separate",
+          "body": "c4",
+          "relVel": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "type": "fire",
+          "device": "c4.shock"
+        }
+      ]
+    },
+    {
+      "name": "c1_drogue",
+      "when": {
+        "type": "after",
+        "event": "containers_exposed",
+        "delay": 0.3
+      },
+      "do": [
+        {
+          "type": "deploy",
+          "device": "c1.drogue"
+        }
+      ]
+    },
+    {
+      "name": "c1_main",
+      "when": {
+        "type": "or",
+        "any": [
+          {
+            "type": "and",
+            "all": [
+              {
+                "type": "after",
+                "event": "c1_drogue",
+                "delay": 1.0
+              },
+              {
+                "type": "speed",
+                "body": "c1",
+                "below": 40
+              }
+            ]
+          },
+          {
+            "type": "after",
+            "event": "c1_drogue",
+            "delay": 10.0
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "release",
+          "device": "c1.drogue"
+        },
+        {
+          "type": "deploy",
+          "device": "c1.main"
+        }
+      ]
+    },
+    {
+      "name": "c2_drogue",
+      "when": {
+        "type": "after",
+        "event": "containers_exposed",
+        "delay": 0.5
+      },
+      "do": [
+        {
+          "type": "deploy",
+          "device": "c2.drogue"
+        }
+      ]
+    },
+    {
+      "name": "c2_main",
+      "when": {
+        "type": "or",
+        "any": [
+          {
+            "type": "and",
+            "all": [
+              {
+                "type": "after",
+                "event": "c2_drogue",
+                "delay": 1.0
+              },
+              {
+                "type": "speed",
+                "body": "c2",
+                "below": 40
+              }
+            ]
+          },
+          {
+            "type": "after",
+            "event": "c2_drogue",
+            "delay": 10.0
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "release",
+          "device": "c2.drogue"
+        },
+        {
+          "type": "deploy",
+          "device": "c2.main"
+        }
+      ]
+    },
+    {
+      "name": "c3_drogue",
+      "when": {
+        "type": "after",
+        "event": "containers_exposed",
+        "delay": 0.7
+      },
+      "do": [
+        {
+          "type": "deploy",
+          "device": "c3.drogue"
+        }
+      ]
+    },
+    {
+      "name": "c3_main",
+      "when": {
+        "type": "or",
+        "any": [
+          {
+            "type": "and",
+            "all": [
+              {
+                "type": "after",
+                "event": "c3_drogue",
+                "delay": 1.0
+              },
+              {
+                "type": "speed",
+                "body": "c3",
+                "below": 40
+              }
+            ]
+          },
+          {
+            "type": "after",
+            "event": "c3_drogue",
+            "delay": 10.0
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "release",
+          "device": "c3.drogue"
+        },
+        {
+          "type": "deploy",
+          "device": "c3.main"
+        }
+      ]
+    },
+    {
+      "name": "c4_drogue",
+      "when": {
+        "type": "after",
+        "event": "containers_exposed",
+        "delay": 0.9
+      },
+      "do": [
+        {
+          "type": "deploy",
+          "device": "c4.drogue"
+        }
+      ]
+    },
+    {
+      "name": "c4_main",
+      "when": {
+        "type": "or",
+        "any": [
+          {
+            "type": "and",
+            "all": [
+              {
+                "type": "after",
+                "event": "c4_drogue",
+                "delay": 1.0
+              },
+              {
+                "type": "speed",
+                "body": "c4",
+                "below": 40
+              }
+            ]
+          },
+          {
+            "type": "after",
+            "event": "c4_drogue",
+            "delay": 10.0
+          }
+        ]
+      },
+      "do": [
+        {
+          "type": "release",
+          "device": "c4.drogue"
+        },
+        {
+          "type": "deploy",
+          "device": "c4.main"
+        }
+      ]
+    }
+  ],
+  "collisions": {
+    "restitution": 0.3,
+    "friction": 0.3,
+    "parachutes": true,
+    "until": 40,
+    "bodies": [
+      "nose",
+      "tail",
+      "petal1",
+      "petal2",
+      "petal3",
+      "c1",
+      "c2",
+      "c3",
+      "c4"
+    ]
+  },
+  "metrics": [
+    {
+      "type": "maxLoad",
+      "name": "containerPeakG",
+      "bodies": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "limitG": 50
+    },
+    {
+      "type": "debrisNearDeploy",
+      "name": "debrisAtDrogue",
+      "devices": [
+        "c1.drogue",
+        "c2.drogue",
+        "c3.drogue",
+        "c4.drogue"
+      ],
+      "debris": [
+        "nose",
+        "tail",
+        "petal1",
+        "petal2",
+        "petal3"
+      ],
+      "window": 3.0,
+      "riskDistance": 5.0
+    },
+    {
+      "type": "landingSeparation",
+      "name": "containerLandingSeparation",
+      "bodies": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "target": 70
+    },
+    {
+      "type": "minSeparation",
+      "name": "debrisContainerClearance",
+      "bodies": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "nose",
+        "tail",
+        "petal1",
+        "petal2",
+        "petal3"
+      ],
+      "ignoreAfterSeparation": 0.2
+    }
+  ],
+  "dispersions": [
+    {
+      "path": "environment.wind.speed",
+      "dist": "truncnormal",
+      "sd": 1.5,
+      "min": 0,
+      "max": 10
+    },
+    {
+      "path": "environment.wind.directionFrom",
+      "dist": "normal",
+      "sd": 20
+    },
+    {
+      "path": "events.petal2_cut.when.t",
+      "dist": "uniform",
+      "min": -0.0003,
+      "max": 0.0003
+    },
+    {
+      "path": "events.petal3_cut.when.t",
+      "dist": "uniform",
+      "min": -0.0003,
+      "max": 0.0003
+    },
+    {
+      "path": "events.petal1_cut.do.0.relOmega.2",
+      "dist": "normal",
+      "mode": "scale",
+      "sd": 0.25
+    },
+    {
+      "path": "events.petal2_cut.do.0.relOmega.1",
+      "dist": "normal",
+      "mode": "scale",
+      "sd": 0.25
+    },
+    {
+      "path": "events.petal3_cut.do.0.relOmega.1",
+      "dist": "normal",
+      "mode": "scale",
+      "sd": 0.25
+    },
+    {
+      "path": "bodies.c1.devices.shock.peakG",
+      "dist": "uniform",
+      "mode": "scale",
+      "min": 0.67,
+      "max": 1.33
+    }
+  ],
+  "monteCarlo": {
+    "runs": 32,
+    "impactBody": "c1",
+    "sampling": "lhs",
+    "seed": 61
+  }
+}

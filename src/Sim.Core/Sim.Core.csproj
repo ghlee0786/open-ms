@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Sim.Core</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Structures\materials.json" LogicalName="Sim.Core.materials.json" />
+    <EmbeddedResource Include="Models\reference_data.json" LogicalName="Sim.Core.reference_data.json" />
+  </ItemGroup>
+</Project>

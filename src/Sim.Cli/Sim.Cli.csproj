@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Sim.Cli</RootNamespace>
+    <AssemblyName>mns</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sim.Core\Sim.Core.csproj" />
+    <ProjectReference Include="..\Sim.Gpu\Sim.Gpu.csproj" />
+  </ItemGroup>
+</Project>

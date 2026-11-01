@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+    <!-- 앱 버전: 0.0.0 = 개발 빌드(자동 업데이트 확인 안 함). 릴리스는 태그 v1.2.3 → dotnet publish -p:Version=1.2.3 (scripts/build-installer.ps1) -->
+    <Version>0.0.0</Version>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,133 @@
+{
+  "schema": "mns.environment/1",
+  "id": "dirt",
+  "displayName": {
+    "ko": "흙 (마른 땅)",
+    "en": "Dry Lakebed"
+  },
+  "style": "scene",
+  "centerAngleDeg": 0,
+  "scaling": {
+    "fitTo": 2,
+    "autoScale": true,
+    "autoScaleFactor": 10
+  },
+  "features": [
+    {
+      "kind": "ground",
+      "shape": "plane",
+      "isGroundPlane": true,
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "soil",
+          "seed": 1,
+          "colors": [
+            [
+              0.55,
+              0.44,
+              0.32
+            ],
+            [
+              0.68,
+              0.57,
+              0.43
+            ],
+            [
+              0.36,
+              0.28,
+              0.2
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "kind": "dome",
+      "shape": "hemisphere",
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "sky",
+          "seed": 1,
+          "zenith": [
+            0.3,
+            0.48,
+            0.75
+          ],
+          "horizon": [
+            0.85,
+            0.82,
+            0.76
+          ],
+          "haze": [
+            0.7,
+            0.62,
+            0.52
+          ],
+          "trees": false
+        }
+      }
+    }
+  ],
+  "ibl": {
+    "source": "procedural-sky",
+    "exposureEV": 0.0
+  },
+  "lights": [
+    {
+      "type": "directional",
+      "label": "sun",
+      "color": [
+        0.88,
+        0.82,
+        0.7
+      ],
+      "gain": 1.0,
+      "space": "ground",
+      "direction": [
+        -0.1962,
+        0.539,
+        -0.8192
+      ],
+      "shadowColor": [
+        -0.3,
+        -0.3,
+        -0.3
+      ],
+      "enabled": true
+    },
+    {
+      "type": "hemisphere",
+      "label": "sky/ground",
+      "sky": [
+        0.44,
+        0.46,
+        0.52
+      ],
+      "ground": [
+        0.3,
+        0.25,
+        0.19
+      ],
+      "gain": 1.0,
+      "enabled": true
+    }
+  ],
+  "ambient": {
+    "color": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "gain": 0.0
+  },
+  "soilMatch": [
+    "clay",
+    "soil",
+    "dirt",
+    "loam",
+    "silt",
+    "lakebed"
+  ]
+}

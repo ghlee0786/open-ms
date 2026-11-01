@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420" font-family="'Segoe UI','Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Fusion 해석 패키지 교차 검증</title>
+  <desc id="d">Fusion 해석 패키지(.adsksimpkg) → mns simpkg 가 바디별 형상 · 재료 · 하중 · 경계를 복원 → CalculiX 로 정적 · 고유진동 · 메시 수렴을 다시 풂 → Fusion 보고서 · 범례 값과 반력 · 안전율 · 응력을 비교한 report.md.</desc>
+  <!-- Open M&amp;S README 인포그래픽. 단계가 차례로 켜지고 흐름이 움직인다(CSS keyframes · SMIL, 자바스크립트 없음). 다시 만들기: scripts/make_infographics.py -->
+  <style>
+    .flow { stroke-dasharray: 7 7; animation: dash 1s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -14; } }
+    @keyframes on0 { 0%, 3.0% { opacity: 0; } 6.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on0 { opacity: 0; animation: on0 10s infinite; }
+    @keyframes now0 { 0%, 3.0% { opacity: 0; } 6.0% { opacity: .55; } 23.5%, 100% { opacity: 0; } }
+    .now0 { opacity: 0; animation: now0 10s infinite; }
+    @keyframes on1 { 0%, 23.5% { opacity: 0; } 26.5%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on1 { opacity: 0; animation: on1 10s infinite; }
+    @keyframes now1 { 0%, 23.5% { opacity: 0; } 26.5% { opacity: .55; } 44.0%, 100% { opacity: 0; } }
+    .now1 { opacity: 0; animation: now1 10s infinite; }
+    @keyframes on2 { 0%, 44.0% { opacity: 0; } 47.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on2 { opacity: 0; animation: on2 10s infinite; }
+    @keyframes now2 { 0%, 44.0% { opacity: 0; } 47.0% { opacity: .55; } 64.5%, 100% { opacity: 0; } }
+    .now2 { opacity: 0; animation: now2 10s infinite; }
+    @keyframes on3 { 0%, 64.5% { opacity: 0; } 67.5%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on3 { opacity: 0; animation: on3 10s infinite; }
+    @keyframes now3 { 0%, 64.5% { opacity: 0; } 67.5% { opacity: .55; } 85.0%, 100% { opacity: 0; } }
+    .now3 { opacity: 0; animation: now3 10s infinite; }
+    
+  </style>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b8b95"/></marker>
+    <marker id="headR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+  </defs>
+  <rect width="960" height="420" rx="18" fill="#111318" stroke="#2a2f3a"/>
+  <text x="28" y="38" font-size="20" fill="#f4f4f5" font-weight="700">Fusion 해석 패키지 교차 검증</text>
+  <text x="28" y="60" font-size="13.5" fill="#a1a1aa">Fusion 의 구조 해석 패키지를 그대로 다시 풀어 같은 조건에서 Fusion 결과와 나란히 비교한다 (mns simpkg)</text>
+  <g transform="translate(24 80)"><rect class="now0" x="-5" y="-5" width="222" height="100" rx="16" fill="#f59e0b"/><rect width="212" height="90" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on0" width="212" height="90" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><rect class="on0" x="0" y="10" width="4" height="70" rx="2" fill="#f59e0b"/><circle cx="22" cy="21" r="11" fill="#f59e0b" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">1</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">Fusion 해석 패키지</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">.adsksimpkg (zip + JSON)</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">형상 · 재료 · 하중 · 경계 · 접촉</text></g>
+  <path class="flow" d="M238 125H254" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on1 flow" d="M238 125H254" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(256 80)"><rect class="now1" x="-5" y="-5" width="222" height="100" rx="16" fill="#06b6d4"/><rect width="212" height="90" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="212" height="90" rx="12" fill="none" stroke="#06b6d4" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="70" rx="2" fill="#06b6d4"/><circle cx="22" cy="21" r="11" fill="#06b6d4" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">2</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">mns simpkg</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">바디별 STEP 과 이름 맞추기</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">재료 · 질량 이관 · 한글 이름 복원</text></g>
+  <path class="flow" d="M470 125H486" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on2 flow" d="M470 125H486" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(488 80)"><rect class="now2" x="-5" y="-5" width="222" height="100" rx="16" fill="#a78bfa"/><rect width="212" height="90" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on2" width="212" height="90" rx="12" fill="none" stroke="#a78bfa" stroke-width="2.5"/><rect class="on2" x="0" y="10" width="4" height="70" rx="2" fill="#a78bfa"/><circle cx="22" cy="21" r="11" fill="#a78bfa" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">3</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">CalculiX 재풀이</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">정적 (+ --modal 고유진동)</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">--converge 메시 수렴</text></g>
+  <path class="flow" d="M702 125H718" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on3 flow" d="M702 125H718" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <g transform="translate(720 80)"><rect class="now3" x="-5" y="-5" width="222" height="100" rx="16" fill="#22c55e"/><rect width="212" height="90" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on3" width="212" height="90" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/><rect class="on3" x="0" y="10" width="4" height="70" rx="2" fill="#22c55e"/><circle cx="22" cy="21" r="11" fill="#22c55e" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">4</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">비교 보고서</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">Fusion 보고서 · 범례와 대조</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">report.md · summary.json</text></g>
+  <rect x="24" y="196" width="912" height="200" rx="12" fill="#171b23"/>
+  <text x="44" y="224" font-size="13.5" fill="#f4f4f5" font-weight="700">비교 항목</text>
+  <text x="314" y="224" font-size="13.5" fill="#f4f4f5" font-weight="700">Fusion</text>
+  <text x="444" y="224" font-size="13.5" fill="#f4f4f5" font-weight="700">재현 (CalculiX)</text>
+  <text x="604" y="224" font-size="13.5" fill="#f4f4f5" font-weight="700">확인</text>
+  <path d="M40 234H920" stroke="#262c38"/>
+  <text x="44" y="256" font-size="13" fill="#a1a1aa">반력 = 모델 질량 × 하중 가속도</text>
+  <text x="314" y="256" font-size="13" fill="#a1a1aa">보고서</text>
+  <g class="on2"><text x="444" y="256" font-size="13" fill="#a78bfa">합 반력</text></g>
+  <g class="on3"><text x="604" y="256" font-size="12.5" fill="#22c55e">✓ 오차 % — 하중 재현부터 확인</text></g>
+  <path d="M40 268H920" stroke="#262c38"/>
+  <text x="44" y="290" font-size="13" fill="#a1a1aa">최소 안전율 (최대 응력 기준)</text>
+  <text x="314" y="290" font-size="13" fill="#a1a1aa">범례 · 요약 표</text>
+  <g class="on2"><text x="444" y="290" font-size="13" fill="#a78bfa">바디별 최대</text></g>
+  <g class="on3"><text x="604" y="290" font-size="12.5" fill="#22c55e">✓ 모서리 특이점 — 메시 민감</text></g>
+  <path d="M40 302H920" stroke="#262c38"/>
+  <text x="44" y="324" font-size="13" fill="#a1a1aa">99 % 백분위 응력 · 안전율</text>
+  <text x="314" y="324" font-size="13" fill="#a1a1aa">—</text>
+  <g class="on2"><text x="444" y="324" font-size="13" fill="#a78bfa">바디별 99 %</text></g>
+  <g class="on3"><text x="604" y="324" font-size="12.5" fill="#22c55e">✓ 메시 수렴 ±% 로 판단</text></g>
+  <path d="M40 336H920" stroke="#262c38"/>
+  <text x="44" y="358" font-size="13" fill="#a1a1aa">고유진동수 1~6차</text>
+  <text x="314" y="358" font-size="13" fill="#a1a1aa">—</text>
+  <g class="on2"><text x="444" y="358" font-size="13" fill="#a78bfa">--modal</text></g>
+  <g class="on3"><text x="604" y="358" font-size="12.5" fill="#22c55e">✓ 모드별 주 변위 바디</text></g>
+  <text x="44" y="386" font-size="12" fill="#71717a">경계 · 지지 조건이 다르면 같은 값을 기대하지 않는다 — 차이 원인(경계 · 메시 · 판정 지표 · 허용값)을 표로 남긴다</text>
+</svg>

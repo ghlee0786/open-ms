@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440" font-family="'Segoe UI','Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">장면 환경 — 하늘 · 지면 · 조명</title>
+  <desc id="d">config/environments/&lt;id&gt;/environment.json → 하늘 돔(절차적 하늘) · 지면 텍스처 · 태양 방향광과 그림자 → 시나리오 토양으로 자동 선택 → 3D 화면. 해석 결과는 바뀌지 않고 그림만 바뀐다.</desc>
+  <!-- Open M&amp;S README 인포그래픽. 단계가 차례로 켜지고 흐름이 움직인다(CSS keyframes · SMIL, 자바스크립트 없음). 다시 만들기: scripts/make_infographics.py -->
+  <style>
+    .flow { stroke-dasharray: 7 7; animation: dash 1s linear infinite; }
+    @keyframes dash { to { stroke-dashoffset: -14; } }
+    @keyframes on0 { 0%, 3.0% { opacity: 0; } 6.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on0 { opacity: 0; animation: on0 12s infinite; }
+    @keyframes now0 { 0%, 3.0% { opacity: 0; } 6.0% { opacity: .55; } 23.5%, 100% { opacity: 0; } }
+    .now0 { opacity: 0; animation: now0 12s infinite; }
+    @keyframes on1 { 0%, 23.5% { opacity: 0; } 26.5%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on1 { opacity: 0; animation: on1 12s infinite; }
+    @keyframes now1 { 0%, 23.5% { opacity: 0; } 26.5% { opacity: .55; } 44.0%, 100% { opacity: 0; } }
+    .now1 { opacity: 0; animation: now1 12s infinite; }
+    @keyframes on2 { 0%, 44.0% { opacity: 0; } 47.0%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on2 { opacity: 0; animation: on2 12s infinite; }
+    @keyframes now2 { 0%, 44.0% { opacity: 0; } 47.0% { opacity: .55; } 64.5%, 100% { opacity: 0; } }
+    .now2 { opacity: 0; animation: now2 12s infinite; }
+    @keyframes on3 { 0%, 64.5% { opacity: 0; } 67.5%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    .on3 { opacity: 0; animation: on3 12s infinite; }
+    @keyframes now3 { 0%, 64.5% { opacity: 0; } 67.5% { opacity: .55; } 85.0%, 100% { opacity: 0; } }
+    .now3 { opacity: 0; animation: now3 12s infinite; }
+    
+  </style>
+  <defs>
+    <marker id="head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8b8b95"/></marker>
+    <marker id="headR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+  </defs>
+  <rect width="960" height="440" rx="18" fill="#111318" stroke="#2a2f3a"/>
+  <text x="28" y="38" font-size="20" fill="#f4f4f5" font-weight="700">장면 환경 — 하늘 · 지면 · 조명</text>
+  <text x="28" y="60" font-size="13.5" fill="#a1a1aa">환경 파일 하나가 하늘 돔 · 지면 무늬 · 태양을 정한다. '자동' 은 시나리오 토양(environment.soil)에 맞는 환경을 고른다</text>
+  <g transform="translate(24 84)"><rect class="now0" x="-5" y="-5" width="230" height="106" rx="16" fill="#f59e0b"/><rect width="220" height="96" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on0" width="220" height="96" rx="12" fill="none" stroke="#f59e0b" stroke-width="2.5"/><rect class="on0" x="0" y="10" width="4" height="76" rx="2" fill="#f59e0b"/><circle cx="22" cy="21" r="11" fill="#f59e0b" opacity=".9"/><text x="22" y="25.5" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="middle">1</text><text x="40" y="26" font-size="16" fill="#f4f4f5" font-weight="700">환경 파일</text><text x="16" y="47" font-size="11.5" fill="#a1a1aa">config/environments/&lt;id&gt;/</text><text x="16" y="63.5" font-size="11.5" fill="#a1a1aa">environment.json (형식 /1)</text><text x="16" y="80" font-size="11.5" fill="#a1a1aa">내장 7종 + 사용자 .hdr · .png</text></g>
+  <g transform="translate(282 78)"><rect class="now1" x="-5" y="-5" width="260" height="70" rx="16" fill="#06b6d4"/><rect width="250" height="60" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="250" height="60" rx="12" fill="none" stroke="#06b6d4" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="40" rx="2" fill="#06b6d4"/><text x="16" y="26" font-size="15" fill="#f4f4f5" font-weight="700">하늘 돔</text><text x="16" y="47" font-size="12" fill="#a1a1aa">절차적 하늘 · 지평선 나무 실루엣</text></g>
+  <g transform="translate(282 148)"><rect class="now1" x="-5" y="-5" width="260" height="70" rx="16" fill="#06b6d4"/><rect width="250" height="60" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="250" height="60" rx="12" fill="none" stroke="#06b6d4" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="40" rx="2" fill="#06b6d4"/><text x="16" y="26" font-size="15" fill="#f4f4f5" font-weight="700">지면</text><text x="16" y="47" font-size="12" fill="#a1a1aa">풀 · 흙 · 모래 · 암반 · 눈 · 낙엽 무늬</text></g>
+  <g transform="translate(282 218)"><rect class="now1" x="-5" y="-5" width="260" height="70" rx="16" fill="#06b6d4"/><rect width="250" height="60" rx="12" fill="#1f2430" stroke="#3a4150" stroke-width="1.5"/><rect class="on1" width="250" height="60" rx="12" fill="none" stroke="#06b6d4" stroke-width="2.5"/><rect class="on1" x="0" y="10" width="4" height="40" rx="2" fill="#06b6d4"/><text x="16" y="26" font-size="15" fill="#f4f4f5" font-weight="700">조명</text><text x="16" y="47" font-size="12" fill="#a1a1aa">태양 방향광 · 그림자 · 반구 환경광</text></g>
+  <path class="flow" d="M246 132H278" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on1 flow" d="M246 132H278" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <path class="flow" d="M534 150H566" stroke="#52525b" stroke-width="2.5" fill="none" marker-end="url(#head)"/>
+  <path class="on3 flow" d="M534 150H566" stroke="#94a3b8" stroke-width="2.5" fill="none"/>
+  <rect x="24" y="300" width="508" height="116" rx="12" fill="#171b23"/>
+  <g><text x="40" y="324" font-size="14" fill="#f4f4f5" font-weight="700">③ 자동 선택 — environment.soil → 환경</text></g>
+  <g><rect x="40" y="338" width="103" height="30" rx="8" fill="#1f2430" stroke="#3a4150"/><rect class="on2" x="40" y="338" width="103" height="30" rx="8" fill="none" stroke="#d8c48e" stroke-width="2"/><rect x="48" y="348" width="10" height="10" rx="2" fill="#d8c48e"/><text x="64" y="357.5" font-size="12" fill="#a1a1aa">sand → 모래</text></g>
+  <g><rect x="155.44" y="338" width="89" height="30" rx="8" fill="#1f2430" stroke="#3a4150"/><rect class="on2" x="155.44" y="338" width="89" height="30" rx="8" fill="none" stroke="#8a6a48" stroke-width="2"/><rect x="163.44" y="348" width="10" height="10" rx="2" fill="#8a6a48"/><text x="179.44" y="357.5" font-size="12" fill="#a1a1aa">clay → 흙</text></g>
+  <g><rect x="256.24" y="338" width="105" height="30" rx="8" fill="#1f2430" stroke="#3a4150"/><rect class="on2" x="256.24" y="338" width="105" height="30" rx="8" fill="none" stroke="#e8eef5" stroke-width="2"/><rect x="264.24" y="348" width="10" height="10" rx="2" fill="#e8eef5"/><text x="280.24" y="357.5" font-size="12" fill="#a1a1aa">frozen → 눈</text></g>
+  <g><rect x="40" y="374" width="103" height="30" rx="8" fill="#1f2430" stroke="#3a4150"/><rect class="on2" x="40" y="374" width="103" height="30" rx="8" fill="none" stroke="#8b8f94" stroke-width="2"/><rect x="48" y="384" width="10" height="10" rx="2" fill="#8b8f94"/><text x="64" y="393.5" font-size="12" fill="#a1a1aa">rock → 암반</text></g>
+  <g><rect x="155.44" y="374" width="218" height="30" rx="8" fill="#1f2430" stroke="#3a4150"/><rect class="on2" x="155.44" y="374" width="218" height="30" rx="8" fill="none" stroke="#6b8f3a" stroke-width="2"/><rect x="163.44" y="384" width="10" height="10" rx="2" fill="#6b8f3a"/><text x="179.44" y="393.5" font-size="12" fill="#a1a1aa">grass · farmland · 그 밖 → 풀밭</text></g>
+  <text x="393.12" y="393" font-size="12" fill="#71717a">데모 1 모래 · 2 흙 · 3 눈</text>
+  <defs><clipPath id="pv"><rect x="570" y="78" width="366" height="338" rx="12"/></clipPath><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f73c6"/><stop offset="1" stop-color="#b8c9dc"/></linearGradient></defs>
+  <g clip-path="url(#pv)"><rect x="570" y="78" width="366" height="338" fill="url(#sky)"/>
+  <circle r="16" fill="#fde68a"><animateMotion dur="12s" repeatCount="indefinite" path="M610 198 Q750 88 900 188"/></circle>
+  <g opacity=".55"><path d="M574 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M596 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M618 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M640 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M662 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M684 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M706 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M728 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M750 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M772 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M794 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M816 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M838 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M860 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M882 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M904 288l9 -26l9 26z" fill="#2c3e2a"/><path d="M926 288l9 -26l9 26z" fill="#2c3e2a"/></g>
+  <rect x="570" y="288" width="366" height="128" fill="#d8c48e"><animate attributeName="fill" values="#d8c48e;#8a6a48;#e8eef5;#d8c48e" keyTimes="0;0.333;0.666;1" calcMode="discrete" dur="12s" repeatCount="indefinite"/></rect>
+  <path d="M570 306 q45 -6 90 0 t90 0 t90 0 t96 0" stroke="#000" stroke-opacity=".12" stroke-width="2" fill="none"/>
+  <path d="M570 324 q45 -6 90 0 t90 0 t90 0 t96 0" stroke="#000" stroke-opacity=".12" stroke-width="2" fill="none"/>
+  <path d="M570 342 q45 -6 90 0 t90 0 t90 0 t96 0" stroke="#000" stroke-opacity=".12" stroke-width="2" fill="none"/>
+  <path d="M570 360 q45 -6 90 0 t90 0 t90 0 t96 0" stroke="#000" stroke-opacity=".12" stroke-width="2" fill="none"/>
+  <path d="M570 378 q45 -6 90 0 t90 0 t90 0 t96 0" stroke="#000" stroke-opacity=".12" stroke-width="2" fill="none"/>
+  <path d="M570 396 q45 -6 90 0 t90 0 t90 0 t96 0" stroke="#000" stroke-opacity=".12" stroke-width="2" fill="none"/>
+  <ellipse cx="770" cy="360" rx="34" ry="7" fill="#000" opacity=".3"><animate attributeName="cx" values="784;756;784" dur="12s" repeatCount="indefinite"/></ellipse>
+  <rect x="740" y="330" width="60" height="24" rx="12" fill="#6f8f5a"/>
+  </g>
+  <g opacity="0"><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.01;0.323;0.333;1" dur="12s" repeatCount="indefinite"/><rect x="582" y="90" width="120" height="26" rx="13" fill="#0b0d12" opacity=".7"/><text x="642" y="108" font-size="12.5" fill="#f4f4f5" font-weight="700" text-anchor="middle">데모 1 · 모래</text></g>
+  <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.333;0.334;0.666;0.667;1" dur="12s" repeatCount="indefinite"/><rect x="582" y="90" width="120" height="26" rx="13" fill="#0b0d12" opacity=".7"/><text x="642" y="108" font-size="12.5" fill="#f4f4f5" font-weight="700" text-anchor="middle">데모 2 · 흙</text></g>
+  <g opacity="0"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.667;0.668;1" dur="12s" repeatCount="indefinite"/><rect x="582" y="90" width="120" height="26" rx="13" fill="#0b0d12" opacity=".7"/><text x="642" y="108" font-size="12.5" fill="#f4f4f5" font-weight="700" text-anchor="middle">데모 3 · 눈</text></g>
+  <rect class="on3" x="570" y="78" width="366" height="338" rx="12" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+  <rect x="570" y="78" width="366" height="338" rx="12" fill="none" stroke="#3a4150" stroke-width="1"/>
+  <text x="924" y="404" font-size="12" fill="#0b0d12" font-weight="700" text-anchor="end">④ 3D 화면 (해석 결과는 그대로)</text>
+  <text x="282" y="292" font-size="11.5" fill="#71717a">밝기 · 노출 · 회전 · 반사 · 그림자 · 안개 — 보기 메뉴</text>
+</svg>

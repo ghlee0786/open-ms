@@ -1,0 +1,131 @@
+{
+  "schema": "mns.environment/1",
+  "id": "rock",
+  "displayName": {
+    "ko": "암반",
+    "en": "Bedrock"
+  },
+  "style": "scene",
+  "centerAngleDeg": 0,
+  "scaling": {
+    "fitTo": 2,
+    "autoScale": true,
+    "autoScaleFactor": 10
+  },
+  "features": [
+    {
+      "kind": "ground",
+      "shape": "plane",
+      "isGroundPlane": true,
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "rock",
+          "seed": 1,
+          "colors": [
+            [
+              0.38,
+              0.37,
+              0.36
+            ],
+            [
+              0.58,
+              0.56,
+              0.53
+            ],
+            [
+              0.22,
+              0.21,
+              0.2
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "kind": "dome",
+      "shape": "hemisphere",
+      "isSurrounding": true,
+      "texture": {
+        "procedural": {
+          "kind": "sky",
+          "seed": 1,
+          "zenith": [
+            0.32,
+            0.44,
+            0.62
+          ],
+          "horizon": [
+            0.7,
+            0.73,
+            0.76
+          ],
+          "haze": [
+            0.5,
+            0.5,
+            0.5
+          ],
+          "trees": false
+        }
+      }
+    }
+  ],
+  "ibl": {
+    "source": "procedural-sky",
+    "exposureEV": 0.0
+  },
+  "lights": [
+    {
+      "type": "directional",
+      "label": "sun",
+      "color": [
+        0.86,
+        0.82,
+        0.75
+      ],
+      "gain": 1.0,
+      "space": "ground",
+      "direction": [
+        -0.5417,
+        0.5417,
+        -0.6428
+      ],
+      "shadowColor": [
+        -0.3,
+        -0.3,
+        -0.3
+      ],
+      "enabled": true
+    },
+    {
+      "type": "hemisphere",
+      "label": "sky/ground",
+      "sky": [
+        0.42,
+        0.45,
+        0.52
+      ],
+      "ground": [
+        0.23,
+        0.22,
+        0.21
+      ],
+      "gain": 1.0,
+      "enabled": true
+    }
+  ],
+  "ambient": {
+    "color": [
+      0.25,
+      0.25,
+      0.25
+    ],
+    "gain": 0.0
+  },
+  "soilMatch": [
+    "rock",
+    "concrete",
+    "asphalt",
+    "gravel"
+  ]
+}

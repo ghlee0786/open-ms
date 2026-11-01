@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Sim.App</RootNamespace>
+    <AssemblyName>MnS.Simulator</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- 앱 아이콘: tools/icon/make_icon.py 로 생성 -->
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.22" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.22" />
+    <PackageReference Include="Material.Icons.Avalonia" Version="2.4.1" />
+    <PackageReference Include="Silk.NET.OpenGL" Version="2.23.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sim.Core\Sim.Core.csproj" />
+    <ProjectReference Include="..\Sim.Gpu\Sim.Gpu.csproj" />
+  </ItemGroup>
+</Project>
